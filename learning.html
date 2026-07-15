@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IOTO 智慧党建 · 理论学习模块</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="common.css">
+<style>
+.menu a:hover{color:var(--gold);}
+.menu .btn-gold{background:linear-gradient(135deg,var(--gold),#B8860B);color:#5a3a00;padding:8px 20px;border-radius:6px;font-weight:700;font-size:13px;}
+.menu .btn-gold:hover{background:linear-gradient(135deg,var(--gold-light),var(--gold));}
+.hero{background:linear-gradient(135deg,rgba(46,91,255,0.92),rgba(30,58,138,0.88)),radial-gradient(circle at 60% 30%,rgba(212,175,55,0.15),transparent 50%);color:#fff;padding:60px 32px;text-align:center;}
+.hero h1{font-family:'Noto Serif SC';font-size:36px;font-weight:900;margin-bottom:12px;letter-spacing:4px;}
+.hero h1 .mark{color:var(--gold);}
+.hero p{font-size:15px;opacity:0.85;max-width:800px;margin:0 auto;line-height:1.8;}
+.container{max-width:1400px;margin:50px auto;padding:0 32px;}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:40px;}
+.stat-card{background:#fff;border-radius:12px;padding:24px;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.05);border-left:4px solid var(--blue);}
+.stat-card .num{font-family:'Noto Serif SC';font-size:36px;font-weight:900;color:var(--blue);line-height:1;}
+.stat-card .label{font-size:14px;color:#666;margin-top:8px;}
+.section{background:#fff;border-radius:12px;padding:32px;margin-bottom:24px;box-shadow:0 4px 16px rgba(0,0,0,0.05);}
+.section-title{font-family:'Noto Serif SC';font-size:22px;color:#333;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.section-title i{color:var(--blue);font-size:20px;}
+.section-title .badge{background:rgba(46,91,255,0.1);color:var(--blue);font-size:12px;padding:4px 10px;border-radius:20px;font-weight:600;margin-left:auto;}
+.learn-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.learn-card{background:linear-gradient(135deg,rgba(46,91,255,0.04),rgba(46,91,255,0.01));border:1px solid rgba(46,91,255,0.15);border-radius:10px;padding:20px;transition:all .3s;}
+.learn-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(46,91,255,0.12);}
+.learn-card .icon{font-size:32px;color:var(--blue);margin-bottom:12px;}
+.learn-card h3{font-family:'Noto Serif SC';font-size:18px;color:#333;margin-bottom:8px;}
+.learn-card p{font-size:14px;color:#666;line-height:1.7;margin-bottom:12px;}
+.learn-card .btn{display:inline-block;background:var(--blue);color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-size:13px;font-weight:600;transition:all .3s;}
+.learn-card .btn:hover{background:#1E3A8A;}
+.news-list{list-style:none;}
+.news-list li{padding:16px 0;border-bottom:1px dashed #eee;display:flex;gap:16px;align-items:flex-start;}
+.news-list li:last-child{border-bottom:none;}
+.news-list .date{background:rgba(46,91,255,0.08);color:var(--blue);padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600;white-space:nowrap;}
+.news-list .content{flex:1;}
+.news-list .content h4{font-size:15px;color:#333;margin-bottom:4px;}
+.news-list .content p{font-size:13px;color:#888;margin-bottom:6px;}
+.news-list .content .source{font-size:11px;color:#aaa;display:flex;align-items:center;gap:4px;}
+.news-list .content .source i{font-size:10px;}
+.news-list .content a{text-decoration:none;color:#333;}
+.news-list .content a:hover h4{color:var(--blue);}
+.news-link{text-decoration:none;color:inherit;display:block;flex:1;}
+.news-link:hover .content{background:rgba(46,91,255,0.03);padding:8px 12px;margin:-8px -12px;border-radius:8px;}
+.quiz-section{background:linear-gradient(135deg,rgba(46,91,255,0.06),rgba(46,91,255,0.02));border-radius:10px;padding:24px;}
+.quiz-section h4{font-family:'Noto Serif SC';font-size:16px;color:#333;margin-bottom:16px;}
+.quiz-item{margin-bottom:16px;}
+.quiz-item .question{font-size:14px;color:#444;margin-bottom:8px;padding:12px;background:#fff;border-radius:8px;}
+.quiz-item .options{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.quiz-item .opt{padding:10px 12px;background:#fff;border:1px solid #ddd;border-radius:6px;font-size:13px;color:#555;cursor:pointer;transition:all .3s;}
+.quiz-item .opt:hover{border-color:var(--blue);background:rgba(46,91,255,0.05);}
+.quiz-item .opt.correct{border-color:#4ADE80;background:rgba(74,222,128,0.1);color:#166534;}
+.quiz-item .opt.wrong{border-color:#FF6B6B;background:rgba(255,107,107,0.1);color:#991B1B;}
+.leaderboard{width:100%;border-collapse:collapse;}
+.leaderboard th{background:linear-gradient(135deg,var(--blue),#1E3A8A);color:#fff;padding:14px 12px;text-align:left;font-size:13px;font-weight:600;}
+.leaderboard th:first-child{border-radius:8px 0 0 0;}
+.leaderboard th:last-child{border-radius:0 8px 0 0;}
+.leaderboard td{padding:12px 12px;font-size:13px;border-bottom:1px solid #eee;}
+.leaderboard tbody tr:hover{background:rgba(46,91,255,0.03);}
+.leaderboard .rank{width:40px;text-align:center;font-family:'Noto Serif SC';font-weight:900;color:#666;}
+.leaderboard .rank.top1{color:#FFD966;background:#5a3a00;padding:4px 8px;border-radius:4px;}
+.leaderboard .rank.top2{color:#fff;background:#888;padding:4px 8px;border-radius:4px;}
+.leaderboard .rank.top3{color:#fff;background:#CD7F32;padding:4px 8px;border-radius:4px;}
+.leaderboard .score{font-family:'Noto Serif SC';font-weight:700;color:var(--blue);text-align:right;}
+footer{background:var(--navy);color:#fff;padding:40px 32px;margin-top:60px;text-align:center;}
+footer a{color:var(--gold);text-decoration:none;}
+@media(max-width:1024px){.stats-row{grid-template-columns:repeat(2,1fr);}.learn-grid{grid-template-columns:1fr;}.quiz-item .options{grid-template-columns:1fr;}}
+@media(max-width:640px){.stats-row{grid-template-columns:1fr;}.menu{gap:12px;font-size:12px;}.hero h1{font-size:28px;}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-wrap">
+    <a class="logo" href="index.html">
+      <i class="fas fa-hammer"></i>
+      <div class="logo-text"><div class="t1">IOTO 智慧党建</div><div class="t2">宋丹 · 双带头人工作室</div></div>
+    </a>
+    <div class="menu">
+      <a href="index.html">首页</a>
+      <a href="learning.html" style="color:var(--gold);">学习模块</a>
+      <a href="activity.html">活动模块</a>
+      <a href="service_detail.html">服务模块</a>
+      <a href="news.html">学院新闻</a>
+      <a href="analysis.html">分析模块</a>
+      <a href="management.html">管理模块</a>
+      <a href="vote.html">投票问卷</a>
+      <a href="honor.html">荣誉管理</a>
+      <a href="dashboard.html" target="_blank" class="btn-gold"><i class="fas fa-chart-line"></i> 数据大屏</a>
+    </div>
+  </div>
+</nav>
+<div class="hero">
+  <h1><span class="mark">📚 理论学习</span> · 输入新知识，形成自己的知识</h1>
+  <p>基于IOTO任务驱动学习闭环模型的输入环节，让每位党员都能持续学习、不断进步</p>
+</div>
+<div class="container">
+  <div class="stats-row">
+    <div class="stat-card"><div class="num">95.8%</div><div class="label">月度学习完成率</div></div>
+    <div class="stat-card"><div class="num">4500+</div><div class="label">学习强国人均积分/月</div></div>
+    <div class="stat-card"><div class="num">92%</div><div class="label">在线考试平均分</div></div>
+    <div class="stat-card"><div class="num">100%</div><div class="label">学习心得提交率</div></div>
+  </div>
+  <div class="section">
+    <div class="section-title"><i class="fas fa-book-open"></i> 学习资源中心 <span class="badge">4大学习渠道</span></div>
+    <div class="learn-grid">
+      <div class="learn-card">
+        <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+        <h3>学习强国平台</h3>
+        <p>每日登录学习强国，浏览时政新闻、观看视频课程、参与答题挑战，积分实时同步</p>
+        <a href="#" class="btn"><i class="fas fa-external-link-alt"></i> 进入学习强国</a>
+      </div>
+      <div class="learn-card">
+        <div class="icon"><i class="fas fa-book"></i></div>
+        <h3>专题学习课程</h3>
+        <p>党章党规学习、习近平新时代中国特色社会主义思想、党史学习等专题课程</p>
+        <a href="#" class="btn"><i class="fas fa-play-circle"></i> 开始学习</a>
+      </div>
+      <div class="learn-card">
+        <div class="icon"><i class="fas fa-pencil-alt"></i></div>
+        <h3>在线考试系统</h3>
+        <p>定期组织在线考试，检验学习成果，自动评分排名，错题自动归集</p>
+        <a href="#" class="btn"><i class="fas fa-file-alt"></i> 进入考试</a>
+      </div>
+      <div class="learn-card">
+        <div class="icon"><i class="fas fa-robot"></i></div>
+        <h3>AI党建助手</h3>
+        <p>智能问答、AI摘要、智能出卷，24小时在线解答党建相关问题</p>
+        <a href="#" class="btn"><i class="fas fa-comments"></i> 咨询助手</a>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title"><i class="fas fa-newspaper"></i> 党建动态 <span class="badge">资讯速递</span></div>
+    <ul class="news-list">
+      <li><span class="date">2026-07-02</span><a href="https://swmy.hnae.edu.cn/info/1181/8515.htm" target="_blank" class="news-link"><div class="content"><h4>深学细悟正确政绩观 坚守育人实干初心——商务贸易学院全体党员参加专题党课学习</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2026-06-01</span><a href="https://swmy.hnae.edu.cn/info/1181/8275.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院教工党支部召开预备党员转正大会</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2026-04-17</span><a href="https://swmy.hnae.edu.cn/info/1181/8065.htm" target="_blank" class="news-link"><div class="content"><h4>深学细悟两会精神 勇担教育育人使命 —— 党委委员、副校长周金宗为三院党员讲授专题党课</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2026-03-22</span><a href="https://swmy.hnae.edu.cn/info/1181/7945.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院教工党支部召开2025年度组织生活会暨民主评议党员大会</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2025-12-26</span><a href="https://swmy.hnae.edu.cn/info/1181/8015.htm" target="_blank" class="news-link"><div class="content"><h4>深入学习贯彻党的二十届四中全会精神——校党委委员、副校长周金宗为商务贸易学院全体教师作专题宣讲</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2025-11-28</span><a href="https://swmy.hnae.edu.cn/info/1181/7725.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院教工党支部召开接收预备党员大会</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2025-11-14</span><a href="https://swmy.hnae.edu.cn/info/1181/7635.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院党总支开展11月主题党日活动</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2025-11-07</span><a href="https://swmy.hnae.edu.cn/info/1181/7605.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院党总支部举行2025下期分党校入党积极分子培训开班典礼</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2025-09-29</span><a href="https://swmy.hnae.edu.cn/info/1181/7485.htm" target="_blank" class="news-link"><div class="content"><h4>学深悟透 笃信笃行——商贸学院开展学习《习近平谈治国理政》第五卷座谈会</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2025-09-04</span><a href="https://swmy.hnae.edu.cn/info/1181/7385.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院组织师生收看纪念中国人民抗日战争暨世界反法西斯战争胜利80周年大会</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2024-03-23</span><a href="https://swmy.hnae.edu.cn/info/1181/2625.htm" target="_blank" class="news-link"><div class="content"><h4>商贸学院党总支部组织开展走进图书馆阅读图书教育实践活动</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2024-02-27</span><a href="https://swmy.hnae.edu.cn/info/1181/2615.htm" target="_blank" class="news-link"><div class="content"><h4>《大美中国·春天系列》春天的湖南：让商贸党员师生感悟美丽湖南建设成就</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2024-02-23</span><a href="https://swmy.hnae.edu.cn/info/1181/2595.htm" target="_blank" class="news-link"><div class="content"><h4>商贸学院开展2月份微党课学习活动</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2024-01-26</span><a href="https://swmy.hnae.edu.cn/info/1181/2585.htm" target="_blank" class="news-link"><div class="content"><h4>商贸学院开展1月份微党课学习活动</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2024-01-10</span><a href="https://swmy.hnae.edu.cn/info/1181/2575.htm" target="_blank" class="news-link"><div class="content"><h4>正风不止步 肃纪不停歇——商贸学院党总支组织观看《正风肃纪》警示教育片</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-12-27</span><a href="https://swmy.hnae.edu.cn/info/1181/2545.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院党支部开展“寻初心豪情 学使命担当”主题党日活动</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-12-08</span><a href="https://swmy.hnae.edu.cn/info/1181/2535.htm" target="_blank" class="news-link"><div class="content"><h4>2023年下半年商贸学院教工党支部接收预备党员大会召开</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-12-08</span><a href="https://swmy.hnae.edu.cn/info/1181/2525.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院教工党支部举行2023年预备党员转正大会</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-11-24</span><a href="https://swmy.hnae.edu.cn/info/1181/2505.htm" target="_blank" class="news-link"><div class="content"><h4>商贸学院党支部开展《志愿军：雄兵出击》党性锤炼观影活动</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-11-17</span><a href="https://swmy.hnae.edu.cn/info/1181/2485.htm" target="_blank" class="news-link"><div class="content"><h4>商贸学院党总支十一月党课开课</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-10-20</span><a href="https://swmy.hnae.edu.cn/info/1181/2465.htm" target="_blank" class="news-link"><div class="content"><h4>商贸学院组织党员师生收看第三届“一带一路”国际合作高峰论坛直播</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-09-16</span><a href="https://swmy.hnae.edu.cn/info/1181/2455.htm" target="_blank" class="news-link"><div class="content"><h4>商贸学院党总支召开学习贯彻习近平新时代中国特色社会主义思想主题教育专题组织生活会</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-08-18</span><a href="https://swmy.hnae.edu.cn/info/1181/3035.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院八月份主题党日活动举行</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-07-20</span><a href="https://swmy.hnae.edu.cn/info/1181/3025.htm" target="_blank" class="news-link"><div class="content"><h4>商贸学院开展“党建引领推动垃圾分类成为低碳生活新时尚”主题党日活动</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-07-08</span><a href="https://swmy.hnae.edu.cn/info/1181/3015.htm" target="_blank" class="news-link"><div class="content"><h4>商贸学院组织全体党员在线观看系列专题影片《七七事变》</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-06-17</span><a href="https://swmy.hnae.edu.cn/info/1181/2995.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院六月份主题党日活动举行</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-05-18</span><a href="https://swmy.hnae.edu.cn/info/1181/2975.htm" target="_blank" class="news-link"><div class="content"><h4>党委委员、副院长周金宗为商贸党员师生讲授主题教育专题党课</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-05-06</span><a href="https://swmy.hnae.edu.cn/info/1181/2955.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院五月份主题党日活动举行</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-04-08</span><a href="https://swmy.hnae.edu.cn/info/1181/2935.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院党总支部开展四月份专题党课学习——学习株洲市优秀共产党员严亮同志的优秀事迹</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-04-08</span><a href="https://swmy.hnae.edu.cn/info/1181/2925.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院四月份主题党日活动举行</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-03-16</span><a href="https://swmy.hnae.edu.cn/info/1181/2905.htm" target="_blank" class="news-link"><div class="content"><h4>党建引领铸师魂，课堂示范展风采——商务贸易学院三月份主题党日活动举行</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-03-16</span><a href="https://swmy.hnae.edu.cn/info/1181/2915.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院教工党支部开展2022年度组织生活会和民主评议党员活动</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-02-24</span><a href="https://swmy.hnae.edu.cn/info/1181/2895.htm" target="_blank" class="news-link"><div class="content"><h4>奋进新征程 建功新时代——商务贸易学院党总支部开展二月份专题党课学习主题党日活动</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-02-14</span><a href="https://swmy.hnae.edu.cn/info/1181/2885.htm" target="_blank" class="news-link"><div class="content"><h4>商贸学院召开学院第四届教职工代表大会暨工会会员大会代表选举会议</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2023-01-16</span><a href="https://swmy.hnae.edu.cn/info/1181/2865.htm" target="_blank" class="news-link"><div class="content"><h4>奋斗正当时，再上新征程——商务贸易学院党总支二0二三年一月份主题党日活动顺利召开</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-12-29</span><a href="https://swmy.hnae.edu.cn/info/1181/2855.htm" target="_blank" class="news-link"><div class="content"><h4>2022年下半年商贸学院教工党支部预备党员转正大会召开</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-12-24</span><a href="https://swmy.hnae.edu.cn/info/1181/2825.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院党总支十二月份主题党日活动顺利召开</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-12-09</span><a href="https://swmy.hnae.edu.cn/info/1181/2815.htm" target="_blank" class="news-link"><div class="content"><h4>2022年下半年商贸学院教工党支部接收预备党员大会召开</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-11-30</span><a href="https://swmy.hnae.edu.cn/info/1181/2795.htm" target="_blank" class="news-link"><div class="content"><h4>"疫"线主题党日，让党旗在疫情防控一线高高飘扬——商务贸易学院党总支十一月主题党日活动召开</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-11-29</span><a href="https://swmy.hnae.edu.cn/info/1181/2785.htm" target="_blank" class="news-link"><div class="content"><h4>学习二十大 凝聚青年心——商务贸易学院组织学习二十大原文活动</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-10-29</span><a href="https://swmy.hnae.edu.cn/info/1181/2755.htm" target="_blank" class="news-link"><div class="content"><h4>踔厉奋发担使命，勇毅前行向未来——商务贸易学院党总支十月份主题党日活动顺利召开</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-10-17</span><a href="https://swmy.hnae.edu.cn/info/1181/3085.htm" target="_blank" class="news-link"><div class="content"><h4>无愧今天的使命担当，不负明天的伟大梦想</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-09-30</span><a href="https://swmy.hnae.edu.cn/info/1181/3075.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院2022级新生入党启蒙教育顺利开展</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-09-24</span><a href="https://swmy.hnae.edu.cn/info/1181/3445.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院党总支部召开总支委员补选大会</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-09-24</span><a href="https://swmy.hnae.edu.cn/info/1181/3055.htm" target="_blank" class="news-link"><div class="content"><h4>传承红色基因 凝聚奋进力量——商务贸易学院党总支九月份主题党日活动召开</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-07-15</span><a href="https://swmy.hnae.edu.cn/info/1181/3435.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院党总支（筹）组织全院师生收看《为时代育新人》第二集 《远方——在复兴的赛道上》</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-07-08</span><a href="https://swmy.hnae.edu.cn/info/1181/3365.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院（筹）党总支召开出席学校第二次党代会代表选举大会</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-07-08</span><a href="https://swmy.hnae.edu.cn/info/1181/3415.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院（筹）党总支七月份主题党日活动召开</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-06-26</span><a href="https://swmy.hnae.edu.cn/info/1181/3355.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院党总支六月份主题党日活动召开</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-06-05</span><a href="https://swmy.hnae.edu.cn/info/1181/3305.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院党总支开展关于深化整治领导干部违规收送红包礼金专题组织生活会</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-05-25</span><a href="https://swmy.hnae.edu.cn/info/1181/3285.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院党总支五月份主题党日活动召开</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-05-09</span><a href="https://swmy.hnae.edu.cn/info/1181/3275.htm" target="_blank" class="news-link"><div class="content"><h4>2022年上半年商贸学院教工党支部预备党员转正大会召开</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-04-29</span><a href="https://swmy.hnae.edu.cn/info/1181/3265.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院党总支四月份主题党日活动召开</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-03-28</span><a href="https://swmy.hnae.edu.cn/info/1181/3245.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院党总支三月份主题党日活动召开</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-03-25</span><a href="https://swmy.hnae.edu.cn/info/1181/3235.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院教工支部2021年度组织生活会暨民主评议党员大会顺利召开</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2022-01-18</span><a href="https://swmy.hnae.edu.cn/info/1181/3215.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院（筹）党总支召开1月份主题党日活动</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2021-12-30</span><a href="https://swmy.hnae.edu.cn/info/1181/3195.htm" target="_blank" class="news-link"><div class="content"><h4>商贸学院教工党支部召开新党员发展大会</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2021-12-30</span><a href="https://swmy.hnae.edu.cn/info/1181/3185.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院（筹）党总支召开十二月份主题党日活动</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2021-11-27</span><a href="https://swmy.hnae.edu.cn/info/1181/3155.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院党总支组织11月份主题党日活动</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2021-11-01</span><a href="https://swmy.hnae.edu.cn/info/1181/3135.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院（筹）党总支十月份主题党日活动顺利开展</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+      <li><span class="date">2021-10-26</span><a href="https://swmy.hnae.edu.cn/info/1181/3115.htm" target="_blank" class="news-link"><div class="content"><h4>商务贸易学院开展 2021 级新生入党启蒙教育</h4><p>点击查看详情</p><div class="source"><i class="fas fa-external-link-alt"></i> 查看详情</div></div></a></li>
+    </ul>
+  </div>
+  <div class="section">
+    <div class="section-title"><i class="fas fa-quiz"></i> 在线自测 <span class="badge">每日一题</span></div>
+    <div class="quiz-section">
+      <h4>今日学习：党的二十大精神</h4>
+      <div class="quiz-item">
+        <div class="question">1. 党的二十大报告指出，中国式现代化是人口规模巨大的现代化，是全体人民共同富裕的现代化，是物质文明和精神文明相协调的现代化，是______的现代化。</div>
+        <div class="options">
+          <div class="opt">人与自然和谐共生</div>
+          <div class="opt">经济快速发展</div>
+          <div class="opt">科技创新引领</div>
+          <div class="opt">文化自信自强</div>
+        </div>
+      </div>
+      <div class="quiz-item">
+        <div class="question">2. 中国共产党的根本宗旨是______。</div>
+        <div class="options">
+          <div class="opt">实现共产主义</div>
+          <div class="opt">全心全意为人民服务</div>
+          <div class="opt">建设社会主义现代化强国</div>
+          <div class="opt">实现中华民族伟大复兴</div>
+        </div>
+      </div>
+      <a href="#" class="btn" style="margin-top:16px;"><i class="fas fa-check-circle"></i> 提交答案</a>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title"><i class="fas fa-trophy"></i> 学习强国积分排行榜 <span class="badge">实时更新</span></div>
+    <table class="leaderboard">
+      <thead><tr><th>排名</th><th>姓名</th><th>本周积分</th><th>本月积分</th><th>年度累计</th></tr></thead>
+      <tbody>
+        <tr><td><span class="rank top1">1</span></td><td>宋丹</td><td>145</td><td>628</td><td>7850</td></tr>
+        <tr><td><span class="rank top2">2</span></td><td>谭亲强</td><td>138</td><td>592</td><td>7230</td></tr>
+        <tr><td><span class="rank top3">3</span></td><td>李忠华</td><td>132</td><td>568</td><td>6980</td></tr>
+        <tr><td><span class="rank">4</span></td><td>曾昭山</td><td>128</td><td>545</td><td>6720</td></tr>
+        <tr><td><span class="rank">5</span></td><td>殷兰波</td><td>125</td><td>528</td><td>6550</td></tr>
+        <tr><td><span class="rank">6</span></td><td>熊津津</td><td>122</td><td>512</td><td>6380</td></tr>
+        <tr><td><span class="rank">7</span></td><td>刘娜敏</td><td>118</td><td>498</td><td>6120</td></tr>
+        <tr><td><span class="rank">8</span></td><td>陈思为</td><td>115</td><td>485</td><td>5980</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<footer>
+  <div>🚩 商务贸易学院教工党支部 · 宋丹"双带头人"工作室 · IOTO智慧党建平台</div>
+  <div style="margin-top:8px;font-size:12px;opacity:0.7;">© 2024-2026 版权所有</div>
+</footer>
+</body>
+</html>

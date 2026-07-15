@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>六个一服务工程 - IOTO智慧党建平台</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, #C41E3A 0%, #8B0000 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+        }
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 12px;
+        }
+        .nav {
+            display: flex;
+            gap: 24px;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .nav a:hover, .nav a.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .page-title {
+            background: white;
+            padding: 24px 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        .page-title h1 {
+            font-size: 28px;
+            color: #C41E3A;
+            margin-bottom: 8px;
+        }
+        .page-title p {
+            color: #666;
+            font-size: 14px;
+        }
+        .service-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .tab-btn.active {
+            background: linear-gradient(135deg, #C41E3A 0%, #8B0000 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
+        }
+        .tab-btn:hover {
+            transform: translateY(-2px);
+        }
+        .tab-content {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            min-height: 500px;
+        }
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #C41E3A;
+        }
+        .stat-card .value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #C41E3A;
+            margin-bottom: 4px;
+        }
+        .stat-card .label {
+            font-size: 14px;
+            color: #666;
+        }
+        .chart-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+        .chart-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .chart-box h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        .table-container {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        table th {
+            background: #f8f9fa;
+            color: #333;
+            font-weight: bold;
+        }
+        table tr:hover {
+            background: #f8f9fa;
+        }
+        .status-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status-processing {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .progress-bar {
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #C41E3A, #ff6b6b);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        .detail-section {
+            margin-bottom: 30px;
+        }
+        .detail-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #C41E3A;
+        }
+        .case-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .case-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #C41E3A;
+        }
+        .case-card h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .case-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        .case-card .meta {
+            font-size: 12px;
+            color: #999;
+        }
+        .back-btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background: #C41E3A;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            background: #8B0000;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath fill='%23fff' d='M25 5l5 10h10l-8 6 3 10-9-5-9 5 3-10-8-6h10z'/%3E%3C/svg%3E" alt="Logo">
+                IOTO智慧党建平台
+            </div>
+            <div class="nav">
+                <a href="index.html">首页</a>
+                <a href="modules.html">平台架构</a>
+                <a href="learning.html">学习教育</a>
+                <a href="activity.html">组织活动</a>
+                <a href="service_detail.html" class="active">服务师生</a>
+                <a href="news.html">新闻动态</a>
+                <a href="analysis.html">数据分析</a>
+                <a href="management.html">综合管理</a>
+                <a href="conclusion.html">结项窗口</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+        
+        <div class="page-title">
+            <h1>六个一服务工程</h1>
+            <p>党员每人每年结对帮扶6项任务，台账化追踪，精准服务师生</p>
+        </div>
+
+        <div class="service-tabs">
+            <button class="tab-btn active" onclick="showTab('difficulty')">困难学生帮扶</button>
+            <button class="tab-btn" onclick="showTab('dormitory')">宿舍对接服务</button>
+            <button class="tab-btn" onclick="showTab('alumni')">校友联系服务</button>
+            <button class="tab-btn" onclick="showTab('competition')">竞赛指导服务</button>
+            <button class="tab-btn" onclick="showTab('employment')">就业服务</button>
+            <button class="tab-btn" onclick="showTab('enterprise')">校企服务</button>
+        </div>
+
+        <div id="tab-difficulty" class="tab-content">
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="value">132</div>
+                    <div class="label">帮扶次数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">48</div>
+                    <div class="label">帮扶学生</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">18.7%</div>
+                    <div class="label">平均成绩提升</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">93.8%</div>
+                    <div class="label">就业率</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-box">
+                    <h3>帮扶类型分布</h3>
+                    <canvas id="difficultyTypeChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h3>成绩提升对比</h3>
+                    <canvas id="scoreChart"></canvas>
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <h3>帮扶记录明细表</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>学生姓名</th>
+                                <th>专业班级</th>
+                                <th>帮扶内容</th>
+                                <th>帮扶党员</th>
+                                <th>时间</th>
+                                <th>成效</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>李明</td><td>电商2201班</td><td>学业辅导+心理疏导</td><td>宋丹</td><td>2024-09-15</td><td class="status-completed">成绩提升25%</td></tr>
+                            <tr><td>2</td><td>王芳</td><td>会计2203班</td><td>经济资助+就业指导</td><td>胡晨怡</td><td>2024-09-20</td><td class="status-completed">已就业</td></tr>
+                            <tr><td>3</td><td>张伟</td><td>电商2202班</td><td>学业辅导+技能培训</td><td>曾昭山</td><td>2024-10-08</td><td class="status-completed">成绩提升18%</td></tr>
+                            <tr><td>4</td><td>陈静</td><td>会计2201班</td><td>心理疏导+职业规划</td><td>岳伟</td><td>2024-10-15</td><td class="status-completed">状态好转</td></tr>
+                            <tr><td>5</td><td>刘洋</td><td>电商2203班</td><td>经济资助+学业辅导</td><td>文轩</td><td>2024-11-05</td><td class="status-completed">成绩提升15%</td></tr>
+                            <tr><td>6</td><td>赵雪</td><td>会计2202班</td><td>就业指导+简历优化</td><td>易蕾</td><td>2024-11-12</td><td class="status-completed">已就业</td></tr>
+                            <tr><td>7</td><td>孙磊</td><td>电商2201班</td><td>技能培训+竞赛指导</td><td>宋吉华</td><td>2024-12-01</td><td class="status-completed">获省级竞赛奖</td></tr>
+                            <tr><td>8</td><td>周婷</td><td>会计2203班</td><td>学业辅导+心理疏导</td><td>朱爱娇</td><td>2025-03-10</td><td class="status-completed">成绩提升20%</td></tr>
+                            <tr><td>9</td><td>吴强</td><td>电商2202班</td><td>职业规划+实习推荐</td><td>徐雪君</td><td>2025-03-18</td><td class="status-completed">已实习</td></tr>
+                            <tr><td>10</td><td>郑琳</td><td>会计2201班</td><td>经济资助+学业辅导</td><td>马紫仪</td><td>2025-04-05</td><td class="status-completed">成绩提升12%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <h3>典型帮扶案例</h3>
+                <div class="case-list">
+                    <div class="case-card">
+                        <h4>李明：从挂科到获奖</h4>
+                        <p>帮扶前：电商2201班李明，大一学年挂科3门，自信心不足。帮扶后：通过党员教师宋丹每周2次学业辅导，大二学年平均成绩提升25%，获校级奖学金。</p>
+                        <div class="meta">帮扶周期：2024年9月-2025年6月 | 帮扶党员：宋丹</div>
+                    </div>
+                    <div class="case-card">
+                        <h4>王芳：就业逆袭</h4>
+                        <p>帮扶前：会计2203班王芳，家庭困难，性格内向，求职屡屡受挫。帮扶后：通过胡晨怡老师的就业指导和企业推荐，成功入职株洲天泰会计师事务所。</p>
+                        <div class="meta">帮扶周期：2024年9月-2025年3月 | 帮扶党员：胡晨怡</div>
+                    </div>
+                    <div class="case-card">
+                        <h4>孙磊：技能突破</h4>
+                        <p>帮扶前：电商2201班孙磊，专业技能薄弱，缺乏竞赛经验。帮扶后：通过宋吉华老师的竞赛指导和技能培训，代表学校参加湖南省职业院校技能大赛获一等奖。</p>
+                        <div class="meta">帮扶周期：2024年12月-2025年5月 | 帮扶党员：宋吉华</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-dormitory" class="tab-content" style="display:none;">
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="value">108</div>
+                    <div class="label">对接次数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">36</div>
+                    <div class="label">对接宿舍</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">144</div>
+                    <div class="label">覆盖学生</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">96%</div>
+                    <div class="label">满意度</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-box">
+                    <h3>对接问题类型分布</h3>
+                    <canvas id="dormitoryTypeChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h3>月度对接趋势</h3>
+                    <canvas id="dormitoryTrendChart"></canvas>
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <h3>宿舍对接记录明细表</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>宿舍号</th>
+                                <th>所属楼栋</th>
+                                <th>对接问题</th>
+                                <th>对接党员</th>
+                                <th>时间</th>
+                                <th>处理状态</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>301</td><td>3号栋</td><td>空调故障维修</td><td>曾昭山</td><td>2024-09-10</td><td class="status-completed">已解决</td></tr>
+                            <tr><td>2</td><td>405</td><td>4号栋</td><td>宿舍矛盾调解</td><td>胡晨怡</td><td>2024-09-18</td><td class="status-completed">已解决</td></tr>
+                            <tr><td>10</td><td>402</td><td>4号栋</td><td>矛盾调解</td><td>胡晨怡</td><td>2025-04-10</td><td class="status-completed">已解决</td></tr>
+                            <tr><td>4</td><td>502</td><td>5号栋</td><td>卫生检查整改</td><td>岳伟</td><td>2024-10-20</td><td class="status-completed">已整改</td></tr>
+                            <tr><td>5</td><td>306</td><td>3号栋</td><td>安全隐患排查</td><td>文轩</td><td>2024-11-08</td><td class="status-completed">已消除</td></tr>
+                            <tr><td>6</td><td>408</td><td>4号栋</td><td>学习氛围营造</td><td>易蕾</td><td>2024-11-15</td><td class="status-completed">已完成</td></tr>
+                            <tr><td>7</td><td>207</td><td>2号栋</td><td>心理问题疏导</td><td>朱爱娇</td><td>2025-03-05</td><td class="status-completed">已缓解</td></tr>
+                            <tr><td>8</td><td>505</td><td>5号栋</td><td>设施报修跟进</td><td>徐雪君</td><td>2025-03-12</td><td class="status-completed">已解决</td></tr>
+                            <tr><td>9</td><td>309</td><td>3号栋</td><td>宿舍文化建设</td><td>马紫仪</td><td>2025-04-01</td><td class="status-completed">已完成</td></tr>
+                            <tr><td>10</td><td>402</td><td>4号栋</td><td>矛盾调解</td><td>胡晨怡</td><td>2025-04-10</td><td class="status-completed">已解决</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-alumni" class="tab-content" style="display:none;">
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="value">96</div>
+                    <div class="label">联系次数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">52</div>
+                    <div class="label">联系校友</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">38</div>
+                    <div class="label">提供就业岗位</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">26</div>
+                    <div class="label">回校讲座</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-box">
+                    <h3>校友行业分布</h3>
+                    <canvas id="alumniIndustryChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h3>校友贡献统计</h3>
+                    <canvas id="alumniContributionChart"></canvas>
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <h3>校友联系记录明细表</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>校友姓名</th>
+                                <th>毕业年份</th>
+                                <th>现任职单位</th>
+                                <th>联系内容</th>
+                                <th>联系党员</th>
+                                <th>时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>陈晓</td><td>2018届</td><td>用友新道科技</td><td>就业岗位对接</td><td>宋丹</td><td>2024-09-20</td></tr>
+                            <tr><td>2</td><td>张涛</td><td>2019届</td><td>株洲天泰会计师事务所</td><td>实习基地建设</td><td>陈思为</td><td>2024-10-08</td></tr>
+                            <tr><td>3</td><td>李娜</td><td>2020届</td><td>株洲百货集团</td><td>回校讲座</td><td>胡晨怡</td><td>2024-11-15</td></tr>
+                            <tr><td>4</td><td>王浩</td><td>2017届</td><td>湖南建业管理咨询</td><td>横向课题合作</td><td>宋吉华</td><td>2024-12-05</td></tr>
+                            <tr><td>5</td><td>赵琳</td><td>2021届</td><td>株洲河包农业</td><td>校企合作洽谈</td><td>岳伟</td><td>2025-03-10</td></tr>
+                            <tr><td>6</td><td>刘勇</td><td>2018届</td><td>湖南华逸信息</td><td>就业推荐</td><td>文轩</td><td>2025-03-18</td></tr>
+                            <tr><td>7</td><td>陈静</td><td>2019届</td><td>湖南联通株洲分公司</td><td>回校交流</td><td>易蕾</td><td>2025-04-05</td></tr>
+                            <tr><td>8</td><td>周伟</td><td>2020届</td><td>株洲市财政局</td><td>课题合作</td><td>朱爱娇</td><td>2025-04-12</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-competition" class="tab-content" style="display:none;">
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="value">120</div>
+                    <div class="label">指导次数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">43</div>
+                    <div class="label">获奖数量</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">1</div>
+                    <div class="label">国家级获奖</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">7</div>
+                    <div class="label">省级获奖</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-box">
+                    <h3>竞赛类型分布</h3>
+                    <canvas id="competitionTypeChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h3>获奖等级分布</h3>
+                    <canvas id="competitionLevelChart"></canvas>
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <h3>竞赛指导记录明细表</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>竞赛名称</th>
+                                <th>获奖等级</th>
+                                <th>指导学生</th>
+                                <th>指导教师</th>
+                                <th>时间</th>
+                                <th>备注</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>全国职业院校技能大赛</td><td>国家级二等奖</td><td>孙磊、李明</td><td>宋吉华、宋丹</td><td>2024-11</td><td>互联网+国际贸易赛项</td></tr>
+                            <tr><td>2</td><td>湖南省职业院校技能大赛</td><td>省级一等奖</td><td>王芳、张伟</td><td>曾昭山、胡晨怡</td><td>2024-10</td><td>会计技能赛项</td></tr>
+                            <tr><td>3</td><td>湖南省职业院校技能大赛</td><td>省级二等奖</td><td>陈静、刘洋</td><td>张晓航、刘佳杰</td><td>2024-10</td><td>电子商务赛项</td></tr>
+                            <tr><td>4</td><td>湖南省职业院校技能大赛</td><td>省级一等奖</td><td>赵雪、周婷</td><td>宋丹、李忠华</td><td>2025-05</td><td>市场营销赛项</td></tr>
+                            <tr><td>5</td><td>学创杯全国大学生创业模拟大赛</td><td>省级一等奖</td><td>吴强、郑琳</td><td>胡晨怡、岳伟</td><td>2025-04</td><td>创业模拟赛项</td></tr>
+                            <tr><td>6</td><td>湖南省"互联网+"大学生创新创业大赛</td><td>省级二等奖</td><td>孙磊、王芳</td><td>宋吉华、易蕾</td><td>2025-06</td><td>创新创业赛项</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-employment" class="tab-content" style="display:none;">
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="value">180</div>
+                    <div class="label">服务次数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">126</div>
+                    <div class="label">服务学生</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">93.8%</div>
+                    <div class="label">就业率</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">38</div>
+                    <div class="label">推荐岗位</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-box">
+                    <h3>就业行业分布</h3>
+                    <canvas id="employmentIndustryChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h3>就业率对比</h3>
+                    <canvas id="employmentRateChart"></canvas>
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <h3>就业服务记录明细表</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>学生姓名</th>
+                                <th>专业班级</th>
+                                <th>服务内容</th>
+                                <th>服务党员</th>
+                                <th>就业单位</th>
+                                <th>时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>王芳</td><td>会计2203班</td><td>简历优化+面试指导</td><td>胡晨怡</td><td>株洲天泰会计师事务所</td><td>2025-03</td></tr>
+                            <tr><td>2</td><td>张伟</td><td>电商2202班</td><td>职业规划+岗位推荐</td><td>曾昭山</td><td>用友新道科技</td><td>2025-04</td></tr>
+                            <tr><td>3</td><td>陈静</td><td>会计2201班</td><td>就业指导+实习推荐</td><td>岳伟</td><td>湖南建业管理咨询</td><td>2025-03</td></tr>
+                            <tr><td>4</td><td>刘洋</td><td>电商2203班</td><td>简历优化+面试模拟</td><td>文轩</td><td>株洲百货集团</td><td>2025-04</td></tr>
+                            <tr><td>5</td><td>赵雪</td><td>会计2202班</td><td>职业规划+企业推荐</td><td>易蕾</td><td>株洲河包农业</td><td>2025-05</td></tr>
+                            <tr><td>6</td><td>孙磊</td><td>电商2201班</td><td>就业指导+技能提升</td><td>宋吉华</td><td>湖南华逸信息</td><td>2025-05</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-enterprise" class="tab-content" style="display:none;">
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="value">156</div>
+                    <div class="label">服务次数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">5</div>
+                    <div class="label">合作企业</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">12.6万</div>
+                    <div class="label">横向课题经费</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">182</div>
+                    <div class="label">订单班学生</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-box">
+                    <h3>校企合作类型分布</h3>
+                    <canvas id="enterpriseTypeChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h3>合作企业贡献</h3>
+                    <canvas id="enterpriseContributionChart"></canvas>
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <h3>校企服务记录明细表</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>企业名称</th>
+                                <th>服务内容</th>
+                                <th>服务党员</th>
+                                <th>成果</th>
+                                <th>时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>用友新道科技</td><td>员工培训+课程共建</td><td>宋丹、陈思为</td><td>订单班1个/12.6万课题</td><td>2024-09</td></tr>
+                            <tr><td>2</td><td>株洲天泰会计师事务所</td><td>专家进课堂+实习基地</td><td>胡晨怡、宋吉华</td><td>实习岗位20个</td><td>2024-10</td></tr>
+                            <tr><td>3</td><td>株洲百货集团</td><td>电商人才培养+项目合作</td><td>岳伟、文轩</td><td>订单班1个/82人</td><td>2025-03</td></tr>
+                            <tr><td>4</td><td>湖南建业管理咨询</td><td>横向课题+师资培训</td><td>易蕾、朱爱娇</td><td>课题合作1项</td><td>2025-06</td></tr>
+                            <tr><td>5</td><td>株洲河包农业</td><td>乡村振兴+电商助农</td><td>徐雪君、马紫仪</td><td>助农项目1个</td><td>2025-09</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.style.display = 'none');
+            
+            event.target.classList.add('active');
+            document.getElementById('tab-' + tabName).style.display = 'block';
+            
+            initCharts(tabName);
+        }
+
+        let charts = {};
+
+        function initCharts(tabName) {
+            if (charts[tabName]) {
+                charts[tabName].forEach(chart => chart.destroy());
+            }
+            charts[tabName] = [];
+
+            if (tabName === 'difficulty') {
+                charts[tabName].push(new Chart(document.getElementById('difficultyTypeChart'), {
+                    type: 'pie',
+                    data: {
+                        labels: ['学业辅导', '心理疏导', '经济资助', '就业指导', '技能培训'],
+                        datasets: [{data: [45, 28, 15, 8, 4], backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF']}]
+                    },
+                    options: {responsive: true}
+                }));
+                charts[tabName].push(new Chart(document.getElementById('scoreChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['帮扶前', '帮扶后'],
+                        datasets: [{label: '平均成绩', data: [62, 80.7], backgroundColor: ['#AEC6CF', '#C41E3A']}]
+                    },
+                    options: {responsive: true}
+                }));
+            } else if (tabName === 'dormitory') {
+                charts[tabName].push(new Chart(document.getElementById('dormitoryTypeChart'), {
+                    type: 'pie',
+                    data: {
+                        labels: ['设施维修', '矛盾调解', '学习辅导', '卫生检查', '安全排查'],
+                        datasets: [{data: [35, 25, 20, 12, 8], backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF']}]
+                    },
+                    options: {responsive: true}
+                }));
+                charts[tabName].push(new Chart(document.getElementById('dormitoryTrendChart'), {
+                    type: 'line',
+                    data: {
+                        labels: ['9月', '10月', '11月', '12月', '3月', '4月'],
+                        datasets: [{label: '对接次数', data: [18, 22, 25, 20, 15, 8], borderColor: '#C41E3A'}]
+                    },
+                    options: {responsive: true}
+                }));
+            } else if (tabName === 'alumni') {
+                charts[tabName].push(new Chart(document.getElementById('alumniIndustryChart'), {
+                    type: 'pie',
+                    data: {
+                        labels: ['信息技术', '金融会计', '商贸流通', '政府机关', '教育科研'],
+                        datasets: [{data: [30, 28, 22, 12, 8], backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF']}]
+                    },
+                    options: {responsive: true}
+                }));
+                charts[tabName].push(new Chart(document.getElementById('alumniContributionChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['就业岗位', '回校讲座', '实习基地', '资金捐赠'],
+                        datasets: [{label: '数量', data: [38, 26, 12, 5], backgroundColor: '#C41E3A'}]
+                    },
+                    options: {responsive: true}
+                }));
+            } else if (tabName === 'competition') {
+                charts[tabName].push(new Chart(document.getElementById('competitionTypeChart'), {
+                    type: 'pie',
+                    data: {
+                        labels: ['互联网+国际贸易', '会计技能', '电子商务', '市场营销', '创新创业'],
+                        datasets: [{data: [25, 22, 20, 18, 15], backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF']}]
+                    },
+                    options: {responsive: true}
+                }));
+                charts[tabName].push(new Chart(document.getElementById('competitionLevelChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['国家级', '省级一等奖', '省级二等奖', '省级三等奖', '校级'],
+                        datasets: [{label: '获奖数量', data: [1, 3, 4, 8, 27], backgroundColor: '#C41E3A'}]
+                    },
+                    options: {responsive: true}
+                }));
+            } else if (tabName === 'employment') {
+                charts[tabName].push(new Chart(document.getElementById('employmentIndustryChart'), {
+                    type: 'pie',
+                    data: {
+                        labels: ['信息技术', '金融会计', '商贸流通', '教育培训', '其他'],
+                        datasets: [{data: [32, 28, 22, 10, 8], backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF']}]
+                    },
+                    options: {responsive: true}
+                }));
+                charts[tabName].push(new Chart(document.getElementById('employmentRateChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['帮扶学生', '全院平均'],
+                        datasets: [{label: '就业率', data: [93.8, 90.6], backgroundColor: ['#C41E3A', '#AEC6CF']}]
+                    },
+                    options: {responsive: true}
+                }));
+            } else if (tabName === 'enterprise') {
+                charts[tabName].push(new Chart(document.getElementById('enterpriseTypeChart'), {
+                    type: 'pie',
+                    data: {
+                        labels: ['订单班', '横向课题', '专家进课堂', '教师实践', '实习基地'],
+                        datasets: [{data: [28, 25, 22, 15, 10], backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF']}]
+                    },
+                    options: {responsive: true}
+                }));
+                charts[tabName].push(new Chart(document.getElementById('enterpriseContributionChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['用友新道', '株洲天泰', '株洲百货', '湖南建业', '株洲河包'],
+                        datasets: [{label: '合作成果评分', data: [95, 85, 90, 80, 75], backgroundColor: '#C41E3A'}]
+                    },
+                    options: {responsive: true}
+                }));
+            }
+        }
+
+        initCharts('difficulty');
+    </script>
+</body>
+</html>

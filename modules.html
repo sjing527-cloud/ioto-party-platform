@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IOTO 智慧党建 · 平台架构</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="common.css">
+<style>
+.menu a:hover{color:var(--gold);}
+.menu .btn-gold{background:linear-gradient(135deg,var(--gold),#B8860B);color:#5a3a00;padding:8px 20px;border-radius:6px;font-weight:700;font-size:13px;}
+.menu .btn-gold:hover{background:linear-gradient(135deg,var(--gold-light),var(--gold));}
+.hero{background:linear-gradient(135deg,rgba(139,0,0,0.92),rgba(178,34,34,0.88)),radial-gradient(circle at 60% 30%,rgba(212,175,55,0.15),transparent 50%);color:#fff;padding:60px 32px;text-align:center;}
+.hero h1{font-family:'Noto Serif SC';font-size:36px;font-weight:900;margin-bottom:12px;letter-spacing:4px;}
+.hero h1 .mark{color:var(--gold);}
+.hero p{font-size:15px;opacity:0.85;max-width:800px;margin:0 auto;line-height:1.8;}
+.mod-grid{max-width:1400px;margin:50px auto;padding:0 32px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.mod-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.06);transition:all .3s;border-top:4px solid var(--red-main);}
+.mod-card:hover{transform:translateY(-6px);box-shadow:0 12px 32px rgba(139,0,0,0.12);}
+.mod-card .mod-header{padding:24px 24px 0;}
+.mod-card .num{display:inline-block;width:36px;height:36px;line-height:36px;text-align:center;background:rgba(139,0,0,0.08);color:var(--red-main);border-radius:50%;font-family:'Noto Serif SC';font-weight:900;font-size:16px;margin-bottom:12px;}
+.mod-card .mod-icon{font-size:42px;color:var(--red-main);margin-bottom:12px;}
+.mod-card h3{font-family:'Noto Serif SC';font-size:20px;color:#333;margin-bottom:8px;}
+.mod-card .desc{font-size:14px;color:#666;line-height:1.7;margin-bottom:16px;}
+.mod-card .features{list-style:none;padding:0 24px 20px;}
+.mod-card .features li{padding:8px 0;font-size:13px;color:#555;border-bottom:1px dashed #eee;display:flex;align-items:center;gap:8px;}
+.mod-card .features li:last-child{border-bottom:none;}
+.mod-card .features li i{color:var(--gold);font-size:12px;}
+.mod-card .cta{display:block;background:rgba(139,0,0,0.06);color:var(--red-main);text-decoration:none;padding:14px 24px;text-align:center;font-weight:600;font-size:14px;transition:all .3s;letter-spacing:1px;}
+.mod-card .cta:hover{background:var(--red-main);color:#fff;}
+.mod-card.learning{border-top-color:#2E5BFF;}
+.mod-card.learning .mod-icon,.mod-card.learning .num,.mod-card.learning .cta{color:#2E5BFF;}
+.mod-card.learning .cta:hover{background:#2E5BFF;}
+.mod-card.activity{border-top-color:#FF6B6B;}
+.mod-card.activity .mod-icon,.mod-card.activity .num,.mod-card.activity .cta{color:#FF6B6B;}
+.mod-card.activity .cta:hover{background:#FF6B6B;}
+.mod-card.service{border-top-color:#4ADE80;}
+.mod-card.service .mod-icon,.mod-card.service .num,.mod-card.service .cta{color:#4ADE80;}
+.mod-card.service .cta:hover{background:#4ADE80;}
+.mod-card.analysis{border-top-color:#FFD966;}
+.mod-card.analysis .mod-icon,.mod-card.analysis .num,.mod-card.analysis .cta{color:#B8860B;}
+.mod-card.analysis .cta:hover{background:#B8860B;}
+.mod-card.management{border-top-color:#9333EA;}
+.mod-card.management .mod-icon,.mod-card.management .num,.mod-card.management .cta{color:#9333EA;}
+.mod-card.management .cta:hover{background:#9333EA;}
+footer{background:var(--navy);color:#fff;padding:40px 32px;margin-top:60px;text-align:center;}
+footer a{color:var(--gold);text-decoration:none;}
+@media(max-width:1024px){.mod-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:640px){.mod-grid{grid-template-columns:1fr;}.menu{gap:12px;font-size:12px;}.hero h1{font-size:28px;}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-wrap">
+    <a class="logo" href="index.html">
+      <i class="fas fa-hammer"></i>
+      <div class="logo-text"><div class="t1">IOTO 智慧党建</div><div class="t2">宋丹 · 双带头人工作室</div></div>
+    </a>
+    <div class="menu">
+      <a href="index.html">首页</a>
+      <a href="learning.html">学习模块</a>
+      <a href="activity.html">活动模块</a>
+      <a href="service_detail.html">服务模块</a>
+      <a href="news.html">学院新闻</a>
+      <a href="analysis.html">分析模块</a>
+      <a href="management.html">管理模块</a>
+      <a href="vote.html">投票问卷</a>
+      <a href="honor.html">荣誉管理</a>
+      <a href="dashboard.html" target="_blank" class="btn-gold"><i class="fas fa-chart-line"></i> 数据大屏</a>
+    </div>
+  </div>
+</nav>
+<div class="hero">
+  <h1><span class="mark">六大核心模块</span> · 两项展示功能</h1>
+  <p>V2 版本按照“六大核心业务模块 + 两项展示功能”统一口径，突出结项验收中最需要呈现的工作闭环、数据留痕与成果展示</p>
+</div>
+<div class="mod-grid">
+  <div class="mod-card">
+    <div class="mod-header">
+      <span class="num">01</span>
+      <div class="mod-icon"><i class="fas fa-bullhorn"></i></div>
+      <h3>📢 宣传资讯 <span style="font-size:10px;background:#E8F0FE;color:#1a73e8;padding:2px 6px;border-radius:4px;margin-left:4px;">⑤宣传师生有力</span></h3>
+      <p class="desc">党建要闻、通知公告、典型案例、视频号等内容统一发布平台</p>
+      <ul class="features">
+        <li><i class="fas fa-check-circle"></i> 党建要闻与上级精神传达</li>
+        <li><i class="fas fa-check-circle"></i> 工作室活动通知发布</li>
+        <li><i class="fas fa-check-circle"></i> 典型案例与风采展示</li>
+        <li><i class="fas fa-check-circle"></i> 视频号内容同步推送</li>
+      </ul>
+    </div>
+    <a href="news.html" class="cta"><i class="fas fa-arrow-right"></i> 进入宣传资讯</a>
+  </div>
+  <div class="mod-card learning">
+    <div class="mod-header">
+      <span class="num">02</span>
+      <div class="mod-icon"><i class="fas fa-book-open"></i></div>
+      <h3>📚 理论学习 <span style="font-size:10px;background:#E8F5E9;color:#2E7D32;padding:2px 6px;border-radius:4px;margin-left:4px;">①教育党员有力</span></h3>
+      <p class="desc">学习强国、专题学习、在线考试、AI问答等学习平台</p>
+      <ul class="features">
+        <li><i class="fas fa-check-circle"></i> 学习强国积分实时同步</li>
+        <li><i class="fas fa-check-circle"></i> 专题学习与在线考试</li>
+        <li><i class="fas fa-check-circle"></i> AI党建助手智能答疑</li>
+        <li><i class="fas fa-check-circle"></i> 学习心得提交与互评</li>
+      </ul>
+    </div>
+    <a href="learning.html" class="cta"><i class="fas fa-arrow-right"></i> 进入学习模块</a>
+  </div>
+  <div class="mod-card activity">
+    <div class="mod-header">
+      <span class="num">03</span>
+      <div class="mod-icon"><i class="fas fa-calendar-check"></i></div>
+      <h3>🎯 组织活动 <span style="font-size:10px;background:#FFF3E0;color:#E65100;padding:2px 6px;border-radius:4px;margin-left:4px;">④组织师生有力</span></h3>
+      <p class="desc">三会一课、主题党日、在线报名、签到打卡、风采展示</p>
+      <ul class="features">
+        <li><i class="fas fa-check-circle"></i> 三会一课全流程在线</li>
+        <li><i class="fas fa-check-circle"></i> 主题党日在线报名</li>
+        <li><i class="fas fa-check-circle"></i> 签到打卡与活动记录</li>
+        <li><i class="fas fa-check-circle"></i> 活动风采照片墙</li>
+      </ul>
+    </div>
+    <a href="activity.html" class="cta"><i class="fas fa-arrow-right"></i> 进入活动模块</a>
+  </div>
+  <div class="mod-card service">
+    <div class="mod-header">
+      <span class="num">04</span>
+      <div class="mod-icon"><i class="fas fa-handshake"></i></div>
+      <h3>🤝 师生服务 <span style="font-size:10px;background:#F3E5F5;color:#7B1FA2;padding:2px 6px;border-radius:4px;margin-left:4px;">⑦服务师生有力</span></h3>
+      <p class="desc">意见信箱、帮扶台账、心理关怀、校友联络等服务平台</p>
+      <ul class="features">
+        <li><i class="fas fa-check-circle"></i> 三位一体服务渠道（钉钉/邮箱/电话）</li>
+        <li><i class="fas fa-check-circle"></i> 困难学生帮扶台账</li>
+        <li><i class="fas fa-check-circle"></i> 宿舍对接与心理关怀</li>
+        <li><i class="fas fa-check-circle"></i> 校友联络与就业服务</li>
+      </ul>
+    </div>
+    <a href="service_detail.html" class="cta"><i class="fas fa-arrow-right"></i> 进入服务模块</a>
+  </div>
+  <div class="mod-card analysis">
+    <div class="mod-header">
+      <span class="num">05</span>
+      <div class="mod-icon"><i class="fas fa-chart-bar"></i></div>
+      <h3>📊 数据分析 <span style="font-size:10px;background:#E3F2FD;color:#1565C0;padding:2px 6px;border-radius:4px;margin-left:4px;">七个有力全景</span></h3>
+      <p class="desc">党建指数画像、排名公示、数据看板、绩效报表</p>
+      <ul class="features">
+        <li><i class="fas fa-check-circle"></i> 七个有力固定权重画像</li>
+        <li><i class="fas fa-check-circle"></i> 党员党建指数排名</li>
+        <li><i class="fas fa-check-circle"></i> 支部数据驾驶舱</li>
+        <li><i class="fas fa-check-circle"></i> 绩效报表自动生成</li>
+      </ul>
+    </div>
+    <a href="analysis.html" class="cta"><i class="fas fa-arrow-right"></i> 进入分析模块</a>
+  </div>
+  <div class="mod-card management">
+    <div class="mod-header">
+      <span class="num">06</span>
+      <div class="mod-icon"><i class="fas fa-tools"></i></div>
+      <h3>🛠️ 综合管理 <span style="font-size:10px;background:#FCE4EC;color:#C62828;padding:2px 6px;border-radius:4px;margin-left:4px;">②③管理监督有力</span></h3>
+      <p class="desc">党费管理、组织关系、档案数字化、制度库管理</p>
+      <ul class="features">
+        <li><i class="fas fa-check-circle"></i> 党费收缴与台账管理</li>
+        <li><i class="fas fa-check-circle"></i> 组织关系转接记录</li>
+        <li><i class="fas fa-check-circle"></i> 党员档案数字化</li>
+        <li><i class="fas fa-check-circle"></i> 制度库与知识库</li>
+      </ul>
+    </div>
+    <a href="management.html" class="cta"><i class="fas fa-arrow-right"></i> 进入管理模块</a>
+  </div>
+  <div class="mod-card" style="border-top-color:#3B82F6;">
+    <div class="mod-header">
+      <span class="num" style="color:#3B82F6;">07</span>
+      <div class="mod-icon" style="color:#3B82F6;"><i class="fas fa-vote-yea"></i></div>
+      <h3>🗳️ 投票问卷 <span style="font-size:10px;background:#E8EAF6;color:#283593;padding:2px 6px;border-radius:4px;margin-left:4px;">展示功能</span></h3>
+      <p class="desc">服务民主评议、意见征集和满意度调查的辅助展示页面</p>
+      <ul class="features">
+        <li><i class="fas fa-check-circle"></i> 优秀党员评选投票</li>
+        <li><i class="fas fa-check-circle"></i> 活动方案民主决策</li>
+        <li><i class="fas fa-check-circle"></i> 平台满意度调查</li>
+        <li><i class="fas fa-check-circle"></i> 实时投票结果统计</li>
+      </ul>
+    </div>
+    <a href="vote.html" class="cta" style="color:#3B82F6;">进入投票问卷</a>
+  </div>
+  <div class="mod-card" style="border-top-color:#F97316;">
+    <div class="mod-header">
+      <span class="num" style="color:#F97316;">08</span>
+      <div class="mod-icon" style="color:#F97316;"><i class="fas fa-trophy"></i></div>
+      <h3>🏆 荣誉展示 <span style="font-size:10px;background:#FFF8E1;color:#F57F17;padding:2px 6px;border-radius:4px;margin-left:4px;">展示功能</span></h3>
+      <p class="desc">党员荣誉墙、勋章体系、荣誉排行榜等成果展示页面</p>
+      <ul class="features">
+        <li><i class="fas fa-check-circle"></i> 党员荣誉墙展示</li>
+        <li><i class="fas fa-check-circle"></i> 三级勋章体系</li>
+        <li><i class="fas fa-check-circle"></i> 荣誉时间线记录</li>
+        <li><i class="fas fa-check-circle"></i> 荣誉之星排行榜</li>
+      </ul>
+    </div>
+    <a href="honor.html" class="cta" style="color:#F97316;">进入荣誉展示</a>
+  </div>
+</div>
+<footer>
+  <div>🚩 商务贸易学院教工党支部 · 宋丹"双带头人"工作室 · IOTO智慧党建平台</div>
+  <div style="margin-top:8px;font-size:12px;opacity:0.7;">© 2024-2026 版权所有</div>
+</footer>
+</body>
+</html>
