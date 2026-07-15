@@ -3,59 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>六个一服务工程 - IOTO智慧党建平台</title>
+    <title>六个一服务工程 - POWER智慧党建平台</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="common.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
-            min-height: 100vh;
-        }
-        .header {
-            background: linear-gradient(135deg, #C41E3A 0%, #8B0000 100%);
-            color: white;
-            padding: 20px 0;
-            box-shadow: 0 4px 15px rgba(196, 30, 58, 0.3);
-        }
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .logo img {
-            width: 40px;
-            height: 40px;
-            margin-right: 12px;
-        }
-        .nav {
-            display: flex;
-            gap: 24px;
-        }
-        .nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-        }
-        .nav a:hover, .nav a.active {
-            background: rgba(255, 255, 255, 0.2);
-        }
         .main {
             max-width: 1200px;
             margin: 30px auto;
@@ -249,36 +201,43 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="header-content">
-            <div class="logo">
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath fill='%23fff' d='M25 5l5 10h10l-8 6 3 10-9-5-9 5 3-10-8-6h10z'/%3E%3C/svg%3E" alt="Logo">
-                IOTO智慧党建平台
-            </div>
-            <div class="nav">
-                <a href="index.html">首页</a>
-                <a href="modules.html">平台架构</a>
-                <a href="learning.html">学习教育</a>
-                <a href="activity.html">组织活动</a>
-                <a href="service_detail.html" class="active">服务师生</a>
-                <a href="news.html">新闻动态</a>
-                <a href="analysis.html">数据分析</a>
-                <a href="management.html">综合管理</a>
-                <a href="conclusion.html">结项窗口</a>
-            </div>
-        </div>
+    <nav>
+  <div class="nav-wrap">
+    <a class="logo" href="index.html">
+      <i class="fas fa-hammer"></i>
+      <div class="logo-text">
+        <div class="t1">POWER 智慧党建</div>
+        <div class="t2">宋丹 · 双带头人工作室</div>
+      </div>
+    </a>
+    <div class="menu">
+      <a href="index.html">首页</a>
+      <a href="modules.html">平台架构</a>
+      <a href="learning.html">学习模块</a>
+      <a href="activity.html">活动模块</a>
+      <a href="service.html">服务模块</a>
+      <a href="news.html">学院新闻</a>
+      <a href="analysis.html">分析模块</a>
+      <a href="management.html">管理模块</a>
+      <a href="vote.html">投票问卷</a>
+      <a href="honor.html">荣誉管理</a>
+      <a href="conclusion.html" class="btn-gold"><i class="fas fa-file-alt"></i> 结项窗口</a>
+      <a href="dashboard.html" target="_blank" class="btn-gold"><i class="fas fa-chart-line"></i> 数据大屏</a>
     </div>
+  </div>
+</nav>
 
     <div class="main">
         <a href="index.html" class="back-btn">← 返回首页</a>
         
         <div class="page-title">
-            <h1>六个一服务工程</h1>
-            <p>党员每人每年结对帮扶6项任务，台账化追踪，精准服务师生</p>
+            <h1>七个一服务工程</h1>
+            <p>党员每人每年结对帮扶7项任务，台账化追踪，精准服务师生</p>
         </div>
 
         <div class="service-tabs">
             <button class="tab-btn active" onclick="showTab('difficulty')">困难学生帮扶</button>
+            <button class="tab-btn" onclick="showTab('academic')">学业导师帮扶</button>
             <button class="tab-btn" onclick="showTab('dormitory')">宿舍对接服务</button>
             <button class="tab-btn" onclick="showTab('alumni')">校友联系服务</button>
             <button class="tab-btn" onclick="showTab('competition')">竞赛指导服务</button>
@@ -333,16 +292,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>1</td><td>李明</td><td>电商2201班</td><td>学业辅导+心理疏导</td><td>宋丹</td><td>2024-09-15</td><td class="status-completed">成绩提升25%</td></tr>
-                            <tr><td>2</td><td>王芳</td><td>会计2203班</td><td>经济资助+就业指导</td><td>胡晨怡</td><td>2024-09-20</td><td class="status-completed">已就业</td></tr>
-                            <tr><td>3</td><td>张伟</td><td>电商2202班</td><td>学业辅导+技能培训</td><td>曾昭山</td><td>2024-10-08</td><td class="status-completed">成绩提升18%</td></tr>
-                            <tr><td>4</td><td>陈静</td><td>会计2201班</td><td>心理疏导+职业规划</td><td>岳伟</td><td>2024-10-15</td><td class="status-completed">状态好转</td></tr>
-                            <tr><td>5</td><td>刘洋</td><td>电商2203班</td><td>经济资助+学业辅导</td><td>文轩</td><td>2024-11-05</td><td class="status-completed">成绩提升15%</td></tr>
-                            <tr><td>6</td><td>赵雪</td><td>会计2202班</td><td>就业指导+简历优化</td><td>易蕾</td><td>2024-11-12</td><td class="status-completed">已就业</td></tr>
-                            <tr><td>7</td><td>孙磊</td><td>电商2201班</td><td>技能培训+竞赛指导</td><td>宋吉华</td><td>2024-12-01</td><td class="status-completed">获省级竞赛奖</td></tr>
-                            <tr><td>8</td><td>周婷</td><td>会计2203班</td><td>学业辅导+心理疏导</td><td>朱爱娇</td><td>2025-03-10</td><td class="status-completed">成绩提升20%</td></tr>
-                            <tr><td>9</td><td>吴强</td><td>电商2202班</td><td>职业规划+实习推荐</td><td>徐雪君</td><td>2025-03-18</td><td class="status-completed">已实习</td></tr>
-                            <tr><td>10</td><td>郑琳</td><td>会计2201班</td><td>经济资助+学业辅导</td><td>马紫仪</td><td>2025-04-05</td><td class="status-completed">成绩提升12%</td></tr>
+                            <tr><td>1</td><td>李晋湘</td><td>本科电商2501</td><td>学业辅导+心理疏导</td><td>宋丹</td><td>2025-10-15</td><td class="status-completed">成绩提升25%</td></tr>
+                            <tr><td>2</td><td>赵子乐</td><td>营销2501</td><td>经济资助+就业指导</td><td>胡晨怡</td><td>2025-10-20</td><td class="status-completed">就业方向明确</td></tr>
+                            <tr><td>3</td><td>付彦国</td><td>电商2501</td><td>学业辅导+技能培训</td><td>曾昭山</td><td>2025-11-08</td><td class="status-completed">成绩提升18%</td></tr>
+                            <tr><td>4</td><td>彭奕涵</td><td>本科电商2501</td><td>心理疏导+职业规划</td><td>岳伟</td><td>2025-11-15</td><td class="status-completed">状态好转</td></tr>
+                            <tr><td>5</td><td>程清妍</td><td>营销2501</td><td>经济资助+学业辅导</td><td>文轩</td><td>2025-12-05</td><td class="status-completed">成绩提升15%</td></tr>
+                            <tr><td>6</td><td>左源杰</td><td>电商2501</td><td>就业指导+简历优化</td><td>易蕾</td><td>2025-12-12</td><td class="status-completed">简历达标</td></tr>
+                            <tr><td>7</td><td>胡智睿</td><td>电商2501</td><td>技能培训+竞赛指导</td><td>宋吉华</td><td>2026-03-01</td><td class="status-completed">获省级竞赛奖</td></tr>
+                            <tr><td>8</td><td>彭丹丁</td><td>本科电商2501</td><td>学业辅导+心理疏导</td><td>朱爱娇</td><td>2026-03-10</td><td class="status-completed">成绩提升20%</td></tr>
+                            <tr><td>9</td><td>黄旭</td><td>营销2501</td><td>职业规划+实习推荐</td><td>徐雪君</td><td>2026-03-18</td><td class="status-completed">已实习</td></tr>
+                            <tr><td>10</td><td>盛菲</td><td>本科电商2501</td><td>经济资助+学业辅导</td><td>马紫仪</td><td>2026-04-05</td><td class="status-completed">成绩提升12%</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -352,19 +311,130 @@
                 <h3>典型帮扶案例</h3>
                 <div class="case-list">
                     <div class="case-card">
-                        <h4>李明：从挂科到获奖</h4>
-                        <p>帮扶前：电商2201班李明，大一学年挂科3门，自信心不足。帮扶后：通过党员教师宋丹每周2次学业辅导，大二学年平均成绩提升25%，获校级奖学金。</p>
-                        <div class="meta">帮扶周期：2024年9月-2025年6月 | 帮扶党员：宋丹</div>
+                        <h4>李晋湘：从挂科到获奖</h4>
+                        <p>帮扶前：本科电商2501李晋湘，入学时基础薄弱，自信心不足。帮扶后：通过党员教师宋丹每周2次学业辅导，学期平均成绩提升25%，获校级奖学金。</p>
+                        <div class="meta">帮扶周期：2025年10月-2026年6月 | 帮扶党员：宋丹</div>
                     </div>
                     <div class="case-card">
-                        <h4>王芳：就业逆袭</h4>
-                        <p>帮扶前：会计2203班王芳，家庭困难，性格内向，求职屡屡受挫。帮扶后：通过胡晨怡老师的就业指导和企业推荐，成功入职株洲天泰会计师事务所。</p>
-                        <div class="meta">帮扶周期：2024年9月-2025年3月 | 帮扶党员：胡晨怡</div>
+                        <h4>赵子乐：就业方向清晰</h4>
+                        <p>帮扶前：营销2501赵子乐，家庭困难，性格内向，对未来职业规划迷茫。帮扶后：通过胡晨怡老师的就业指导和企业推荐，明确了市场营销职业发展方向。</p>
+                        <div class="meta">帮扶周期：2025年10月-2026年3月 | 帮扶党员：胡晨怡</div>
                     </div>
                     <div class="case-card">
-                        <h4>孙磊：技能突破</h4>
-                        <p>帮扶前：电商2201班孙磊，专业技能薄弱，缺乏竞赛经验。帮扶后：通过宋吉华老师的竞赛指导和技能培训，代表学校参加湖南省职业院校技能大赛获一等奖。</p>
-                        <div class="meta">帮扶周期：2024年12月-2025年5月 | 帮扶党员：宋吉华</div>
+                        <h4>胡智睿：技能突破</h4>
+                        <p>帮扶前：电商2501胡智睿，专业技能薄弱，缺乏竞赛经验。帮扶后：通过宋吉华老师的竞赛指导和技能培训，代表学校参加湖南省职业院校技能大赛获一等奖。</p>
+                        <div class="meta">帮扶周期：2026年3月-2026年5月 | 帮扶党员：宋吉华</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-academic" class="tab-content" style="display:none;">
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="value">86</div>
+                    <div class="label">指导次数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">6</div>
+                    <div class="label">学业导师</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">本科电商2501-2506</div>
+                    <div class="label">覆盖班级</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">100%</div>
+                    <div class="label">学生覆盖率</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-box">
+                    <h3>指导类型分布</h3>
+                    <canvas id="academicTypeChart"></canvas>
+                </div>
+                <div class="chart-box">
+                    <h3>月度指导统计</h3>
+                    <canvas id="academicTrendChart"></canvas>
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <h3>学业导师名单</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>导师姓名</th>
+                                <th>负责班级</th>
+                                <th>专业方向</th>
+                                <th>指导次数</th>
+                                <th>学生人数</th>
+                                <th>主要工作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>黄琳博</td><td>本科电商2501</td><td>全媒体电商运营</td><td>14</td><td>45</td><td>学业引导+竞赛指导+安全教育</td></tr>
+                            <tr><td>2</td><td>曹薇</td><td>本科电商2503</td><td>全媒体电商运营</td><td>14</td><td>44</td><td>学业引导+竞赛指导+学风建设</td></tr>
+                            <tr><td>3</td><td>宋丹</td><td>本科电商2502</td><td>全媒体电商运营</td><td>15</td><td>46</td><td>思想引领+学业辅导+就业指导</td></tr>
+                            <tr><td>4</td><td>胡晨怡</td><td>本科电商2504</td><td>全媒体电商运营</td><td>14</td><td>45</td><td>职业规划+心理疏导+实践指导</td></tr>
+                            <tr><td>5</td><td>宋吉华</td><td>本科电商2505</td><td>全媒体电商运营</td><td>15</td><td>43</td><td>技能培训+学科竞赛+创新创业</td></tr>
+                            <tr><td>6</td><td>易蕾</td><td>本科电商2506</td><td>全媒体电商运营</td><td>14</td><td>44</td><td>学习方法+课程指导+素质拓展</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <h3>学业导师帮扶记录明细表</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>导师姓名</th>
+                                <th>班级</th>
+                                <th>指导内容</th>
+                                <th>形式</th>
+                                <th>时间</th>
+                                <th>地点</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>黄琳博</td><td>本科电商2501</td><td>第一次导师见面会+班干部谈心谈话</td><td>集体指导</td><td>2025-10-23</td><td>商贸101教室</td></tr>
+                            <tr><td>2</td><td>宋丹</td><td>本科电商2502</td><td>第一次导师见面会+学业规划指导</td><td>集体指导</td><td>2025-10-21</td><td>商贸101教室</td></tr>
+                            <tr><td>3</td><td>黄琳博</td><td>本科电商2501</td><td>全国大学生数字商业应用能力大赛报名指导</td><td>竞赛指导</td><td>2025-10-17</td><td>经管303</td></tr>
+                            <tr><td>4</td><td>曹薇</td><td>本科电商2503</td><td>数字贸易综合运营赛道竞赛培训</td><td>竞赛指导</td><td>2025-11-05</td><td>电商实训室</td></tr>
+                            <tr><td>5</td><td>黄琳博</td><td>本科电商2501</td><td>网络安全与防范电信诈骗专题学习</td><td>安全教育</td><td>2025-11-28</td><td>商贸101教室</td></tr>
+                            <tr><td>6</td><td>宋吉华</td><td>本科电商2505</td><td>十六届全国大学生电子商务"三创赛"报名指导</td><td>竞赛指导</td><td>2025-12-30</td><td>经管503</td></tr>
+                            <tr><td>7</td><td>胡晨怡</td><td>本科电商2504</td><td>学分认定与转换管理办法解读</td><td>学业指导</td><td>2026-03-19</td><td>商贸101教室</td></tr>
+                            <tr><td>8</td><td>易蕾</td><td>本科电商2506</td><td>第二课堂学分管理办法解读+四级报名提醒</td><td>学业指导</td><td>2026-03-19</td><td>商贸101教室</td></tr>
+                            <tr><td>9</td><td>黄琳博</td><td>本科电商2501</td><td>国家安全教育专题班会</td><td>思想引领</td><td>2026-04-22</td><td>商贸101教室</td></tr>
+                            <tr><td>10</td><td>曹薇</td><td>本科电商2503</td><td>三创挑战赛校赛组织指导</td><td>竞赛指导</td><td>2026-04-24</td><td>经管403</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="detail-section">
+                <h3>典型学业帮扶案例</h3>
+                <div class="case-list">
+                    <div class="case-card">
+                        <h4>李晋湘：从基础薄弱到专业前列</h4>
+                        <p>帮扶前：本科电商2501李晋湘，入学时对专业认知模糊，学习方法不当，多门课程挂科风险。帮扶后：通过黄琳博导师的学业规划和每周1次的一对一辅导，学期末专业排名提升32名，获校级三等奖学金。</p>
+                        <div class="meta">帮扶周期：2025年10月-2026年6月 | 学业导师：黄琳博</div>
+                    </div>
+                    <div class="case-card">
+                        <h4>彭奕涵：竞赛小白到省奖获得者</h4>
+                        <p>帮扶前：本科电商2502彭奕涵，无竞赛经验，对专业实践缺乏信心。帮扶后：通过宋丹导师的竞赛指导和项目训练，组队参加全国大学生电子商务"三创赛"获省级二等奖，专业实践能力显著提升。</p>
+                        <div class="meta">帮扶周期：2025年12月-2026年5月 | 学业导师：宋丹</div>
+                    </div>
+                    <div class="case-card">
+                        <h4>胡智睿：创新创业启蒙之旅</h4>
+                        <p>帮扶前：本科电商2504胡智睿，有创业想法但不知如何落地。帮扶后：通过宋吉华导师的创新创业指导，成功入驻学校创业孵化基地，项目获湖南省"互联网+"创新创业大赛铜奖。</p>
+                        <div class="meta">帮扶周期：2025年11月-2026年6月 | 学业导师：宋吉华</div>
                     </div>
                 </div>
             </div>
@@ -480,14 +550,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>1</td><td>陈晓</td><td>2018届</td><td>用友新道科技</td><td>就业岗位对接</td><td>宋丹</td><td>2024-09-20</td></tr>
-                            <tr><td>2</td><td>张涛</td><td>2019届</td><td>株洲天泰会计师事务所</td><td>实习基地建设</td><td>陈思为</td><td>2024-10-08</td></tr>
-                            <tr><td>3</td><td>李娜</td><td>2020届</td><td>株洲百货集团</td><td>回校讲座</td><td>胡晨怡</td><td>2024-11-15</td></tr>
-                            <tr><td>4</td><td>王浩</td><td>2017届</td><td>湖南建业管理咨询</td><td>横向课题合作</td><td>宋吉华</td><td>2024-12-05</td></tr>
-                            <tr><td>5</td><td>赵琳</td><td>2021届</td><td>株洲河包农业</td><td>校企合作洽谈</td><td>岳伟</td><td>2025-03-10</td></tr>
-                            <tr><td>6</td><td>刘勇</td><td>2018届</td><td>湖南华逸信息</td><td>就业推荐</td><td>文轩</td><td>2025-03-18</td></tr>
-                            <tr><td>7</td><td>陈静</td><td>2019届</td><td>湖南联通株洲分公司</td><td>回校交流</td><td>易蕾</td><td>2025-04-05</td></tr>
-                            <tr><td>8</td><td>周伟</td><td>2020届</td><td>株洲市财政局</td><td>课题合作</td><td>朱爱娇</td><td>2025-04-12</td></tr>
+                            <tr><td>1</td><td>李晋湘</td><td>2018届</td><td>湖南中易晟达电子商务</td><td>就业岗位对接</td><td>宋丹</td><td>2024-09-20</td></tr>
+                            <tr><td>2</td><td>彭奕涵</td><td>2019届</td><td>湖南中榜集团</td><td>实习基地建设</td><td>陈思为</td><td>2024-10-08</td></tr>
+                            <tr><td>3</td><td>彭丹丁</td><td>2020届</td><td>株洲百货集团</td><td>回校讲座</td><td>胡晨怡</td><td>2024-11-15</td></tr>
+                            <tr><td>4</td><td>盛菲</td><td>2017届</td><td>京东物流（长沙）</td><td>横向课题合作</td><td>宋吉华</td><td>2024-12-05</td></tr>
+                            <tr><td>5</td><td>李沛然</td><td>2021届</td><td>景宸星火集团</td><td>校企合作洽谈</td><td>岳伟</td><td>2025-03-10</td></tr>
+                            <tr><td>6</td><td>文嘉豪</td><td>2018届</td><td>株洲易通达国际贸易</td><td>就业推荐</td><td>文轩</td><td>2025-03-18</td></tr>
+                            <tr><td>7</td><td>李好</td><td>2019届</td><td>湖南联通株洲分公司</td><td>回校交流</td><td>易蕾</td><td>2025-04-05</td></tr>
+                            <tr><td>8</td><td>叶婧仪</td><td>2020届</td><td>马栏山聚恒科技园</td><td>课题合作</td><td>朱爱娇</td><td>2025-04-12</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -541,12 +611,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>1</td><td>全国职业院校技能大赛</td><td>国家级二等奖</td><td>孙磊、李明</td><td>宋吉华、宋丹</td><td>2024-11</td><td>互联网+国际贸易赛项</td></tr>
-                            <tr><td>2</td><td>湖南省职业院校技能大赛</td><td>省级一等奖</td><td>王芳、张伟</td><td>曾昭山、胡晨怡</td><td>2024-10</td><td>会计技能赛项</td></tr>
-                            <tr><td>3</td><td>湖南省职业院校技能大赛</td><td>省级二等奖</td><td>陈静、刘洋</td><td>张晓航、刘佳杰</td><td>2024-10</td><td>电子商务赛项</td></tr>
-                            <tr><td>4</td><td>湖南省职业院校技能大赛</td><td>省级一等奖</td><td>赵雪、周婷</td><td>宋丹、李忠华</td><td>2025-05</td><td>市场营销赛项</td></tr>
-                            <tr><td>5</td><td>学创杯全国大学生创业模拟大赛</td><td>省级一等奖</td><td>吴强、郑琳</td><td>胡晨怡、岳伟</td><td>2025-04</td><td>创业模拟赛项</td></tr>
-                            <tr><td>6</td><td>湖南省"互联网+"大学生创新创业大赛</td><td>省级二等奖</td><td>孙磊、王芳</td><td>宋吉华、易蕾</td><td>2025-06</td><td>创新创业赛项</td></tr>
+                            <tr><td>1</td><td>全国职业院校技能大赛</td><td>国家级二等奖</td><td>胡智睿、付彦国</td><td>宋吉华、宋丹</td><td>2025-11</td><td>互联网+国际贸易赛项</td></tr>
+                            <tr><td>2</td><td>湖南省职业院校技能大赛</td><td>省级一等奖</td><td>程清妍、全玲丽</td><td>曾昭山、胡晨怡</td><td>2025-10</td><td>市场营销赛项</td></tr>
+                            <tr><td>3</td><td>湖南省职业院校技能大赛</td><td>省级二等奖</td><td>李晋湘、彭奕涵</td><td>张晓航、刘佳杰</td><td>2025-10</td><td>电子商务赛项</td></tr>
+                            <tr><td>4</td><td>湖南省职业院校技能大赛</td><td>省级一等奖</td><td>唐雅晴、张靓靓</td><td>宋丹、李忠华</td><td>2026-05</td><td>市场营销赛项</td></tr>
+                            <tr><td>5</td><td>学创杯全国大学生创业模拟大赛</td><td>省级一等奖</td><td>黄旭、戴哲舒</td><td>胡晨怡、岳伟</td><td>2026-04</td><td>创业模拟赛项</td></tr>
+                            <tr><td>6</td><td>湖南省"互联网+"大学生创新创业大赛</td><td>省级二等奖</td><td>彭丹丁、盛菲</td><td>宋吉华、易蕾</td><td>2026-06</td><td>创新创业赛项</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -600,12 +670,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>1</td><td>王芳</td><td>会计2203班</td><td>简历优化+面试指导</td><td>胡晨怡</td><td>株洲天泰会计师事务所</td><td>2025-03</td></tr>
-                            <tr><td>2</td><td>张伟</td><td>电商2202班</td><td>职业规划+岗位推荐</td><td>曾昭山</td><td>用友新道科技</td><td>2025-04</td></tr>
-                            <tr><td>3</td><td>陈静</td><td>会计2201班</td><td>就业指导+实习推荐</td><td>岳伟</td><td>湖南建业管理咨询</td><td>2025-03</td></tr>
-                            <tr><td>4</td><td>刘洋</td><td>电商2203班</td><td>简历优化+面试模拟</td><td>文轩</td><td>株洲百货集团</td><td>2025-04</td></tr>
-                            <tr><td>5</td><td>赵雪</td><td>会计2202班</td><td>职业规划+企业推荐</td><td>易蕾</td><td>株洲河包农业</td><td>2025-05</td></tr>
-                            <tr><td>6</td><td>孙磊</td><td>电商2201班</td><td>就业指导+技能提升</td><td>宋吉华</td><td>湖南华逸信息</td><td>2025-05</td></tr>
+                            <tr><td>1</td><td>赵子乐</td><td>营销2501</td><td>简历优化+面试指导</td><td>胡晨怡</td><td>湖南中榜集团</td><td>2026-03</td></tr>
+                            <tr><td>2</td><td>付彦国</td><td>电商2501</td><td>职业规划+岗位推荐</td><td>曾昭山</td><td>湖南中易晟达电子商务</td><td>2026-04</td></tr>
+                            <tr><td>3</td><td>彭奕涵</td><td>本科电商2501</td><td>就业指导+实习推荐</td><td>岳伟</td><td>京东物流（长沙）</td><td>2026-03</td></tr>
+                            <tr><td>4</td><td>程清妍</td><td>营销2501</td><td>简历优化+面试模拟</td><td>文轩</td><td>株洲百货集团</td><td>2026-04</td></tr>
+                            <tr><td>5</td><td>李沛然</td><td>本科电商2501</td><td>职业规划+企业推荐</td><td>易蕾</td><td>湖南中榜集团</td><td>2026-05</td></tr>
+                            <tr><td>6</td><td>胡智睿</td><td>电商2501</td><td>就业指导+技能提升</td><td>宋吉华</td><td>湖南中易晟达电子商务</td><td>2026-05</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -658,11 +728,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>1</td><td>用友新道科技</td><td>员工培训+课程共建</td><td>宋丹、陈思为</td><td>订单班1个/12.6万课题</td><td>2024-09</td></tr>
-                            <tr><td>2</td><td>株洲天泰会计师事务所</td><td>专家进课堂+实习基地</td><td>胡晨怡、宋吉华</td><td>实习岗位20个</td><td>2024-10</td></tr>
-                            <tr><td>3</td><td>株洲百货集团</td><td>电商人才培养+项目合作</td><td>岳伟、文轩</td><td>订单班1个/82人</td><td>2025-03</td></tr>
-                            <tr><td>4</td><td>湖南建业管理咨询</td><td>横向课题+师资培训</td><td>易蕾、朱爱娇</td><td>课题合作1项</td><td>2025-06</td></tr>
-                            <tr><td>5</td><td>株洲河包农业</td><td>乡村振兴+电商助农</td><td>徐雪君、马紫仪</td><td>助农项目1个</td><td>2025-09</td></tr>
+                            <tr><td>1</td><td>湖南中榜集团</td><td>直播电商人才培养+项目合作</td><td>宋丹、陈思为</td><td>订单班1个/直播联合培训</td><td>2024-10</td></tr>
+                            <tr><td>2</td><td>湖南中易晟达电子商务</td><td>电商专家进课堂+实习基地</td><td>胡晨怡、宋吉华</td><td>实习岗位30个/校企合作签约</td><td>2026-03</td></tr>
+                            <tr><td>3</td><td>京东物流（长沙）</td><td>物流电商人才培养+订单班</td><td>岳伟、文轩</td><td>订单班洽谈/共建实训基地</td><td>2026-03</td></tr>
+                            <tr><td>4</td><td>株洲百货集团</td><td>市场营销+电商项目合作</td><td>易蕾、朱爱娇</td><td>实习基地+就业推荐</td><td>2025-11</td></tr>
+                            <tr><td>5</td><td>景宸星火集团</td><td>全媒体电商运营+师资实践</td><td>徐雪君、马紫仪</td><td>暑期教师实践/项目合作</td><td>2024-08</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -689,107 +759,575 @@
             }
             charts[tabName] = [];
 
-            if (tabName === 'difficulty') {
+            if (tabName === 'academic') {
+                charts[tabName].push(new Chart(document.getElementById('academicTypeChart'), {
+                    type: 'pie',
+                    data: {
+                        labels: ['思想引领', '学业辅导', '竞赛指导', '安全教育', '就业指导', '学风建设'],
+                        datasets: [{
+                            data: [20, 28, 22, 12, 10, 8],
+                            backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF', '#DDA0DD'],
+                            borderWidth: 2,
+                            borderColor: '#fff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { padding: 12, font: { size: 11 }, usePointStyle: true }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(139, 0, 0, 0.9)',
+                                padding: 12,
+                                cornerRadius: 8,
+                                callbacks: {
+                                    label: function(context) {
+                                        var total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        var percentage = ((context.raw / total) * 100).toFixed(1) + '%';
+                                        return context.label + ': ' + context.raw + '次 (' + percentage + ')';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }));
+                charts[tabName].push(new Chart(document.getElementById('academicTrendChart'), {
+                    type: 'line',
+                    data: {
+                        labels: ['10月', '11月', '12月', '1月', '3月', '4月', '5月', '6月'],
+                        datasets: [{
+                            label: '指导次数',
+                            data: [18, 12, 10, 8, 15, 12, 9, 2],
+                            borderColor: '#C41E3A',
+                            backgroundColor: 'rgba(196, 30, 58, 0.1)',
+                            borderWidth: 3,
+                            pointRadius: 6,
+                            pointBackgroundColor: '#C41E3A',
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(139, 0, 0, 0.9)',
+                                padding: 12,
+                                cornerRadius: 8,
+                                callbacks: {
+                                    label: function(context) {
+                                        return '指导次数: ' + context.raw + '次';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: { stepSize: 5, font: { size: 12 } },
+                                grid: { color: '#eee' },
+                                title: { display: true, text: '指导次数', font: { size: 13, weight: 'bold' } }
+                            },
+                            x: {
+                                ticks: { font: { size: 12 } },
+                                grid: { display: false },
+                                title: { display: true, text: '月份', font: { size: 13, weight: 'bold' } }
+                            }
+                        }
+                    }
+                }));
+            } else if (tabName === 'difficulty') {
                 charts[tabName].push(new Chart(document.getElementById('difficultyTypeChart'), {
                     type: 'pie',
                     data: {
                         labels: ['学业辅导', '心理疏导', '经济资助', '就业指导', '技能培训'],
-                        datasets: [{data: [45, 28, 15, 8, 4], backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF']}]
+                        datasets: [{
+                            data: [45, 28, 15, 8, 4],
+                            backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF'],
+                            borderWidth: 2,
+                            borderColor: '#fff'
+                        }]
                     },
-                    options: {responsive: true}
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    padding: 16,
+                                    font: { size: 12 },
+                                    usePointStyle: true,
+                                    pointStyle: 'circle'
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(139, 0, 0, 0.9)',
+                                titleFont: { size: 14, weight: 'bold' },
+                                bodyFont: { size: 13 },
+                                padding: 12,
+                                cornerRadius: 8,
+                                callbacks: {
+                                    label: function(context) {
+                                        var total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        var percentage = ((context.raw / total) * 100).toFixed(1) + '%';
+                                        return context.label + ': ' + context.raw + '次 (' + percentage + ')';
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }));
                 charts[tabName].push(new Chart(document.getElementById('scoreChart'), {
                     type: 'bar',
                     data: {
                         labels: ['帮扶前', '帮扶后'],
-                        datasets: [{label: '平均成绩', data: [62, 80.7], backgroundColor: ['#AEC6CF', '#C41E3A']}]
+                        datasets: [{
+                            label: '平均成绩',
+                            data: [62, 80.7],
+                            backgroundColor: ['#AEC6CF', '#C41E3A'],
+                            borderWidth: 0,
+                            borderRadius: 8
+                        }]
                     },
-                    options: {responsive: true}
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(139, 0, 0, 0.9)',
+                                titleFont: { size: 14, weight: 'bold' },
+                                bodyFont: { size: 13 },
+                                padding: 12,
+                                cornerRadius: 8,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.label + ': ' + context.raw + '分';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                min: 50,
+                                max: 100,
+                                ticks: { stepSize: 10, font: { size: 12 } },
+                                grid: { color: '#eee', lineWidth: 1 },
+                                title: { display: true, text: '成绩分数', font: { size: 13, weight: 'bold' } }
+                            },
+                            x: {
+                                ticks: { font: { size: 13, weight: 'bold' } },
+                                grid: { display: false },
+                                title: { display: true, text: '帮扶阶段', font: { size: 13, weight: 'bold' } }
+                            }
+                        }
+                    }
                 }));
             } else if (tabName === 'dormitory') {
                 charts[tabName].push(new Chart(document.getElementById('dormitoryTypeChart'), {
                     type: 'pie',
                     data: {
                         labels: ['设施维修', '矛盾调解', '学习辅导', '卫生检查', '安全排查'],
-                        datasets: [{data: [35, 25, 20, 12, 8], backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF']}]
+                        datasets: [{
+                            data: [35, 25, 20, 12, 8],
+                            backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF'],
+                            borderWidth: 2,
+                            borderColor: '#fff'
+                        }]
                     },
-                    options: {responsive: true}
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { padding: 16, font: { size: 12 }, usePointStyle: true }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(139, 0, 0, 0.9)',
+                                padding: 12,
+                                cornerRadius: 8,
+                                callbacks: {
+                                    label: function(context) {
+                                        var total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        var percentage = ((context.raw / total) * 100).toFixed(1) + '%';
+                                        return context.label + ': ' + context.raw + '次 (' + percentage + ')';
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }));
                 charts[tabName].push(new Chart(document.getElementById('dormitoryTrendChart'), {
                     type: 'line',
                     data: {
                         labels: ['9月', '10月', '11月', '12月', '3月', '4月'],
-                        datasets: [{label: '对接次数', data: [18, 22, 25, 20, 15, 8], borderColor: '#C41E3A'}]
+                        datasets: [{
+                            label: '对接次数',
+                            data: [18, 22, 25, 20, 15, 8],
+                            borderColor: '#C41E3A',
+                            backgroundColor: 'rgba(196, 30, 58, 0.1)',
+                            borderWidth: 3,
+                            pointRadius: 6,
+                            pointBackgroundColor: '#C41E3A',
+                            fill: true,
+                            tension: 0.3
+                        }]
                     },
-                    options: {responsive: true}
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(139, 0, 0, 0.9)',
+                                padding: 12,
+                                cornerRadius: 8,
+                                callbacks: {
+                                    label: function(context) {
+                                        return '对接次数: ' + context.raw + '次';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: { stepSize: 5, font: { size: 12 } },
+                                grid: { color: '#eee' },
+                                title: { display: true, text: '对接次数', font: { size: 13, weight: 'bold' } }
+                            },
+                            x: {
+                                ticks: { font: { size: 12 } },
+                                grid: { display: false },
+                                title: { display: true, text: '月份', font: { size: 13, weight: 'bold' } }
+                            }
+                        }
+                    }
                 }));
             } else if (tabName === 'alumni') {
                 charts[tabName].push(new Chart(document.getElementById('alumniIndustryChart'), {
                     type: 'pie',
                     data: {
-                        labels: ['信息技术', '金融会计', '商贸流通', '政府机关', '教育科研'],
-                        datasets: [{data: [30, 28, 22, 12, 8], backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF']}]
+                        labels: ['电子商务', '市场营销', '国际贸易', '新媒体运营', '教育科研'],
+                        datasets: [{
+                            data: [30, 28, 22, 12, 8],
+                            backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF'],
+                            borderWidth: 2,
+                            borderColor: '#fff'
+                        }]
                     },
-                    options: {responsive: true}
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { padding: 12, font: { size: 11 }, usePointStyle: true }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(139, 0, 0, 0.9)',
+                                padding: 12,
+                                cornerRadius: 8,
+                                callbacks: {
+                                    label: function(context) {
+                                        var total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        var percentage = ((context.raw / total) * 100).toFixed(1) + '%';
+                                        return context.label + ': ' + context.raw + '人 (' + percentage + ')';
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }));
                 charts[tabName].push(new Chart(document.getElementById('alumniContributionChart'), {
                     type: 'bar',
                     data: {
                         labels: ['就业岗位', '回校讲座', '实习基地', '资金捐赠'],
-                        datasets: [{label: '数量', data: [38, 26, 12, 5], backgroundColor: '#C41E3A'}]
+                        datasets: [{
+                            label: '数量',
+                            data: [38, 26, 12, 5],
+                            backgroundColor: '#C41E3A',
+                            borderWidth: 0,
+                            borderRadius: 8
+                        }]
                     },
-                    options: {responsive: true}
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(139, 0, 0, 0.9)',
+                                padding: 12,
+                                cornerRadius: 8,
+                                callbacks: {
+                                    label: function(context) {
+                                        var unit = context.label === '就业岗位' ? '个' : context.label === '回校讲座' ? '场' : context.label === '实习基地' ? '个' : '万元';
+                                        return context.label + ': ' + context.raw + unit;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: { font: { size: 12 } },
+                                grid: { color: '#eee' },
+                                title: { display: true, text: '数量', font: { size: 13, weight: 'bold' } }
+                            },
+                            x: {
+                                ticks: { font: { size: 12 } },
+                                grid: { display: false },
+                                title: { display: true, text: '贡献类型', font: { size: 13, weight: 'bold' } }
+                            }
+                        }
+                    }
                 }));
             } else if (tabName === 'competition') {
                 charts[tabName].push(new Chart(document.getElementById('competitionTypeChart'), {
                     type: 'pie',
                     data: {
-                        labels: ['互联网+国际贸易', '会计技能', '电子商务', '市场营销', '创新创业'],
-                        datasets: [{data: [25, 22, 20, 18, 15], backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF']}]
+                        labels: ['互联网+国际贸易', '电子商务', '市场营销', '全媒体电商运营', '创新创业'],
+                        datasets: [{
+                            data: [25, 22, 20, 18, 15],
+                            backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF'],
+                            borderWidth: 2,
+                            borderColor: '#fff'
+                        }]
                     },
-                    options: {responsive: true}
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { padding: 8, font: { size: 10 }, usePointStyle: true }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(139, 0, 0, 0.9)',
+                                padding: 12,
+                                cornerRadius: 8,
+                                callbacks: {
+                                    label: function(context) {
+                                        var total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        var percentage = ((context.raw / total) * 100).toFixed(1) + '%';
+                                        return context.label + ': ' + context.raw + '次 (' + percentage + ')';
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }));
                 charts[tabName].push(new Chart(document.getElementById('competitionLevelChart'), {
                     type: 'bar',
                     data: {
                         labels: ['国家级', '省级一等奖', '省级二等奖', '省级三等奖', '校级'],
-                        datasets: [{label: '获奖数量', data: [1, 3, 4, 8, 27], backgroundColor: '#C41E3A'}]
+                        datasets: [{
+                            label: '获奖数量',
+                            data: [1, 3, 4, 8, 27],
+                            backgroundColor: ['#C41E3A', '#FFD700', '#C0C0C0', '#CD7F32', '#AEC6CF'],
+                            borderWidth: 0,
+                            borderRadius: 8
+                        }]
                     },
-                    options: {responsive: true}
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(139, 0, 0, 0.9)',
+                                padding: 12,
+                                cornerRadius: 8,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.label + ': ' + context.raw + '项';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: { font: { size: 12 } },
+                                grid: { color: '#eee' },
+                                title: { display: true, text: '获奖数量（项）', font: { size: 13, weight: 'bold' } }
+                            },
+                            x: {
+                                ticks: { font: { size: 11 } },
+                                grid: { display: false },
+                                title: { display: true, text: '获奖等级', font: { size: 13, weight: 'bold' } }
+                            }
+                        }
+                    }
                 }));
             } else if (tabName === 'employment') {
                 charts[tabName].push(new Chart(document.getElementById('employmentIndustryChart'), {
                     type: 'pie',
                     data: {
-                        labels: ['信息技术', '金融会计', '商贸流通', '教育培训', '其他'],
-                        datasets: [{data: [32, 28, 22, 10, 8], backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF']}]
+                        labels: ['电子商务', '市场营销', '国际贸易', '教育培训', '其他'],
+                        datasets: [{
+                            data: [32, 28, 22, 10, 8],
+                            backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF'],
+                            borderWidth: 2,
+                            borderColor: '#fff'
+                        }]
                     },
-                    options: {responsive: true}
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { padding: 16, font: { size: 12 }, usePointStyle: true }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(139, 0, 0, 0.9)',
+                                padding: 12,
+                                cornerRadius: 8,
+                                callbacks: {
+                                    label: function(context) {
+                                        var total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        var percentage = ((context.raw / total) * 100).toFixed(1) + '%';
+                                        return context.label + ': ' + context.raw + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }));
                 charts[tabName].push(new Chart(document.getElementById('employmentRateChart'), {
                     type: 'bar',
                     data: {
                         labels: ['帮扶学生', '全院平均'],
-                        datasets: [{label: '就业率', data: [93.8, 90.6], backgroundColor: ['#C41E3A', '#AEC6CF']}]
+                        datasets: [{
+                            label: '就业率',
+                            data: [93.8, 90.6],
+                            backgroundColor: ['#C41E3A', '#AEC6CF'],
+                            borderWidth: 0,
+                            borderRadius: 8
+                        }]
                     },
-                    options: {responsive: true}
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(139, 0, 0, 0.9)',
+                                padding: 12,
+                                cornerRadius: 8,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.label + ': ' + context.raw + '%';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                min: 80,
+                                max: 100,
+                                ticks: { stepSize: 5, font: { size: 12 }, callback: function(v) { return v + '%'; } },
+                                grid: { color: '#eee' },
+                                title: { display: true, text: '就业率', font: { size: 13, weight: 'bold' } }
+                            },
+                            x: {
+                                ticks: { font: { size: 12, weight: 'bold' } },
+                                grid: { display: false },
+                                title: { display: true, text: '对比对象', font: { size: 13, weight: 'bold' } }
+                            }
+                        }
+                    }
                 }));
             } else if (tabName === 'enterprise') {
                 charts[tabName].push(new Chart(document.getElementById('enterpriseTypeChart'), {
                     type: 'pie',
                     data: {
                         labels: ['订单班', '横向课题', '专家进课堂', '教师实践', '实习基地'],
-                        datasets: [{data: [28, 25, 22, 15, 10], backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF']}]
+                        datasets: [{
+                            data: [28, 25, 22, 15, 10],
+                            backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF'],
+                            borderWidth: 2,
+                            borderColor: '#fff'
+                        }]
                     },
-                    options: {responsive: true}
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { padding: 16, font: { size: 12 }, usePointStyle: true }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(139, 0, 0, 0.9)',
+                                padding: 12,
+                                cornerRadius: 8,
+                                callbacks: {
+                                    label: function(context) {
+                                        var total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        var percentage = ((context.raw / total) * 100).toFixed(1) + '%';
+                                        return context.label + ': ' + context.raw + '% (' + percentage + ')';
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }));
                 charts[tabName].push(new Chart(document.getElementById('enterpriseContributionChart'), {
                     type: 'bar',
                     data: {
-                        labels: ['用友新道', '株洲天泰', '株洲百货', '湖南建业', '株洲河包'],
-                        datasets: [{label: '合作成果评分', data: [95, 85, 90, 80, 75], backgroundColor: '#C41E3A'}]
+                        labels: ['湖南中榜集团', '湖南中易晟达', '京东物流', '株洲百货', '景宸星火'],
+                        datasets: [{
+                            label: '合作成果评分',
+                            data: [95, 92, 88, 85, 80],
+                            backgroundColor: ['#C41E3A', '#FF6B6B', '#FFB347', '#77DD77', '#AEC6CF'],
+                            borderWidth: 0,
+                            borderRadius: 8
+                        }]
                     },
-                    options: {responsive: true}
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: 'rgba(139, 0, 0, 0.9)',
+                                padding: 12,
+                                cornerRadius: 8,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.label + ': ' + context.raw + '分';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                min: 70,
+                                max: 100,
+                                ticks: { stepSize: 10, font: { size: 12 } },
+                                grid: { color: '#eee' },
+                                title: { display: true, text: '评分（分）', font: { size: 13, weight: 'bold' } }
+                            },
+                            x: {
+                                ticks: { font: { size: 10 } },
+                                grid: { display: false },
+                                title: { display: true, text: '合作企业', font: { size: 13, weight: 'bold' } }
+                            }
+                        }
+                    }
                 }));
             }
         }

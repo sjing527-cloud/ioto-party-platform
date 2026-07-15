@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IOTO 智慧党建平台 · 宋丹"双带头人"工作室</title>
-<meta name="description" content="IOTO（Inputs·Outputs·Tasks·Outcomes）智慧党建平台 - 面向高校教师党支部的轻量化数字治理平台，运行逻辑遵循任务→输入→输出→成果闭环。">
+<title>POWER 智慧党建平台 · 宋丹"双带头人"工作室</title>
+<meta name="description" content="POWER智慧党建平台 - 面向高校教师党支部的轻量化数字治理平台，五大工作领域（Publicity·Organization·Wisdom·Execution·Records）对标七个有力。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -56,7 +56,7 @@ nav{
 
 /* ============ HERO ============ */
 .hero{
-  min-height:100vh;padding-top:80px;position:relative;overflow:hidden;
+  min-height:unset;padding-top:80px;padding-bottom:20px;position:relative;overflow:hidden;
   background:
     radial-gradient(ellipse at 20% 30%, rgba(198,40,40,0.12) 0%, transparent 50%),
     radial-gradient(ellipse at 80% 70%, rgba(26,35,126,0.10) 0%, transparent 50%),
@@ -74,8 +74,8 @@ nav{
 }
 @keyframes rotate{to{transform:rotate(360deg);}}
 .hero-wrap{
-  max-width:1280px;margin:0 auto;padding:80px 32px;
-  display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;
+  max-width:1280px;margin:0 auto;padding:60px 32px;
+  display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;
   position:relative;z-index:2;
 }
 .badge{
@@ -85,22 +85,22 @@ nav{
   font-size:13px;color:var(--red-main);font-weight:500;margin-bottom:24px;
 }
 .hero h1{
-  font-size:52px;line-height:1.25;margin-bottom:24px;
+  font-size:48px;line-height:1.2;margin-bottom:20px;
   background:linear-gradient(135deg,var(--red-deep) 0%,var(--red-main) 60%,var(--gold) 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
 }
 .hero h1 .mark{
   display:inline-block;padding:2px 10px;background:var(--gold);color:var(--red-deep);
-  border-radius:6px;font-size:40px;-webkit-text-fill-color:var(--red-deep);
+  border-radius:6px;font-size:36px;-webkit-text-fill-color:var(--red-deep);
   font-weight:900;margin:0 4px;
 }
-.hero .sub{font-size:17px;color:#555;margin-bottom:32px;max-width:600px;}
+.hero .sub{font-size:15px;color:#555;margin-bottom:24px;max-width:600px;}
 .hero .sub b{color:var(--red-main);}
-.hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px;}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:32px;}
 .btn-primary,.btn-secondary{
   display:inline-flex;align-items:center;gap:10px;
-  padding:14px 30px;border-radius:6px;font-weight:600;
-  transition:all .3s;font-size:15px;cursor:pointer;border:none;
+  padding:12px 26px;border-radius:6px;font-weight:600;
+  transition:all .3s;font-size:14px;cursor:pointer;border:none;
 }
 .btn-primary{
   background:linear-gradient(135deg,var(--red-deep),var(--red-main));
@@ -113,10 +113,10 @@ nav{
 }
 .btn-secondary:hover{background:var(--red-deep);color:#fff;}
 
-/* 四IOTO卡片 */
+/* 五POWER卡片 */
 .ioto{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
-  max-width:600px;
+  display:grid;grid-template-columns:repeat(5,1fr);gap:14px;
+  max-width:760px;
 }
 .ioto-card{
   padding:20px 14px;background:#fff;border-radius:10px;
@@ -132,7 +132,7 @@ nav{
 /* Hero右 - 党建指数雷达卡 */
 .hero-visual{position:relative;}
 .hero-card{
-  background:#fff;border-radius:16px;padding:32px;
+  background:#fff;border-radius:16px;padding:24px;
   box-shadow:var(--shadow),0 0 0 1px rgba(212,175,55,0.3);
   border:1px solid rgba(198,40,40,0.08);
   position:relative;overflow:hidden;
@@ -154,23 +154,23 @@ nav{
 .radar-wrap canvas{width:100%!important;height:100%!important;}
 
 /* ============ Section通用 ============ */
-section{padding:100px 32px;position:relative;}
-.sec-head{text-align:center;max-width:720px;margin:0 auto 64px;}
+section{padding:64px 32px;position:relative;}
+.sec-head{text-align:center;max-width:720px;margin:0 auto 36px;}
 .sec-eyebrow{
   display:inline-block;color:var(--gold);font-weight:700;letter-spacing:4px;font-size:12px;
-  padding:6px 18px;background:rgba(212,175,55,0.1);border-radius:20px;margin-bottom:16px;
+  padding:6px 18px;background:rgba(212,175,55,0.1);border-radius:20px;margin-bottom:12px;
 }
-.sec-head h2{font-size:38px;margin-bottom:16px;}
-.sec-head p{font-size:15px;color:#666;}
+.sec-head h2{font-size:32px;margin-bottom:12px;}
+.sec-head p{font-size:14px;color:#666;}
 
 /* ============ 6大模块 ============ */
-.modules{background:linear-gradient(180deg,var(--cream) 0%,#fff 100%);}
+.modules{background:linear-gradient(180deg,var(--cream) 0%,#fff 100%);padding-top:32px;}
 .mod-grid{
   max-width:1280px;margin:0 auto;
   display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
 }
 .mod-card{
-  background:#fff;padding:36px 28px;border-radius:14px;
+  background:#fff;padding:28px 24px;border-radius:14px;
   box-shadow:0 4px 24px rgba(0,0,0,0.06);
   border:1px solid rgba(0,0,0,0.05);
   transition:all .4s cubic-bezier(.2,.8,.2,1);
@@ -183,8 +183,8 @@ section{padding:100px 32px;position:relative;}
 .mod-card:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(198,40,40,0.15);}
 .mod-card:hover::before{height:100%;}
 .mod-icon{
-  width:64px;height:64px;border-radius:16px;margin-bottom:20px;
-  display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;
+  width:56px;height:56px;border-radius:14px;margin-bottom:16px;
+  display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;
   background:linear-gradient(135deg,var(--red-main),var(--gold));
   box-shadow:0 8px 20px rgba(198,40,40,0.3);
 }
@@ -193,8 +193,8 @@ section{padding:100px 32px;position:relative;}
 .mod-card:nth-child(4) .mod-icon{background:linear-gradient(135deg,#e65100,#ffa726);}
 .mod-card:nth-child(5) .mod-icon{background:linear-gradient(135deg,#6a1b9a,#ab47bc);}
 .mod-card:nth-child(6) .mod-icon{background:linear-gradient(135deg,#00695c,#26a69a);}
-.mod-card h3{font-size:20px;margin-bottom:10px;}
-.mod-card>p{font-size:13px;color:#777;margin-bottom:18px;min-height:44px;}
+.mod-card h3{font-size:18px;margin-bottom:8px;}
+.mod-card>p{font-size:13px;color:#777;margin-bottom:14px;min-height:40px;}
 .mod-features{list-style:none;}
 .mod-features li{
   padding:8px 0;font-size:13px;color:#444;
@@ -213,12 +213,12 @@ section{padding:100px 32px;position:relative;}
 .index-sec{background:#fff;}
 .index-wrap{
   max-width:1280px;margin:0 auto;
-  display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:center;
+  display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;
 }
 .score-card{
   background:
     linear-gradient(135deg,var(--red-deep),var(--red-main));
-  border-radius:16px;padding:40px;color:#fff;
+  border-radius:16px;padding:32px;color:#fff;
   box-shadow:0 20px 60px rgba(198,40,40,0.35);
   position:relative;overflow:hidden;
 }
@@ -227,7 +227,7 @@ section{padding:100px 32px;position:relative;}
   opacity:.06;font-family:'Noto Serif SC';font-weight:900;
 }
 .score-label{font-size:13px;opacity:.85;letter-spacing:3px;}
-.score-big{font-size:100px;font-family:'Noto Serif SC';font-weight:900;line-height:1;margin:10px 0;color:var(--gold-light);}
+.score-big{font-size:84px;font-family:'Noto Serif SC';font-weight:900;line-height:1;margin:8px 0;color:var(--gold-light);}
 .score-total{font-size:14px;opacity:.8;margin-bottom:28px;}
 .dim-list{display:grid;gap:14px;position:relative;z-index:2;}
 .dim{
@@ -240,8 +240,8 @@ section{padding:100px 32px;position:relative;}
 .dim-bar span{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:4px;animation: fillBar 2s ease-out;}
 @keyframes fillBar{from{width:0;}}
 
-.index-right h2{font-size:32px;margin-bottom:20px;}
-.index-right .intro{color:#666;margin-bottom:32px;font-size:15px;}
+.index-right h2{font-size:28px;margin-bottom:16px;}
+.index-right .intro{color:#666;margin-bottom:24px;font-size:14px;}
 .dim-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .dc{
   padding:22px;border-radius:10px;background:#fafafa;border:1px solid #eee;
@@ -284,7 +284,7 @@ section{padding:100px 32px;position:relative;}
 .st .v{font-family:'Noto Serif SC';font-size:20px;font-weight:900;color:var(--red-main);line-height:1;}
 .st .u{font-size:10px;color:#666;margin-top:4px;}
 
-.six-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.six-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
 .six{
   padding:18px 12px;border-radius:10px;text-align:center;
   background:linear-gradient(180deg,rgba(230,81,0,0.05),#fff);
@@ -298,26 +298,26 @@ section{padding:100px 32px;position:relative;}
 .six-link{text-decoration:none;color:inherit;display:block;}
 
 /* ============ 党员统计 ============ */
-.members{padding:70px 32px;background:#fff;}
-.member-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:36px;}
+.members{padding:56px 32px;background:#fff;}
+.member-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:32px;}
 .ms-card{padding:20px 10px;text-align:center;border-radius:12px;background:rgba(139,0,0,0.04);border:1px solid rgba(139,0,0,0.08);transition:all .3s;}
 .ms-card:hover{transform:translateY(-4px);background:rgba(139,0,0,0.08);border-color:rgba(139,0,0,0.15);}
 .ms-icon{font-size:28px;color:var(--red-main);margin-bottom:8px;}
 .ms-num{font-family:'Noto Serif SC';font-size:28px;font-weight:900;color:var(--red-main);line-height:1;}
 .ms-label{font-size:12px;color:#666;margin-top:6px;}
-.member-list{overflow-x:auto;}
-.member-list table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.05);}
-.member-list th{background:linear-gradient(135deg,var(--red-main),#b71c1c);color:#fff;padding:14px 12px;text-align:left;font-size:13px;font-weight:600;}
-.member-list th:first-child{border-radius:12px 0 0 0;}
-.member-list th:last-child{border-radius:0 12px 0 0;}
-.member-list td{padding:12px 12px;font-size:13px;border-bottom:1px solid #f0f0f0;}
-.member-list tbody tr:hover{background:rgba(139,0,0,0.03);}
-.member-list tbody tr:last-child td:first-child{border-radius:0 0 0 12px;}
-.member-list tbody tr:last-child td:last-child{border-radius:0 0 12px 0;}
+.member-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;}
+.member-card{background:#fff;border-radius:14px;padding:20px 14px;text-align:center;border:1px solid rgba(0,0,0,0.06);box-shadow:0 2px 8px rgba(0,0,0,0.03);transition:all .3s;}
+.member-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(198,40,40,0.1);border-color:rgba(198,40,40,0.15);}
+.member-avatar{width:48px;height:48px;border-radius:50%;margin:0 auto 12px;background:linear-gradient(135deg,var(--red-main),var(--gold));display:flex;align-items:center;justify-content:center;font-family:'Noto Serif SC';font-size:18px;font-weight:900;color:#fff;}
+.member-name{font-size:14px;font-weight:600;color:#333;margin-bottom:4px;}
+.member-gender{font-size:12px;color:#888;margin-bottom:6px;}
+.member-type{display:inline-block;font-size:11px;padding:3px 10px;border-radius:12px;font-weight:600;}
+.member-type.formal{background:rgba(74,222,128,0.1);color:#166534;}
+.member-type.probation{background:rgba(255,217,102,0.15);color:#92400E;}
 
 /* ============ 党建动态 ============ */
-.news-section{padding:70px 32px;background:#fff;}
-.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px;}
+.news-section{padding:56px 32px;background:#fff;}
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px;}
 .news-card{padding:24px;border-radius:12px;background:rgba(139,0,0,0.03);border:1px solid rgba(139,0,0,0.06);transition:all .3s;}
 .news-card:hover{transform:translateY(-4px);background:rgba(139,0,0,0.06);border-color:rgba(139,0,0,0.12);box-shadow:0 8px 24px rgba(0,0,0,0.04);}
 .news-date{font-size:12px;color:var(--gold);font-weight:600;margin-bottom:12px;}
@@ -335,14 +335,14 @@ section{padding:100px 32px;position:relative;}
   background:
     linear-gradient(135deg,rgba(139,0,0,0.95),rgba(198,40,40,0.92)),
     radial-gradient(circle at 30% 50%,rgba(212,175,55,0.18),transparent 60%);
-  color:#fff;padding:80px 32px;text-align:center;position:relative;overflow:hidden;
+  color:#fff;padding:64px 32px;text-align:center;position:relative;overflow:hidden;
 }
 .cta-sec::before{
   content:'★ ★ ★';position:absolute;top:20px;left:50%;transform:translateX(-50%);
   color:var(--gold);letter-spacing:40px;font-size:18px;opacity:.7;
 }
-.cta-sec h2{color:#fff;font-size:36px;margin-bottom:16px;}
-.cta-sec p{color:rgba(255,255,255,.85);max-width:640px;margin:0 auto 32px;font-size:15px;}
+.cta-sec h2{color:#fff;font-size:30px;margin-bottom:12px;}
+.cta-sec p{color:rgba(255,255,255,.85);max-width:640px;margin:0 auto 24px;font-size:14px;}
 .cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
 .cta-sec .btn-gold{
   background:linear-gradient(135deg,var(--gold),var(--gold-light));
@@ -367,6 +367,7 @@ footer .line{border-top:1px solid rgba(255,255,255,0.1);max-width:1200px;margin:
   .hero h1{font-size:36px;}
   .ioto{max-width:100%;}
   .mod-grid{grid-template-columns:repeat(2,1fr);}
+  .member-grid{grid-template-columns:repeat(3,1fr);}
   .index-wrap{grid-template-columns:1fr;}
   .feat-grid{grid-template-columns:1fr;}
   .menu{display:none;}
@@ -374,6 +375,7 @@ footer .line{border-top:1px solid rgba(255,255,255,0.1);max-width:1200px;margin:
 }
 @media(max-width:640px){
   .mod-grid{grid-template-columns:1fr;}
+  .member-grid{grid-template-columns:repeat(2,1fr);}
   .ioto{grid-template-columns:repeat(2,1fr);}
   .score-big{font-size:72px;}
   .hero h1{font-size:28px;}
@@ -392,7 +394,7 @@ footer .line{border-top:1px solid rgba(255,255,255,0.1);max-width:1200px;margin:
     <a class="logo" href="#">
       <i class="fas fa-hammer"></i>
       <div class="logo-text">
-        <div class="t1">IOTO 智慧党建</div>
+        <div class="t1">POWER 智慧党建</div>
         <div class="t2">宋丹 · 双带头人工作室</div>
       </div>
     </a>
@@ -422,12 +424,12 @@ footer .line{border-top:1px solid rgba(255,255,255,0.1);max-width:1200px;margin:
         校级"双带头人"教师党支部书记工作室 · 核心建设成果
       </div>
       <h1 class="animate__animated animate__fadeInUp">
-        IOTO<span class="mark">智慧党建</span><br>
+        POWER<span class="mark">智慧党建</span><br>
         数字一体化平台
       </h1>
       <p class="sub animate__animated animate__fadeInUp animate__delay-1s">
         面向高校教师党支部自主设计的轻量化数字治理平台。<br>
-        平台命名沿用 <b>I</b>nputs、<b>O</b>utputs、<b>T</b>asks、<b>O</b>utcomes，运行逻辑遵循 <b>任务 → 输入 → 输出 → 成果</b> 的闭环路径。
+        <b>P</b>ublicity · <b>O</b>rganization · <b>W</b>isdom · <b>E</b>xecution · <b>R</b>ecords，五大工作领域对标"七个有力"。
       </p>
       <div class="hero-btns animate__animated animate__fadeInUp animate__delay-2s">
         <a href="dashboard.html" target="_blank" class="btn-primary">
@@ -439,16 +441,19 @@ footer .line{border-top:1px solid rgba(255,255,255,0.1);max-width:1200px;margin:
       </div>
       <div class="ioto animate__animated animate__fadeInUp animate__delay-2s">
         <div class="ioto-card">
-          <div class="letter">I</div><div class="en">INPUTS</div><div class="cn">输入（学习）</div>
+          <div class="letter">P</div><div class="en">PUBLICITY</div><div class="cn">宣传传播</div>
         </div>
         <div class="ioto-card">
-          <div class="letter">O</div><div class="en">OUTPUTS</div><div class="cn">输出（内化）</div>
+          <div class="letter">O</div><div class="en">ORGANIZATION</div><div class="cn">组织建设</div>
         </div>
         <div class="ioto-card">
-          <div class="letter">T</div><div class="en">TASKS</div><div class="cn">任务（驱动）</div>
+          <div class="letter">W</div><div class="en">WISDOM</div><div class="cn">学习赋能</div>
         </div>
         <div class="ioto-card">
-          <div class="letter">O</div><div class="en">OUTCOMES</div><div class="cn">成果（积累）</div>
+          <div class="letter">E</div><div class="en">EXECUTION</div><div class="cn">执行服务</div>
+        </div>
+        <div class="ioto-card">
+          <div class="letter">R</div><div class="en">RECORDS</div><div class="cn">记录管理</div>
         </div>
       </div>
     </div>
@@ -474,7 +479,6 @@ footer .line{border-top:1px solid rgba(255,255,255,0.1);max-width:1200px;margin:
   <div class="sec-head">
     <div class="sec-eyebrow">六大核心模块 + 两项展示功能</div>
     <h2>覆盖支部工作全流程的验收展示平台</h2>
-    <p>V2 版本按照“六大核心业务模块 + 两项展示功能”统一口径，<br>突出结项验收最需要呈现的工作闭环、数据留痕与成果展示。</p>
   </div>
   <div class="mod-grid">
     <a href="news.html" class="mod-card-link">
@@ -563,7 +567,7 @@ footer .line{border-top:1px solid rgba(255,255,255,0.1);max-width:1200px;margin:
     </a>
   </div>
   <div style="max-width:1280px;margin:24px auto 0;padding:0 8px;color:#666;font-size:14px;line-height:1.8;text-align:center;">
-    扩展展示功能包括：<a href="vote.html" style="color:var(--red-main);font-weight:700;">投票问卷</a>、<a href="honor.html" style="color:var(--red-main);font-weight:700;">荣誉展示</a>。两项功能保留在平台中，用于支撑民主评议、成果展示与验收汇报。
+    扩展展示：<a href="vote.html" style="color:var(--red-main);font-weight:700;">投票问卷</a> · <a href="honor.html" style="color:var(--red-main);font-weight:700;">荣誉展示</a>
   </div>
 </section>
 
@@ -711,12 +715,13 @@ footer .line{border-top:1px solid rgba(255,255,255,0.1);max-width:1200px;margin:
     </div>
     <div class="feat-card">
       <div class="feat-head six">
-        <h3>🎯 六个一服务工程</h3>
-        <p>每党员每年6项结对帮扶任务·台账化追踪</p>
+        <h3>🎯 七个一服务工程</h3>
+        <p>每党员每年7项结对帮扶任务·台账化追踪</p>
       </div>
       <div class="feat-body">
         <div class="six-grid">
           <a href="service_detail.html#tab-difficulty" class="six-link"><div class="six"><div class="ic">🎒</div><h5>困难学生</h5><p>132次</p></div></a>
+          <a href="service_detail.html#tab-academic" class="six-link"><div class="six"><div class="ic">📚</div><h5>学业帮扶</h5><p>86次</p></div></a>
           <a href="service_detail.html#tab-dormitory" class="six-link"><div class="six"><div class="ic">🏠</div><h5>宿舍对接</h5><p>108次</p></div></a>
           <a href="service_detail.html#tab-alumni" class="six-link"><div class="six"><div class="ic">👥</div><h5>校友联系</h5><p>96次</p></div></a>
           <a href="service_detail.html#tab-competition" class="six-link"><div class="six"><div class="ic">🏆</div><h5>竞赛指导</h5><p>120次</p></div></a>
@@ -762,39 +767,32 @@ footer .line{border-top:1px solid rgba(255,255,255,0.1);max-width:1200px;margin:
       <div class="ms-label">女党员</div>
     </div>
   </div>
-  <div class="member-list">
-    <table>
-      <thead>
-        <tr><th>序号</th><th>姓名</th><th>性别</th><th>党员类型</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>刘佳杰</td><td>男</td><td>预备党员</td></tr>
-        <tr><td>2</td><td>张晓航</td><td>男</td><td>正式党员</td></tr>
-        <tr><td>3</td><td>马紫仪</td><td>女</td><td>正式党员</td></tr>
-        <tr><td>4</td><td>熊卓城</td><td>男</td><td>正式党员</td></tr>
-        <tr><td>5</td><td>文轩</td><td>女</td><td>正式党员</td></tr>
-        <tr><td>6</td><td>徐雪君</td><td>女</td><td>正式党员</td></tr>
-        <tr><td>7</td><td>黄琳博</td><td>女</td><td>正式党员</td></tr>
-        <tr><td>8</td><td>熊津津</td><td>女</td><td>正式党员</td></tr>
-        <tr><td>9</td><td>刘娜敏</td><td>女</td><td>正式党员</td></tr>
-        <tr><td>10</td><td>陈思为</td><td>男</td><td>正式党员</td></tr>
-        <tr><td>11</td><td>胡晨怡</td><td>女</td><td>正式党员</td></tr>
-        <tr><td>12</td><td>宋吉华</td><td>男</td><td>正式党员</td></tr>
-        <tr><td>13</td><td>沈杰</td><td>男</td><td>正式党员</td></tr>
-        <tr><td>14</td><td>谭亲强</td><td>男</td><td>正式党员</td></tr>
-        <tr><td>15</td><td>汤婷</td><td>女</td><td>正式党员</td></tr>
-        <tr><td>16</td><td>易蕾</td><td>女</td><td>正式党员</td></tr>
-        <tr><td>17</td><td>吴赛芬</td><td>女</td><td>正式党员</td></tr>
-        <tr><td>18</td><td>宋丹</td><td>男</td><td>正式党员</td></tr>
-        <tr><td>19</td><td>岳伟</td><td>女</td><td>正式党员</td></tr>
-        <tr><td>20</td><td>邓新平</td><td>女</td><td>正式党员</td></tr>
-        <tr><td>21</td><td>殷兰波</td><td>男</td><td>正式党员</td></tr>
-        <tr><td>22</td><td>李忠华</td><td>男</td><td>正式党员</td></tr>
-        <tr><td>23</td><td>曾昭山</td><td>男</td><td>正式党员</td></tr>
-        <tr><td>24</td><td>朱爱娇</td><td>女</td><td>正式党员</td></tr>
-        <tr><td>25</td><td>言戈力</td><td>男</td><td>正式党员</td></tr>
-      </tbody>
-    </table>
+  <div class="member-grid">
+    <div class="member-card"><div class="member-avatar">刘</div><div class="member-name">刘佳杰</div><div class="member-gender">男</div><div class="member-type probation">预备党员</div></div>
+    <div class="member-card"><div class="member-avatar">张</div><div class="member-name">张晓航</div><div class="member-gender">男</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">马</div><div class="member-name">马紫仪</div><div class="member-gender">女</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">熊</div><div class="member-name">熊卓城</div><div class="member-gender">男</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">文</div><div class="member-name">文轩</div><div class="member-gender">女</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">徐</div><div class="member-name">徐雪君</div><div class="member-gender">女</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">黄</div><div class="member-name">黄琳博</div><div class="member-gender">女</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">熊</div><div class="member-name">熊津津</div><div class="member-gender">女</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">刘</div><div class="member-name">刘娜敏</div><div class="member-gender">女</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">陈</div><div class="member-name">陈思为</div><div class="member-gender">男</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">胡</div><div class="member-name">胡晨怡</div><div class="member-gender">女</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">宋</div><div class="member-name">宋吉华</div><div class="member-gender">男</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">沈</div><div class="member-name">沈杰</div><div class="member-gender">男</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">谭</div><div class="member-name">谭亲强</div><div class="member-gender">男</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">汤</div><div class="member-name">汤婷</div><div class="member-gender">女</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">易</div><div class="member-name">易蕾</div><div class="member-gender">女</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">吴</div><div class="member-name">吴赛芬</div><div class="member-gender">女</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">宋</div><div class="member-name">宋丹</div><div class="member-gender">男</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">岳</div><div class="member-name">岳伟</div><div class="member-gender">女</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">邓</div><div class="member-name">邓新平</div><div class="member-gender">女</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">殷</div><div class="member-name">殷兰波</div><div class="member-gender">男</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">李</div><div class="member-name">李忠华</div><div class="member-gender">男</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">曾</div><div class="member-name">曾昭山</div><div class="member-gender">男</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">朱</div><div class="member-name">朱爱娇</div><div class="member-gender">女</div><div class="member-type formal">正式党员</div></div>
+    <div class="member-card"><div class="member-avatar">言</div><div class="member-name">言戈力</div><div class="member-gender">男</div><div class="member-type formal">正式党员</div></div>
   </div>
 </section>
 
@@ -875,7 +873,7 @@ footer .line{border-top:1px solid rgba(255,255,255,0.1);max-width:1200px;margin:
 
 <!-- CTA -->
 <section class="cta-sec">
-  <h2>IOTO 平台 · 让支部工作有迹可循</h2>
+  <h2>POWER 平台 · 让支部工作有迹可循</h2>
   <p>从纸面设计到全员可用，仅需10个工作日。低投入、真落地、可持续。<br>欢迎校级领导、兄弟支部莅临视察指导。</p>
   <div class="cta-btns">
     <a href="dashboard.html" target="_blank" class="btn-gold">
@@ -890,7 +888,7 @@ footer .line{border-top:1px solid rgba(255,255,255,0.1);max-width:1200px;margin:
 <footer>
   <div class="line"></div>
   <div>
-    🚩 商务贸易学院教工党支部 · 宋丹"双带头人"工作室 · IOTO智慧党建平台<br>
+    🚩 商务贸易学院教工党支部 · 宋丹"双带头人"工作室 · POWER智慧党建平台<br>
     © 2024-2026 版权所有 · 本网站为工作室结项展示用 · Powered by 静态HTML+GitHub Pages（免费部署）
   </div>
 </footer>

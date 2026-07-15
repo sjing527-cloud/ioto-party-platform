@@ -2,8 +2,8 @@
 set -e
 
 SITE_DIR="/Users/songdan/Library/Mobile Documents/com~apple~CloudDocs/宋丹个人/2024年党支部书记双带头人申报/IOTO智慧党建平台网站"
-REPO_URL="https://github.com/sjling527-cloud/ioto-party-platform.git"
-DEPLOY_URL="https://sjling527-cloud.github.io/ioto-party-platform/"
+REPO_URL="git@github.com:sjing527-cloud/ioto-party-platform.git"
+DEPLOY_URL="https://sjing527-cloud.github.io/ioto-party-platform/"
 
 cd "$SITE_DIR"
 
