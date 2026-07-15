@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IOTO 智慧党建 · 学院新闻</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="common.css">
+<style>
+.menu a:hover{color:var(--gold);}
+.menu .btn-gold{background:linear-gradient(135deg,var(--gold),#B8860B);color:#5a3a00;padding:8px 20px;border-radius:6px;font-weight:700;font-size:13px;}
+.menu .btn-gold:hover{background:linear-gradient(135deg,var(--gold-light),var(--gold));}
+.hero{background:linear-gradient(135deg,rgba(147,51,234,0.92),rgba(30,58,138,0.88)),radial-gradient(circle at 60% 30%,rgba(212,175,55,0.15),transparent 50%);color:#fff;padding:60px 32px;text-align:center;}
+.hero h1{font-family:'Noto Serif SC';font-size:36px;font-weight:900;margin-bottom:12px;letter-spacing:4px;}
+.hero h1 .mark{color:var(--gold);}
+.hero p{font-size:15px;opacity:0.85;max-width:800px;margin:0 auto;line-height:1.8;}
+.container{max-width:1400px;margin:50px auto;padding:0 32px;}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:40px;}
+.stat-card{background:#fff;border-radius:12px;padding:24px;text-align:center;box-shadow:0 4px 16px rgba(0,0,0,0.05);border-left:4px solid var(--purple);}
+.stat-card .num{font-family:'Noto Serif SC';font-size:36px;font-weight:900;color:var(--purple);line-height:1;}
+.stat-card .label{font-size:14px;color:#666;margin-top:8px;}
+.section{background:#fff;border-radius:12px;padding:32px;margin-bottom:24px;box-shadow:0 4px 16px rgba(0,0,0,0.05);}
+.section-title{font-family:'Noto Serif SC';font-size:22px;color:#333;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.section-title i{color:var(--purple);font-size:20px;}
+.section-title .badge{background:rgba(147,51,234,0.1);color:var(--purple);font-size:12px;padding:4px 10px;border-radius:20px;font-weight:600;margin-left:auto;}
+.year-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;}
+.year-tabs button{padding:10px 24px;border:none;border-radius:24px;background:rgba(147,51,234,0.06);color:#666;font-size:14px;font-weight:500;cursor:pointer;transition:all .3s;}
+.year-tabs button.active{background:linear-gradient(135deg,var(--purple),#7E22CE);color:#fff;}
+.year-tabs button:hover{background:rgba(147,51,234,0.12);}
+.news-list{list-style:none;}
+.news-list li{padding:20px 0;border-bottom:1px dashed #eee;display:flex;gap:20px;align-items:flex-start;transition:all .3s;}
+.news-list li:hover{background:rgba(147,51,234,0.03);padding-left:10px;}
+.news-list li:last-child{border-bottom:none;}
+.news-list .date{background:rgba(147,51,234,0.08);color:var(--purple);padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;white-space:nowrap;flex-shrink:0;}
+.news-list .content{flex:1;}
+.news-list .content a{text-decoration:none;color:#333;display:block;}
+.news-list .content h4{font-size:15px;color:#333;margin-bottom:6px;transition:all .3s;}
+.news-list .content a:hover h4{color:var(--purple);}
+.news-list .content .source{font-size:12px;color:#999;display:flex;align-items:center;gap:8px;}
+.news-list .content .source i{font-size:11px;}
+.news-list .external{font-size:11px;color:var(--purple);flex-shrink:0;}
+footer{background:var(--navy);color:#fff;padding:40px 32px;margin-top:60px;text-align:center;}
+footer a{color:var(--gold);text-decoration:none;}
+@media(max-width:1024px){.stats-row{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:640px){.stats-row{grid-template-columns:1fr;}.menu{gap:12px;font-size:12px;}.hero h1{font-size:28px;}.news-list li{flex-direction:column;}.news-list .date{white-space:normal;width:fit-content;}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-wrap">
+    <a class="logo" href="index.html">
+      <i class="fas fa-hammer"></i>
+      <div class="logo-text"><div class="t1">IOTO 智慧党建</div><div class="t2">宋丹 · 双带头人工作室</div></div>
+    </a>
+    <div class="menu">
+      <a href="index.html">首页</a>
+      <a href="learning.html">学习模块</a>
+      <a href="activity.html">活动模块</a>
+      <a href="service_detail.html">服务模块</a>
+      <a href="news.html" style="color:var(--gold);">学院新闻</a>
+      <a href="analysis.html">分析模块</a>
+      <a href="management.html">管理模块</a>
+      <a href="vote.html">投票问卷</a>
+      <a href="honor.html">荣誉管理</a>
+      <a href="dashboard.html" target="_blank" class="btn-gold"><i class="fas fa-chart-line"></i> 数据大屏</a>
+    </div>
+  </div>
+</nav>
+<div class="hero">
+  <h1><span class="mark">📰 学院新闻</span> · 商务贸易学院官方动态</h1>
+  <p>实时同步商务贸易学院官方网站新闻，点击标题即可跳转至原文查看详情</p>
+</div>
+<div class="container">
+  <div class="stats-row">
+    <div class="stat-card"><div class="num">120+</div><div class="label">学院新闻总数</div></div>
+    <div class="stat-card"><div class="num">4</div><div class="label">年份跨度</div></div>
+    <div class="stat-card"><div class="num">100%</div><div class="label">官方数据同步</div></div>
+    <div class="stat-card"><div class="num">实时</div><div class="label">跳转链接</div></div>
+  </div>
+  <div class="section">
+    <div class="section-title"><i class="fas fa-newspaper"></i> 学院新闻动态 <span class="badge">2023-2026</span></div>
+    <div class="year-tabs">
+      <button class="active" onclick="filterYear('all')">全部年份</button>
+      <button onclick="filterYear('2026')">2026年</button>
+      <button onclick="filterYear('2025')">2025年</button>
+      <button onclick="filterYear('2024')">2024年</button>
+      <button onclick="filterYear('2023')">2023年</button>
+    </div>
+    <ul class="news-list" id="newsList">
+      <li data-year="2026"><span class="date">2026-07-03</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/8535.htm" target="_blank"><h4>商务贸易学院召开2026年上半年工作总结暨暑期工作部署全院大会</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2026"><span class="date">2026-06-24</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/8475.htm" target="_blank"><h4>商贸学子斩获第十六届全国大学生电子商务“创新、创意及创业”挑战赛湖南省选拔赛一等奖</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2026"><span class="date">2026-06-17</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/8335.htm" target="_blank"><h4>全媒体电商运营本科专业介绍</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2026"><span class="date">2026-06-13</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/8495.htm" target="_blank"><h4>湖南汽车工程职业大学商务贸易学院携手株洲河包休闲农业发展有限公司共建商贸人才培养基地和实践教学基地</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2026"><span class="date">2026-05-27</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/8255.htm" target="_blank"><h4>企业导师进课堂，赋能学生抖音电商实战能力提升</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2026"><span class="date">2026-04-25</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/8135.htm" target="_blank"><h4>校企协同育英才，就业直通新赛道——商务贸易学院数字贸易订单班动员大会顺利召开</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2026"><span class="date">2026-04-20</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/8085.htm" target="_blank"><h4>商务贸易学院在2025年多项技能竞赛中斩获佳绩</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2026"><span class="date">2026-04-04</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/8005.htm" target="_blank"><h4>湖南省《电子商务》“楚怡”教师教学创新团队2026年上学期推进会召开</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2026"><span class="date">2026-03-13</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7925.htm" target="_blank"><h4>湖汽职大商务贸易学院与湖南中易晟达电子商务有限公司校企合作签约仪式成功举行</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2026"><span class="date">2026-03-10</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7935.htm" target="_blank"><h4>湖汽职大商务贸易学院与京东物流（长沙）洽谈共建订单班 深化产教融合培育人才</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2026"><span class="date">2026-02-08</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7905.htm" target="_blank"><h4>我校商务贸易学院代表队在2026年“楚怡杯”市场营销赛项斩获佳绩</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2026"><span class="date">2026-01-13</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7875.htm" target="_blank"><h4>我校学子在全国大学生数字商业应用能力大赛中斩获佳绩</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-11-25</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7595.htm" target="_blank"><h4>深化政行校企行合作 共育技术技能人才——株洲市石峰区政协副主席谢洁率队来我院开展交流座谈</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-11-25</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7695.htm" target="_blank"><h4>商务贸易学院李忠华院长率队赴湖南中榜集团开展校企合作洽谈事宜</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-11-22</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7665.htm" target="_blank"><h4>商贸学院“楚怡”教师教学创新团队召开工作推进例会</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-11-15</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7685.htm" target="_blank"><h4>聚焦商贸人才培养 深化产教协同育人——商务贸易学院圆满完成华南线实习调研任务</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-11-07</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7585.htm" target="_blank"><h4>商务贸易学院携手株洲荷塘区产业服务中心“外贸精英训练营”顺利开营</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-10-23</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7535.htm" target="_blank"><h4>商贸学子捐迷彩 情暖株洲八达中学</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-10-22</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7545.htm" target="_blank"><h4>商务贸易学院学生党支部举行第三十六期“书香汇·师生共读”读书分享会</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-10-18</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7515.htm" target="_blank"><h4>商务贸易学院举行2026届毕业生岗位实习动员大会</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-09-27</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7455.htm" target="_blank"><h4>商务贸易学院李忠华名师工作室获株洲市2024年度优秀双师工作室</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-09-26</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7445.htm" target="_blank"><h4>商务贸易学院教师助力北斗规模应用国际峰会，优质服务获外宾高度赞誉</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-09-11</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7415.htm" target="_blank"><h4>商务贸易学院党总支书记曾昭山率队赴企业开展访企拓岗专项活动</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-09-01</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7375.htm" target="_blank"><h4>商贸学院斩获世界职业院校技能大赛一银一铜，实现工科院校商科专业的跨界突围</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-06-30</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7335.htm" target="_blank"><h4>商务贸易学院全媒体电商运营专业-2025年新增本科专业</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-06-26</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7325.htm" target="_blank"><h4>镌刻美好，启航新程，商务贸易学院“青春不散场”毕业生座谈会举行</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-06-26</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7315.htm" target="_blank"><h4>深化产教融合 服务“一带一路”——我院与株洲二手车出口基地签约共建人才培养新平台</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-06-13</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7265.htm" target="_blank"><h4>商务贸易学院组织开展“知网研学平台与数智化教学应用”专题教师培训</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-05-10</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/7135.htm" target="_blank"><h4>2025年株洲“职教杯”首届高校辅导员素质能力大赛商贸学院获得好成绩！</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-04-17</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2015.htm" target="_blank"><h4>商务贸易学院开展全媒体电商运营专业人才培养调研</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-04-16</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2005.htm" target="_blank"><h4>深化产教融合，助力国际化战略——中车电动与湖汽职大联合举办“AI赋能英语培训班”</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-04-01</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/1965.htm" target="_blank"><h4>商务贸易学院李忠华院长率队赴株洲易通达国际贸易有限公司考察调研</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-03-26</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/1955.htm" target="_blank"><h4>株洲市商务局携企业赴商务贸易学院洽谈跨境实训合作事宜</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-03-24</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/1945.htm" target="_blank"><h4>全力护航大赛 助力竞技促能—湖汽商务贸易学院承办2025年度“楚怡杯”湖南省职业院校技能竞赛互联网+国际经济与贸易赛项赛点工作圆满落幕</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-03-21</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/1935.htm" target="_blank"><h4>“校企协同育人 产研双向赋能”——校党委委员、副校长周金宗率队赴广东考察调研</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-02-21</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/1885.htm" target="_blank"><h4>党委委员、副校长周金宗深入商贸课堂聆听“开学第一课”</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-02-18</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/1865.htm" target="_blank"><h4>商务贸易学院召开2025年新学期教职工大会</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-01-11</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/1855.htm" target="_blank"><h4>湖南铁道职业技术学院王海明副教授受邀到商务贸易学院分享双创比赛经验</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2025"><span class="date">2025-01-06</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/1845.htm" target="_blank"><h4>我校在首届湖南省职业院校乡村振兴公益直播大赛中获佳绩</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2024"><span class="date">2024-12-30</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/1835.htm" target="_blank"><h4>商务贸易学院召开期末重点专项工作部署及说明会议</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2024"><span class="date">2024-12-25</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2405.htm" target="_blank"><h4>湖南汽车工程职业大学商务贸易学院与京东科技开展校企合作交流</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2024"><span class="date">2024-12-17</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2375.htm" target="_blank"><h4>商务贸易学院2025年元旦汇演暨第二届“商贸之星”表彰大会隆重召开</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2024"><span class="date">2024-11-11</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2205.htm" target="_blank"><h4>喜报！在湖南汽车工程职业大学第二十届校运会中，商务贸易学院女子团体总分第一，男子团体总分第三，团体总分排名第一！</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2024"><span class="date">2024-10-19</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2185.htm" target="_blank"><h4>商务贸易学院与湖南中榜集团直播联合培训项目顺利开展</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2024"><span class="date">2024-09-19</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2145.htm" target="_blank"><h4>一等奖！商务贸易学院在“筑梦新时代 颂歌献祖国”红歌大赛中取得好成绩</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2024"><span class="date">2024-08-22</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2125.htm" target="_blank"><h4>商务贸易学院李忠华院长率队赴长沙马栏山聚恒科技园景宸星火集团调研</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2024"><span class="date">2024-07-20</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2105.htm" target="_blank"><h4>企业实践强技能，校企联动助发展——商务贸易学院持续开展2024暑期教师能力提升培训</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2024"><span class="date">2024-07-08</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2075.htm" target="_blank"><h4>商务贸易学院召开2024年上半年工作总结暨暑期工作部署全院教职工大会</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2024"><span class="date">2024-06-24</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2065.htm" target="_blank"><h4>冠军！商务贸易学院女子篮球队在湖汽第十八届篮球联赛女子组中勇夺第一</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2024"><span class="date">2024-06-12</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2045.htm" target="_blank"><h4>湖南汽车工程职业大学携手中联企业管理集团共建"装备制造业产业链大数据中心"</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2024"><span class="date">2024-05-11</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2945.htm" target="_blank"><h4>商务贸易学院“韵承五四 典颂传统”文艺汇演暨五四表彰大会隆重召开</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2024"><span class="date">2024-04-26</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2835.htm" target="_blank"><h4>商务贸易学院院长李忠华一行赴长沙民政职业技术学院调研</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2024"><span class="date">2024-04-10</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2745.htm" target="_blank"><h4>商贸学院成功立项11个株洲市社科职教专项课题</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2024"><span class="date">2024-04-01</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2715.htm" target="_blank"><h4>省级荣誉又+1！商务贸易学院在电子商务人才培养领域再创佳绩！</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2024"><span class="date">2024-03-12</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2695.htm" target="_blank"><h4>青蓝传承 共同促进——商贸学院举行师徒结对仪式</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2024"><span class="date">2024-03-03</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2605.htm" target="_blank"><h4>商务贸易学院召开2024年新学期教职工大会</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2024"><span class="date">2024-01-21</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2565.htm" target="_blank"><h4>商务贸易学院当选全国数字商务行业产教融合共同体理事单位</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2024"><span class="date">2024-01-07</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2515.htm" target="_blank"><h4>商务贸易学院召开2023年度工作总结大会</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2023"><span class="date">2023-12-29</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2475.htm" target="_blank"><h4>刚刚！我院电子商务专业认证结论“优秀”</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2023"><span class="date">2023-12-24</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/2445.htm" target="_blank"><h4>我院教师在2023年“畅享杯”全国财经商贸类专业教师数字技术技能大赛中荣获佳绩</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2023"><span class="date">2023-12-05</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/3045.htm" target="_blank"><h4>全力护航大赛 助力竞技促能——2024年“楚怡杯”湖南省职业院校技能竞赛互联网+国际经济与贸易赛项湖汽商贸学院赛点工作圆满落幕</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2023"><span class="date">2023-12-04</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/3005.htm" target="_blank"><h4>两个一等奖！我院商务贸易学院代表队在2024年度“楚怡杯”湖南省职业院校技能竞赛互联网+国际经济与贸易赛项荣获佳绩</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2023"><span class="date">2023-11-27</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/3475.htm" target="_blank"><h4>商务贸易学院商务英语专业学子在“楚怡杯”连获佳绩</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2023"><span class="date">2023-11-18</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/3465.htm" target="_blank"><h4>一等奖！商贸学子在2023年“中广协”第三届网络直播创新创业实战技能大赛中获佳绩</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2023"><span class="date">2023-10-27</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/3425.htm" target="_blank"><h4>2023年“短视频+直播营销”赋能乡村振兴培训班顺利开班</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2023"><span class="date">2023-09-13</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/3385.htm" target="_blank"><h4>喜报！湖汽商贸学院荣获株洲市“2022年度无偿献血志愿服务奖 团队奖”</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2023"><span class="date">2023-07-26</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/3325.htm" target="_blank"><h4>六连冠！我院代表队再获全国职业院校技能大赛“互联网+国际经济与贸易”赛项团体一等奖</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2023"><span class="date">2023-06-02</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/3315.htm" target="_blank"><h4>商务贸易学院专业负责人代表参加湖南省首届跨境电商产学研交流会</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2023"><span class="date">2023-05-21</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/3295.htm" target="_blank"><h4>商务贸易学院电商专业教师代表参加湖南省第十四届电商专业建设及教学改革研讨会</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2023"><span class="date">2023-04-19</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/3225.htm" target="_blank"><h4>交流学习 拓展提升 谋划合作 ——商务贸易学院赴金华走访调研</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2023"><span class="date">2023-03-12</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/3145.htm" target="_blank"><h4>国内知名连锁酒店管理集团——东呈集团赴商务贸易学院洽谈产教融合事宜</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2023"><span class="date">2023-03-06</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/3095.htm" target="_blank"><h4>一等奖！商务贸易学院代表队在2023年度“楚怡杯”湖南省职业院校技能竞赛互联网+国际贸易综合技能赛项喜获佳绩</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2023"><span class="date">2023-03-06</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/3125.htm" target="_blank"><h4>优秀组织单位！商贸师生获全国电子商务师（跨境电子商务师）职业技能大赛赛项表彰</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2023"><span class="date">2023-02-14</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/4275.htm" target="_blank"><h4>新起点、新征程——商务贸易学院2023年新学年全院教职工大会顺利召开</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+      <li data-year="2023"><span class="date">2023-01-05</span><div class="content"><a href="https://swmy.hnae.edu.cn/info/1004/4115.htm" target="_blank"><h4>踔厉奋发，谱写商贸新篇章——商务贸易学院2022年度教职工大会顺利召开</h4></a><div class="source"><i class="fas fa-link"></i> 点击跳转至商务贸易学院官网查看详情</div></div><span class="external"><i class="fas fa-external-link-alt"></i></span></li>
+    </ul>
+  </div>
+</div>
+<script>
+function filterYear(year) {
+  var items = document.querySelectorAll('#newsList li');
+  var buttons = document.querySelectorAll('.year-tabs button');
+  buttons.forEach(function(btn) {
+    btn.classList.remove('active');
+  });
+  event.target.classList.add('active');
+  items.forEach(function(item) {
+    if (year === 'all') {
+      item.style.display = 'flex';
+    } else {
+      if (item.getAttribute('data-year') === year) {
+        item.style.display = 'flex';
+      } else {
+        item.style.display = 'none';
+      }
+    }
+  });
+}
+</script>
+<footer>
+  <p>© 2026 商务贸易学院 · 宋丹双带头人工作室 | <a href="https://swmy.hnae.edu.cn" target="_blank">商务贸易学院官网</a></p>
+</footer>
+</body>
+</html>

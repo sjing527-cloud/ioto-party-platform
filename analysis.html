@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IOTO 智慧党建 · 数据分析模块</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="common.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{--chart-gold:#B8860B;--chart-red:#C62828;--chart-green:#4ADE80;--chart-blue:#60A5FA;--chart-gray:#9CA3AF;}
+.menu a{color:rgba(255,255,255,0.9);text-decoration:none;transition:all .3s;letter-spacing:1px;font-size:12px;padding:4px 8px;border-radius:4px;}
+.menu a:hover{color:var(--gold);background:rgba(255,255,255,0.1);}
+.menu .btn-gold{background:linear-gradient(135deg,var(--gold),#B8860B);color:#5a3a00;padding:6px 14px;border-radius:4px;font-weight:700;font-size:12px;}
+.menu .btn-gold:hover{background:linear-gradient(135deg,var(--gold-light),var(--gold));}
+.hero{background:linear-gradient(135deg,rgba(255,217,102,0.95),rgba(184,134,11,0.9)),radial-gradient(circle at 60% 30%,rgba(139,0,0,0.15),transparent 50%);color:#333;padding:40px 24px;text-align:center;}
+.hero h1{font-family:'Noto Serif SC';font-size:28px;font-weight:900;margin-bottom:8px;letter-spacing:3px;}
+.hero h1 .mark{color:var(--red-main);}
+.hero p{font-size:13px;opacity:0.85;max-width:700px;margin:0 auto;line-height:1.6;}
+.container{max-width:1200px;margin:24px auto;padding:0 24px;}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+.stat-card{background:#fff;border-radius:8px;padding:16px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.04);border-left:3px solid var(--gold);position:relative;overflow:hidden;}
+.stat-card::before{content:'';position:absolute;top:0;right:0;width:60px;height:60px;background:rgba(184,134,11,0.05);border-radius:0 0 0 50%;}
+.stat-card .num{font-family:'Noto Serif SC';font-size:28px;font-weight:900;color:var(--chart-gold);line-height:1;position:relative;z-index:1;}
+.stat-card .label{font-size:12px;color:#666;margin-top:5px;position:relative;z-index:1;}
+.section{background:#fff;border-radius:10px;padding:24px;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,0.03);border:1px solid rgba(184,134,11,0.08);}
+.section-title{font-family:'Noto Serif SC';font-size:18px;color:#333;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.section-title i{color:var(--chart-gold);font-size:16px;}
+.section-title .badge{background:rgba(255,217,102,0.1);color:var(--chart-gold);font-size:10px;padding:2px 8px;border-radius:12px;font-weight:600;margin-left:auto;}
+.tab-container{margin-bottom:0;}
+.tab-nav{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+.tab-nav button{background:#f9fafb;border:1px solid #e5e7eb;color:#4b5563;padding:8px 18px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:500;transition:all .2s;display:flex;align-items:center;gap:5px;}
+.tab-nav button.active{background:linear-gradient(135deg,var(--chart-gold),#8B6914);color:#fff;border-color:var(--chart-gold);}
+.tab-nav button:hover:not(.active){background:rgba(184,134,11,0.06);border-color:rgba(184,134,11,0.15);}
+.tab-content{display:none;padding-top:6px;}
+.tab-content.active{display:block;animation:fadeIn .25s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(3px);}to{opacity:1;transform:translateY(0);}}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.chart-box{background:rgba(255,217,102,0.03);border-radius:8px;padding:16px;border:1px solid rgba(255,217,102,0.1);}
+.chart-box h4{font-family:'Noto Serif SC';font-size:14px;color:#333;margin-bottom:10px;}
+.chart-box canvas{width:100%;height:220px;}
+.rank-table{width:100%;border-collapse:collapse;font-size:11px;}
+.rank-table th{background:linear-gradient(135deg,var(--chart-gold),#8B6914);color:#fff;padding:8px 6px;text-align:left;font-size:11px;font-weight:600;white-space:nowrap;}
+.rank-table th:first-child{border-radius:4px 0 0 0;}
+.rank-table th:last-child{border-radius:0 4px 0 0;}
+.rank-table td{padding:8px 6px;border-bottom:1px solid #f3f4f6;white-space:nowrap;}
+.rank-table tbody tr:hover{background:rgba(255,217,102,0.04);}
+.rank-table .rank{width:30px;text-align:center;font-family:'Noto Serif SC';font-weight:900;color:#666;font-size:12px;}
+.rank-table .rank.top1{color:#FFD966;background:#5a3a00;padding:2px 5px;border-radius:2px;font-size:10px;}
+.rank-table .rank.top2{color:#fff;background:#888;padding:2px 5px;border-radius:2px;font-size:10px;}
+.rank-table .rank.top3{color:#fff;background:#CD7F32;padding:2px 5px;border-radius:2px;font-size:10px;}
+.rank-table .score{font-family:'Noto Serif SC';font-weight:700;color:var(--chart-gold);text-align:right;font-size:12px;}
+.rank-table .level{padding:2px 6px;border-radius:8px;font-size:9px;font-weight:600;text-align:center;}
+.rank-table .level.excellent{background:rgba(74,222,128,0.1);color:#166534;}
+.rank-table .level.good{background:rgba(255,217,102,0.1);color:#92400E;}
+.rank-table .level.pass{background:rgba(255,107,107,0.1);color:#991B1B;}
+.dim-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.dim-card{background:linear-gradient(135deg,rgba(255,217,102,0.04),rgba(255,217,102,0.01));border-radius:8px;padding:14px;text-align:center;border:1px solid rgba(184,134,11,0.06);}
+.dim-card .icon{font-size:20px;color:var(--chart-gold);margin-bottom:8px;}
+.dim-card .name{font-family:'Noto Serif SC';font-size:12px;color:#333;margin-bottom:4px;line-height:1.3;}
+.dim-card .score{font-family:'Noto Serif SC';font-size:20px;font-weight:900;color:var(--chart-gold);}
+.dim-card .total{font-size:10px;color:#999;}
+.progress-bar{height:4px;background:rgba(184,134,11,0.15);border-radius:2px;overflow:hidden;margin-top:8px;}
+.progress-bar span{display:block;height:100%;border-radius:2px;background:linear-gradient(90deg,var(--chart-gold),#FFD966);}
+.filter-bar{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;}
+.filter-bar button{background:rgba(255,217,102,0.06);border:1px solid rgba(255,217,102,0.15);color:var(--chart-gold);padding:5px 12px;border-radius:4px;cursor:pointer;font-size:11px;transition:all .2s;font-weight:500;}
+.filter-bar button.active{background:var(--chart-gold);color:#fff;border-color:var(--chart-gold);}
+.filter-bar button:hover{background:rgba(184,134,11,0.12);}
+.report-list{list-style:none;margin:0;padding:0;}
+.report-list li{padding:12px 14px;border-bottom:1px dashed #eee;display:flex;justify-content:space-between;align-items:center;}
+.report-list li:last-child{border-bottom:none;}
+.report-list li:hover{background:rgba(255,217,102,0.03);}
+.report-list .info h4{font-family:'Noto Serif SC';font-size:14px;color:#333;margin-bottom:2px;}
+.report-list .info p{font-size:11px;color:#888;}
+.report-list .download{background:var(--chart-gold);color:#fff;padding:5px 12px;border-radius:4px;text-decoration:none;font-size:11px;font-weight:600;transition:all .2s;}
+.report-list .download:hover{background:#8B6914;}
+.method-note{background:linear-gradient(135deg,rgba(255,217,102,0.06),rgba(184,134,11,0.03));border:1px solid rgba(184,134,11,0.12);border-radius:10px;padding:18px;margin-bottom:16px;}
+.method-note h3{font-family:'Noto Serif SC';font-size:16px;color:#333;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.method-note h3 i{color:var(--chart-gold);font-size:14px;}
+.method-note p{font-size:12px;color:#555;line-height:1.6;margin-bottom:6px;}
+.method-note .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.method-note .meta span{background:rgba(184,134,11,0.08);color:#8B6914;padding:4px 8px;border-radius:12px;font-size:10px;font-weight:600;}
+.method-note .actions{margin-top:12px;}
+.method-note .actions a{display:inline-block;background:var(--chart-gold);color:#fff;padding:6px 14px;border-radius:4px;text-decoration:none;font-size:11px;font-weight:600;}
+.method-note .actions a:hover{background:#8B6914;}
+footer{background:var(--navy);color:#fff;padding:24px 24px;margin-top:30px;text-align:center;font-size:12px;}
+footer a{color:var(--gold);text-decoration:none;}
+@media(max-width:1024px){.stats-row{grid-template-columns:repeat(2,1fr);}.chart-grid{grid-template-columns:1fr;}.dim-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:640px){.stats-row{grid-template-columns:1fr;}.dim-grid{grid-template-columns:1fr;}.hero h1{font-size:22px;}.tab-nav button{padding:6px 12px;font-size:11px;}.rank-table{font-size:10px;}.rank-table th,.rank-table td{padding:6px 4px;}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-wrap">
+    <a class="logo" href="index.html">
+      <i class="fas fa-hammer"></i>
+      <div class="logo-text"><div class="t1">IOTO 智慧党建</div><div class="t2">宋丹 · 双带头人工作室</div></div>
+    </a>
+    <div class="menu">
+      <a href="index.html">首页</a>
+      <a href="learning.html">学习模块</a>
+      <a href="activity.html">活动模块</a>
+      <a href="service_detail.html">服务模块</a>
+      <a href="news.html">学院新闻</a>
+      <a href="analysis.html" style="color:var(--gold);">分析模块</a>
+      <a href="methods.html">方法说明</a>
+      <a href="management.html">管理模块</a>
+      <a href="vote.html">投票问卷</a>
+      <a href="honor.html">荣誉管理</a>
+      <a href="conclusion.html" class="btn-gold"><i class="fas fa-file-check"></i> 结项窗口</a>
+      <a href="dashboard.html" target="_blank" class="btn-gold"><i class="fas fa-chart-line"></i> 数据大屏</a>
+    </div>
+  </div>
+</nav>
+<div class="hero">
+  <h1><span class="mark">📊 数据分析</span> · 让党建工作有迹可循</h1>
+  <p>基于 IOTO 任务驱动学习闭环模型的成果环节，围绕党建指数、七个有力画像和绩效报表，集中服务结项验收展示</p>
+</div>
+<div class="container">
+  <div class="stats-row">
+    <div class="stat-card"><div class="num">75.1</div><div class="label">党建指数·支部均分</div></div>
+    <div class="stat-card"><div class="num">5</div><div class="label">优秀党员人数</div></div>
+    <div class="stat-card"><div class="num">0</div><div class="label">&lt;60分预警人数</div></div>
+    <div class="stat-card"><div class="num">7</div><div class="label">固定评价维度</div></div>
+  </div>
+  <div class="method-note">
+    <h3><i class="fas fa-scale-balanced"></i> 指数方法口径说明</h3>
+    <p>本页保留党建指数作为平台核心方法，评价框架固定为"七个有力"七个维度，权重固定为 15、15、14、14、14、14、14，共计 100 分。</p>
+    <p>当前页面为结项验收展示口径，所有图表与排行均围绕支部建设成效、党员表现和服务留痕展开，便于专家快速理解平台的评价逻辑。</p>
+    <div class="meta">
+      <span>固定七维</span>
+      <span>固定权重</span>
+      <span>100 分制</span>
+      <span>对标七个有力</span>
+    </div>
+    <div class="actions"><a href="methods.html"><i class="fas fa-file-lines"></i> 查看完整方法说明</a></div>
+  </div>
+  <div class="section">
+    <div class="section-title"><i class="fas fa-chart-bar"></i> 数据可视化 <span class="badge">验收展示版</span></div>
+    <div class="tab-container">
+      <div class="tab-nav">
+        <button class="active" data-tab="charts"><i class="fas fa-chart-pie"></i> 图表看板</button>
+        <button data-tab="ranking"><i class="fas fa-trophy"></i> 党员排行</button>
+      </div>
+      <div class="tab-content active" id="charts">
+        <div class="chart-grid">
+          <div class="chart-box"><h4>党建指数月度趋势</h4><canvas id="trendChart"></canvas></div>
+          <div class="chart-box"><h4>七个有力 · 固定权重画像</h4><canvas id="radarChart"></canvas></div>
+          <div class="chart-box"><h4>党员等级分布</h4><canvas id="pieChart"></canvas></div>
+          <div class="chart-box"><h4>六个一服务统计</h4><canvas id="barChart"></canvas></div>
+        </div>
+      </div>
+      <div class="tab-content" id="ranking">
+        <div class="filter-bar">
+          <button class="active">全部</button>
+          <button>①教育党员</button>
+          <button>②管理党员</button>
+          <button>③监督党员</button>
+          <button>④组织师生</button>
+          <button>⑤宣传师生</button>
+          <button>⑥凝聚师生</button>
+          <button>⑦服务师生</button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="rank-table">
+            <thead><tr><th>排名</th><th>姓名</th><th>①教育(15)</th><th>②管理(15)</th><th>③监督(14)</th><th>④组织(14)</th><th>⑤宣传(14)</th><th>⑥凝聚(14)</th><th>⑦服务(14)</th><th>总分</th><th>评定</th></tr></thead>
+            <tbody>
+              <tr><td><span class="rank top1">1</span></td><td>宋丹</td><td>14.2</td><td>14.0</td><td>13.2</td><td>13.5</td><td>13.0</td><td>12.6</td><td>13.0</td><td><span class="score">93.5</span></td><td><span class="level excellent">优秀</span></td></tr>
+              <tr><td><span class="rank top2">2</span></td><td>谭亲强</td><td>13.5</td><td>13.2</td><td>12.8</td><td>13.0</td><td>12.5</td><td>12.0</td><td>12.5</td><td><span class="score">89.5</span></td><td><span class="level excellent">优秀</span></td></tr>
+              <tr><td><span class="rank top3">3</span></td><td>李忠华</td><td>13.2</td><td>13.0</td><td>12.5</td><td>13.2</td><td>12.3</td><td>11.8</td><td>12.0</td><td><span class="score">88.0</span></td><td><span class="level excellent">优秀</span></td></tr>
+              <tr><td><span class="rank">4</span></td><td>曾昭山</td><td>13.0</td><td>12.8</td><td>12.2</td><td>12.8</td><td>12.0</td><td>11.5</td><td>11.2</td><td><span class="score">85.5</span></td><td><span class="level excellent">优秀</span></td></tr>
+              <tr><td><span class="rank">5</span></td><td>殷兰波</td><td>12.8</td><td>12.5</td><td>12.0</td><td>12.5</td><td>11.5</td><td>11.0</td><td>10.7</td><td><span class="score">83.0</span></td><td><span class="level excellent">优秀</span></td></tr>
+              <tr><td><span class="rank">6</span></td><td>熊津津</td><td>12.5</td><td>12.2</td><td>11.8</td><td>12.0</td><td>11.2</td><td>10.5</td><td>10.3</td><td><span class="score">81.5</span></td><td><span class="level good">良好</span></td></tr>
+              <tr><td><span class="rank">7</span></td><td>刘娜敏</td><td>12.0</td><td>11.8</td><td>11.5</td><td>11.5</td><td>10.8</td><td>10.2</td><td>10.2</td><td><span class="score">79.0</span></td><td><span class="level good">良好</span></td></tr>
+              <tr><td><span class="rank">8</span></td><td>陈思为</td><td>11.8</td><td>11.5</td><td>11.2</td><td>11.5</td><td>10.5</td><td>10.0</td><td>9.5</td><td><span class="score">78.0</span></td><td><span class="level good">良好</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-title"><i class="fas fa-radar"></i> 支部画像与报表 <span class="badge">对标验收</span></div>
+    <div class="tab-container">
+      <div class="tab-nav">
+        <button class="active" data-tab="portrait"><i class="fas fa-user-check"></i> 七个有力画像</button>
+        <button data-tab="reports"><i class="fas fa-file-pdf"></i> 绩效报表</button>
+      </div>
+      <div class="tab-content active" id="portrait">
+        <div class="dim-grid">
+          <div class="dim-card"><div class="icon"><i class="fas fa-graduation-cap"></i></div><div class="name">①教育党员有力</div><div class="score">12.1</div><div class="total">/ 15分</div><div class="progress-bar"><span style="width:81%"></span></div></div>
+          <div class="dim-card"><div class="icon"><i class="fas fa-users-cog"></i></div><div class="name">②管理党员有力</div><div class="score">11.5</div><div class="total">/ 15分</div><div class="progress-bar"><span style="width:77%"></span></div></div>
+          <div class="dim-card"><div class="icon"><i class="fas fa-shield-alt"></i></div><div class="name">③监督党员有力</div><div class="score">10.8</div><div class="total">/ 14分</div><div class="progress-bar"><span style="width:77%"></span></div></div>
+          <div class="dim-card"><div class="icon"><i class="fas fa-sitemap"></i></div><div class="name">④组织师生有力</div><div class="score">10.2</div><div class="total">/ 14分</div><div class="progress-bar"><span style="width:73%"></span></div></div>
+          <div class="dim-card"><div class="icon"><i class="fas fa-bullhorn"></i></div><div class="name">⑤宣传师生有力</div><div class="score">9.8</div><div class="total">/ 14分</div><div class="progress-bar"><span style="width:70%"></span></div></div>
+          <div class="dim-card"><div class="icon"><i class="fas fa-heart"></i></div><div class="name">⑥凝聚师生有力</div><div class="score">9.5</div><div class="total">/ 14分</div><div class="progress-bar"><span style="width:68%"></span></div></div>
+          <div class="dim-card"><div class="icon"><i class="fas fa-hands-helping"></i></div><div class="name">⑦服务师生有力</div><div class="score">10.2</div><div class="total">/ 14分</div><div class="progress-bar"><span style="width:73%"></span></div></div>
+          <div class="dim-card" style="background:linear-gradient(135deg,rgba(212,175,55,0.08),rgba(198,40,40,0.04));border:1px solid rgba(212,175,55,0.2);"><div class="icon"><i class="fas fa-star"></i></div><div class="name">支部总得分</div><div class="score" style="color:#C62828;">75.1</div><div class="total">/ 100分</div><div class="progress-bar"><span style="width:75%"></span></div></div>
+        </div>
+      </div>
+      <div class="tab-content" id="reports">
+        <ul class="report-list">
+          <li><div class="info"><h4>2026年上半年党建工作绩效报告</h4><p>包含25名党员完整评分、七个有力指标分析、改进建议</p></div><a href="#" class="download"><i class="fas fa-download"></i> 下载PDF</a></li>
+          <li><div class="info"><h4>2026年第二季度党建指数报告</h4><p>季度对比分析、趋势变化、预警提醒</p></div><a href="#" class="download"><i class="fas fa-download"></i> 下载PDF</a></li>
+          <li><div class="info"><h4>六个一服务工程年度总结报告</h4><p>六维度服务数据统计、典型案例、成效分析</p></div><a href="#" class="download"><i class="fas fa-download"></i> 下载PDF</a></li>
+          <li><div class="info"><h4>党员个人党建指数年度报告</h4><p>每位党员的年度成长轨迹、优势与不足分析</p></div><a href="#" class="download"><i class="fas fa-download"></i> 下载PDF</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>
+  <div>🚩 商务贸易学院教工党支部 · 宋丹"双带头人"工作室 · IOTO智慧党建平台</div>
+  <div style="margin-top:6px;font-size:11px;opacity:0.7;">© 2024-2026 版权所有</div>
+</footer>
+<script>
+const ctx1=document.getElementById('trendChart').getContext('2d');new Chart(ctx1,{type:'line',data:{labels:['9月','10月','11月','12月','1月','2月','3月','4月','5月','6月','7月','8月'],datasets:[{label:'支部均分',data:[68.0,69.5,71.0,72.5,70.5,73.5,74.0,75.5,76.5,75.0,77.5,75.1],borderColor:'#B8860B',backgroundColor:'rgba(184,134,11,0.08)',fill:true,tension:0.4,pointRadius:4,pointBackgroundColor:'#FFD966'},{label:'优秀线(80)',data:Array(12).fill(80),borderColor:'#FFD966',borderDash:[5,5],pointRadius:0},{label:'合格线(60)',data:Array(12).fill(60),borderColor:'#FF6B6B',borderDash:[5,5],pointRadius:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:11}}}},scales:{y:{min:55,max:85,ticks:{font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
+const ctx2=document.getElementById('radarChart').getContext('2d');new Chart(ctx2,{type:'radar',data:{labels:['①教育党员','②管理党员','③监督党员','④组织师生','⑤宣传师生','⑥凝聚师生','⑦服务师生'],datasets:[{label:'支部平均',data:[12.1,11.5,10.8,10.2,9.8,9.5,10.2],backgroundColor:'rgba(184,134,11,0.15)',borderColor:'#B8860B',borderWidth:2},{label:'优秀党员(宋丹)',data:[14.2,14.0,13.2,13.5,13.0,12.6,13.0],backgroundColor:'rgba(74,222,128,0.08)',borderColor:'#4ADE80',borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{font:{size:11}}}},scales:{r:{min:0,max:15,ticks:{display:false,stepSize:3}}}}});
+const ctx3=document.getElementById('pieChart').getContext('2d');new Chart(ctx3,{type:'pie',data:{labels:['优秀(≥80分)','良好(70-79分)','合格(60-69分)','预警(<60分)'],datasets:[{data:[5,12,8,0],backgroundColor:['#4ADE80','#FFD966','#FF6B6B','#991B1B']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11}}}}}});
+const ctx4=document.getElementById('barChart').getContext('2d');new Chart(ctx4,{type:'bar',data:{labels:['困难帮扶','宿舍对接','校友联系','竞赛指导','就业服务','校企服务'],datasets:[{label:'服务次数',data:[132,108,96,120,180,156],backgroundColor:'#B8860B'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
+document.querySelectorAll('.tab-nav button').forEach(btn=>{btn.addEventListener('click',function(){const tabId=this.getAttribute('data-tab');document.querySelectorAll('.tab-nav button').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));this.classList.add('active');document.getElementById(tabId).classList.add('active');});});
+</script>
+</body>
+</html>
