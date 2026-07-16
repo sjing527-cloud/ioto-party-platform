@@ -3,654 +3,965 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>POWER 智慧党建 · 数据驾驶舱（大屏版）</title>
+<title>POWER 智慧党建 · 数据驾驶舱</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Orbitron:wght@500;700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-html{width:100%;height:100%}
-body{width:100%;min-height:100vh}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory;width:100%;height:100%}
 body{
+  width:100%;min-height:100vh;
   font-family:'Noto Sans SC',sans-serif;
   color:#E0E6FF;
   background:#040720;
   background-image:
-    radial-gradient(circle at 15% 30%, rgba(198,40,40,0.30), transparent 40%),
-    radial-gradient(circle at 85% 70%, rgba(26,35,126,0.40), transparent 45%),
+    radial-gradient(circle at 20% 10%, rgba(198,40,40,0.20), transparent 50%),
+    radial-gradient(circle at 80% 90%, rgba(26,35,126,0.30), transparent 50%),
     linear-gradient(180deg, #020418 0%, #060A2E 50%, #020418 100%);
-  position:relative;
 }
-/* 网格背景 */
 body::before{
-  content:'';position:absolute;inset:0;
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   background-image:
-    linear-gradient(rgba(100,150,255,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(100,150,255,0.05) 1px, transparent 1px);
-  background-size: 40px 40px;
-  z-index:0;
-  mask-image: radial-gradient(ellipse at center, #000 40%, transparent 100%);
+    linear-gradient(rgba(100,150,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(100,150,255,0.04) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
 }
 
-/* ======== 顶部标题栏 ======== */
-header{
-  position:relative;z-index:10;height:86px;
-  display:flex;align-items:center;justify-content:space-between;gap:24px;
-  padding:0 28px;
-  border-bottom:1px solid rgba(0,180,255,0.2);
-  background:
-    linear-gradient(180deg, rgba(198,40,40,0.35), transparent),
-    linear-gradient(90deg, transparent, rgba(0,180,255,0.08), transparent);
+/* ========== 顶部固定条 ========== */
+.top-bar{
+  position:fixed;top:0;left:0;right:0;z-index:100;height:64px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:0 32px;
+  background:linear-gradient(180deg, rgba(2,4,24,0.97) 0%, rgba(2,4,24,0.85) 100%);
+  border-bottom:1px solid rgba(0,180,255,0.18);
+  backdrop-filter:blur(12px);
 }
-header::after{
-  content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;
-  background:linear-gradient(90deg, transparent, #00d4ff, #c62828, #00d4ff, transparent);
-  animation: shine 6s linear infinite;
+.top-bar .brand{
+  display:flex;align-items:center;gap:12px;font-family:'Noto Serif SC';font-weight:700;
+  font-size:17px;color:#fff;white-space:nowrap;
 }
-@keyframes shine{from{background-position:-1000px 0;}to{background-position:1000px 0;}}
-.h-title{
-  flex:1;min-width:0;text-align:center;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:0 12px;
-}
-.h-title .big{
-  font-family:'Noto Serif SC';font-weight:900;font-size:30px;letter-spacing:5px;
-  background:linear-gradient(180deg,#fff 0%, #FFD966 50%, #fff 100%);
+.top-bar .brand i{color:#FFD966;font-size:20px;}
+.top-bar .brand .big{
+  font-weight:900;font-size:22px;letter-spacing:3px;
+  background:linear-gradient(180deg,#fff,#FFD966);
   -webkit-background-clip:text;background-clip:text;color:transparent;
-  text-shadow:0 0 30px rgba(255,217,102,0.3);
-  white-space:nowrap;
 }
-.h-title .sub{
-  font-size:12px;letter-spacing:4px;margin-top:5px;opacity:.7;
-  color:#89B4FF;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  max-width:100%;
+.top-bar .tags{display:flex;gap:14px;font-size:12px;align-items:center;}
+.top-bar .tags span{display:flex;align-items:center;gap:5px;color:#AABBFF;}
+.top-bar .tags span i{color:#FFD966;}
+.top-bar .tags .live{
+  padding:4px 12px;border-radius:12px;font-size:11px;
+  background:rgba(255,80,80,0.12);border:1px solid rgba(255,80,80,0.25);color:#FF9E9E;
 }
-.h-left,.h-right{
-  display:flex;align-items:center;gap:12px;font-size:13px;
-  flex-shrink:0;white-space:nowrap;
-}
-.h-left>div{min-width:0;}
-.h-left .t1{font-family:'Noto Serif SC';font-weight:700;color:#fff;font-size:15px;line-height:1.2;white-space:nowrap;}
-.h-left .t2{font-size:11px;color:#89B4FF;margin-top:2px;white-space:nowrap;}
-.h-left i,.h-right i{color:#FFD966;}
-.h-chip{
-  padding:6px 12px;border-radius:20px;font-size:12px;
-  background:rgba(0,180,255,0.1);
-  border:1px solid rgba(0,180,255,0.3);
-  color:#89B4FF;
-  white-space:nowrap;
-}
-.h-chip.red{background:rgba(198,40,40,0.15);border-color:rgba(255,80,80,0.35);color:#FF9E9E;}
+.top-bar a{color:#FFD966;font-size:13px;letter-spacing:1px;text-decoration:none;}
+.top-bar a:hover{color:#fff;}
 
-/* ======== 主网格 ======== */
-main{
-  position:relative;z-index:5;
-  min-height:calc(100vh - 86px - 26px);
-  display:grid;
-  grid-template-columns: 24% 1fr 24%;
-  gap:16px;
-  padding:16px;
+/* ========== 侧边导航点 ========== */
+.side-nav{
+  position:fixed;right:60px;top:50%;transform:translateY(-50%);z-index:200;
+  display:flex;flex-direction:column;gap:12px;
 }
-.col{display:flex;flex-direction:column;gap:16px;min-width:0;}
-
-/* 面板通用样式 */
-.panel{
-  position:relative;flex:1;min-height:0;
-  padding:14px 16px 12px;
-  background:linear-gradient(180deg, rgba(20,40,90,0.45), rgba(10,20,50,0.55));
-  border:1px solid rgba(0,180,255,0.22);
-  border-radius:6px;
-  box-shadow:inset 0 0 40px rgba(0,120,255,0.06);
-  display:flex;flex-direction:column;
+.side-nav a{
+  display:flex;align-items:center;gap:10px;text-decoration:none;
 }
-/* 面板四角装饰 */
-.panel::before,.panel::after,
-.panel .corner-tl,.panel .corner-tr,.panel .corner-bl,.panel .corner-br{
-  content:'';position:absolute;width:12px;height:12px;border:2px solid #00D4FF;
+.side-nav .dot{
+  width:10px;height:10px;border-radius:50%;
+  border:1.5px solid rgba(0,212,255,0.4);
+  background:transparent;
+  transition:all .3s;
 }
-.panel::before{top:-1px;left:-1px;border-right:none;border-bottom:none;}
-.panel::after{bottom:-1px;right:-1px;border-left:none;border-top:none;}
-.panel .corner-tr{top:-1px;right:-1px;border-left:none;border-bottom:none;border-color:#C62828;}
-.panel .corner-bl{bottom:-1px;left:-1px;border-right:none;border-top:none;border-color:#C62828;}
-
-.p-title{
-  display:flex;align-items:center;gap:8px;padding-bottom:8px;
-  border-bottom:1px solid rgba(0,180,255,0.15);margin-bottom:10px;
-  font-family:'Noto Serif SC';font-weight:700;font-size:15px;color:#fff;
-}
-.p-title::before{
-  content:'';width:4px;height:14px;border-radius:2px;
-  background:linear-gradient(180deg,#FFD966,#C62828);
-}
-.p-title .dots{margin-left:auto;display:flex;gap:4px;}
-.p-title .dots span{width:6px;height:6px;border-radius:50%;background:#00D4FF;opacity:.6;}
-.p-title .dots span:nth-child(2){background:#FFD966;}
-.p-title .dots span:nth-child(3){background:#C62828;}
-.p-body{flex:1;min-height:0;position:relative;}
-
-/* ======== KPI 数字翻牌 ======== */
-.kpi-strip{
-  display:grid;grid-template-columns:repeat(6,1fr);gap:12px;
-  padding:8px 16px 0;position:relative;z-index:5;
-}
-.kpi{
-  padding:12px 10px 10px;text-align:center;
-  background:linear-gradient(180deg, rgba(0,180,255,0.15), rgba(0,180,255,0.04));
-  border:1px solid rgba(0,180,255,0.3);
-  border-radius:4px;position:relative;overflow:hidden;
-}
-.kpi::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg, transparent, #00D4FF, transparent);
-}
-.kpi .num{
-  font-family:'Orbitron','Noto Serif SC',monospace;font-weight:900;
-  font-size:30px;line-height:1;
-  background:linear-gradient(180deg, #fff 40%, #00d4ff 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  text-shadow:0 0 20px rgba(0,212,255,0.4);
-}
-.kpi.gold .num{background:linear-gradient(180deg,#fff,#FFD966);-webkit-background-clip:text;background-clip:text;color:transparent;}
-.kpi.red .num{background:linear-gradient(180deg,#fff,#FF6B6B);-webkit-background-clip:text;background-clip:text;color:transparent;}
-.kpi .unit{font-size:11px;color:#89B4FF;margin-left:2px;}
-.kpi .lbl{font-size:11px;color:#AABBFF;margin-top:6px;letter-spacing:1px;}
-.kpi .ico{position:absolute;top:6px;right:8px;font-size:10px;opacity:.4;}
-
-.chart{width:100%;height:100%;}
-
-/* ======== 左栏 ======== */
-.rank-list{overflow-y:auto;height:100%;font-size:13px;padding-right:4px;}
-.rank-list::-webkit-scrollbar{width:3px;}
-.rank-list::-webkit-scrollbar-thumb{background:rgba(0,212,255,0.3);border-radius:3px;}
-.rank-item{
-  display:grid;grid-template-columns:32px 1fr 72px 80px;align-items:center;gap:10px;
-  padding:8px 6px;border-bottom:1px dashed rgba(0,180,255,0.1);
-  transition:all .2s;
-}
-.rank-item:hover{background:rgba(0,212,255,0.06);}
-.rank-no{
-  width:26px;height:26px;line-height:26px;text-align:center;border-radius:4px;
-  font-family:'Orbitron',monospace;font-weight:700;font-size:13px;
-  background:rgba(0,180,255,0.12);color:#89B4FF;
-}
-.rank-item:nth-child(1) .rank-no{background:linear-gradient(135deg,#FFD966,#E6A817);color:#5a3a00;font-weight:900;box-shadow:0 0 14px rgba(255,217,102,0.4);}
-.rank-item:nth-child(2) .rank-no{background:linear-gradient(135deg,#C0C0C0,#888);color:#fff;}
-.rank-item:nth-child(3) .rank-no{background:linear-gradient(135deg,#CD7F32,#8B4513);color:#fff;}
-.r-name{color:#E0E6FF;font-weight:500;font-size:13.5px;}
-.r-bar{position:relative;height:8px;background:rgba(0,180,255,0.1);border-radius:4px;overflow:hidden;}
-.r-bar span{
-  display:block;height:100%;border-radius:4px;
-  background:linear-gradient(90deg,#00D4FF,#FFD966);
+.side-nav a:hover .dot,.side-nav a.active .dot{
+  background:#00D4FF;border-color:#00D4FF;
   box-shadow:0 0 10px rgba(0,212,255,0.5);
 }
-.r-score{text-align:right;font-family:'Orbitron',monospace;font-weight:700;color:#FFD966;font-size:14px;}
+.side-nav .label{
+  font-size:11px;color:#6677aa;opacity:0;
+  transform:translateX(6px);transition:all .3s;
+  white-space:nowrap;font-family:'Noto Sans SC';
+}
+.side-nav a:hover .label{opacity:1;color:#AABBFF;transform:translateX(0);}
 
-/* ======== 中栏 ======== */
-.center-top{
-  display:grid;grid-template-columns:1fr 1fr;gap:16px;
-  flex:0 0 32%;
+/* ======== 每个板块 ======== */
+.section{
+  position:relative;z-index:5;
+  min-height:100vh;
+  scroll-snap-align:start;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:88px 48px 48px;
 }
-.center-main{flex:1;display:flex;flex-direction:column;gap:16px;min-height:0;}
-.big-radar{flex:0 0 68%;}
-.ticket-list{
-  font-size:12.5px;overflow:hidden;height:100%;
-  mask-image:linear-gradient(180deg, transparent, #000 8%, #000 92%, transparent);
+.section::before{
+  content:'';position:absolute;bottom:0;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg, transparent, rgba(0,212,255,0.12), transparent);
 }
-.ticket{
-  display:grid;grid-template-columns:60px 1fr 58px;gap:8px;
-  padding:8px 6px;border-bottom:1px dashed rgba(0,180,255,0.1);align-items:center;
-}
-.ticket .time{color:#00D4FF;font-family:'Orbitron';font-size:11px;}
-.ticket .cont{min-width:0;}
-.ticket .t1{color:#E0E6FF;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.ticket .t2{color:#7a8bb3;font-size:10.5px;}
-.st-badge{font-size:10px;padding:2px 6px;border-radius:3px;text-align:center;font-weight:700;}
-.st-new{background:rgba(255,80,80,0.15);color:#FF6B6B;border:1px solid rgba(255,80,80,0.3);}
-.st-doing{background:rgba(255,217,102,0.12);color:#FFD966;border:1px solid rgba(255,217,102,0.3);}
-.st-done{background:rgba(0,212,100,0.12);color:#4ADE80;border:1px solid rgba(0,212,100,0.3);}
+.section:last-of-type::before{display:none;}
 
-/* 右栏四象限卡 */
-.four-grid{
-  display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:10px;height:100%;
+.section-inner{
+  width:100%;max-width:1400px;
+  display:flex;flex-direction:column;align-items:center;
 }
-.fq{
-  padding:12px;border-radius:4px;position:relative;overflow:hidden;
-  background:linear-gradient(135deg, rgba(0,180,255,0.10), rgba(10,20,50,0.6));
-  border:1px solid rgba(0,180,255,0.22);
-  display:flex;flex-direction:column;justify-content:space-between;
-}
-.fq.a{border-top-color:#C62828;border-left-color:#C62828;}
-.fq.b{border-top-color:#FFD966;border-right-color:#FFD966;}
-.fq.c{border-bottom-color:#00D4FF;border-left-color:#00D4FF;}
-.fq.d{border-bottom-color:#4ADE80;border-right-color:#4ADE80;}
-.fq .h{display:flex;align-items:center;gap:8px;}
-.fq .h i{font-size:22px;}
-.fq.a .h i{color:#FF6B6B;} .fq.b .h i{color:#FFD966;}
-.fq.c .h i{color:#00D4FF;} .fq.d .h i{color:#4ADE80;}
-.fq .h h5{font-family:'Noto Serif SC';font-size:14px;color:#fff;}
-.fq .v{
-  font-family:'Orbitron',monospace;font-weight:900;font-size:34px;line-height:1;
-}
-.fq.a .v{background:linear-gradient(180deg,#fff,#FF6B6B);-webkit-background-clip:text;background-clip:text;color:transparent;}
-.fq.b .v{background:linear-gradient(180deg,#fff,#FFD966);-webkit-background-clip:text;background-clip:text;color:transparent;}
-.fq.c .v{background:linear-gradient(180deg,#fff,#00D4FF);-webkit-background-clip:text;background-clip:text;color:transparent;}
-.fq.d .v{background:linear-gradient(180deg,#fff,#4ADE80);-webkit-background-clip:text;background-clip:text;color:transparent;}
-.fq .s{font-size:11px;color:#AABBFF;}
-.fq .p-bar{margin-top:6px;height:4px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;}
-.fq .p-bar span{display:block;height:100%;border-radius:2px;}
-.fq.a .p-bar span{background:linear-gradient(90deg,#C62828,#FF6B6B);width:100%;}
-.fq.b .p-bar span{background:linear-gradient(90deg,#E6A817,#FFD966);width:100%;}
-.fq.c .p-bar span{background:linear-gradient(90deg,#0066cc,#00D4FF);width:100%;}
-.fq.d .p-bar span{background:linear-gradient(90deg,#16803c,#4ADE80);width:63%;}
+.section.full .section-inner{max-width:100%;}
 
-.warn-list{font-size:12.5px;overflow-y:auto;height:100%;padding-right:4px;}
-.warn-list::-webkit-scrollbar{width:3px;}
-.warn-list::-webkit-scrollbar-thumb{background:rgba(255,100,100,0.3);border-radius:3px;}
-.warn-item{
-  display:grid;grid-template-columns:22px 1fr 60px;gap:8px;align-items:center;
-  padding:8px 6px;border-bottom:1px dashed rgba(255,100,100,0.1);
+/* 板块标题 */
+.sec-header{
+  text-align:center;margin-bottom:40px;
 }
-.warn-item .ico{width:22px;height:22px;text-align:center;line-height:22px;border-radius:4px;}
-.warn-item.mid .ico{background:rgba(255,217,102,0.12);color:#FFD966;}
-.warn-item.high .ico{background:rgba(255,80,80,0.15);color:#FF6B6B;animation: blink 1.5s infinite;}
-@keyframes blink{50%{opacity:.4;}}
-.warn-item .t{color:#E0E6FF;font-size:12.5px;}
-.warn-item .s{color:#89B4FF;font-size:10.5px;}
-.warn-item .st{font-size:10px;padding:3px 6px;border-radius:3px;text-align:center;}
-.warn-item.mid .st{background:rgba(255,217,102,0.1);color:#FFD966;border:1px solid rgba(255,217,102,0.25);}
-.warn-item.high .st{background:rgba(255,80,80,0.1);color:#FF6B6B;border:1px solid rgba(255,80,80,0.3);}
+.sec-eyebrow{
+  font-size:13px;letter-spacing:4px;color:#00D4FF;text-transform:uppercase;
+  margin-bottom:10px;
+}
+.sec-title{
+  font-family:'Noto Serif SC';font-weight:900;font-size:34px;
+  background:linear-gradient(180deg,#fff 30%,#FFD966 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  letter-spacing:3px;
+}
+.sec-desc{
+  margin-top:12px;font-size:14px;color:#89B4FF;letter-spacing:1px;
+}
 
-footer-bar{
-  display:block;position:relative;z-index:10;height:26px;
+/* ========== KPI 条（独立板块） ========== */
+.kpi-row{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:20px;width:100%;max-width:1400px;
+}
+.kpi-card{
+  padding:24px 20px;text-align:center;border-radius:8px;position:relative;overflow:hidden;
+  background:linear-gradient(180deg, rgba(0,180,255,0.08), rgba(10,20,50,0.5));
+  border:1px solid rgba(0,180,255,0.2);
+}
+.kpi-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg, transparent, #00D4FF, transparent);
+}
+.kpi-card.gold::before{background:linear-gradient(90deg, transparent, #FFD966, transparent);}
+.kpi-card.gold{border-color:rgba(255,217,102,0.3);}
+.kpi-card .icon{font-size:22px;margin-bottom:8px;}
+.kpi-card .num{
+  font-family:'Orbitron',monospace;font-weight:900;font-size:40px;line-height:1.1;
+  background:linear-gradient(180deg,#fff 30%,#00D4FF 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 0 24px rgba(0,212,255,0.3);
+}
+.kpi-card.gold .num{
+  background:linear-gradient(180deg,#fff 30%,#FFD966 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.kpi-card .unit{font-size:15px;color:#89B4FF;margin-left:2px;}
+.kpi-card .lbl{font-size:13px;color:#AABBFF;margin-top:8px;letter-spacing:2px;}
+
+/* ========== 排行榜 ========== */
+.rank-grid{
+  width:100%;display:grid;grid-template-columns:repeat(5,1fr);gap:16px;
+}
+.rank-card{
+  padding:20px;border-radius:8px;
+  background:linear-gradient(180deg, rgba(20,40,90,0.35), rgba(10,20,50,0.5));
+  border:1px solid rgba(0,180,255,0.18);
+  text-align:center;transition:all .3s;
+}
+.rank-card:nth-child(-n+3){border-color:rgba(255,217,102,0.25);background:linear-gradient(180deg, rgba(255,180,0,0.08), rgba(10,20,50,0.55));}
+.rank-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,180,255,0.12);}
+
+.rank-avatar{
+  width:56px;height:56px;line-height:56px;border-radius:50%;margin:0 auto 12px;
+  font-family:'Noto Serif SC';font-weight:700;font-size:22px;color:#fff;
+  background:linear-gradient(135deg, rgba(0,180,255,0.25), rgba(0,100,200,0.4));
+  border:2px solid rgba(0,180,255,0.3);
+}
+.rank-card:nth-child(1) .rank-avatar{
+  background:linear-gradient(135deg,#FFD966,#E6A817);color:#5a3a00;
+  border-color:#FFD966;box-shadow:0 0 20px rgba(255,217,102,0.35);
+}
+.rank-card:nth-child(2) .rank-avatar{
+  background:linear-gradient(135deg,#C0C0C0,#888);border-color:#C0C0C0;
+}
+.rank-card:nth-child(3) .rank-avatar{
+  background:linear-gradient(135deg,#CD7F32,#8B4513);border-color:#CD7F32;
+}
+.rank-card .name{font-size:16px;color:#fff;font-weight:700;margin-bottom:4px;}
+.rank-card .title{font-size:11px;color:#89B4FF;margin-bottom:12px;}
+.rank-card .bar-wrap{height:10px;background:rgba(0,180,255,0.08);border-radius:5px;overflow:hidden;margin-bottom:8px;}
+.rank-card .bar-wrap .fill{height:100%;border-radius:5px;background:linear-gradient(90deg,#00D4FF,#00BFFF);box-shadow:0 0 12px rgba(0,212,255,0.4);}
+.rank-card:nth-child(1) .bar-wrap .fill{background:linear-gradient(90deg,#FFD966,#F0A40C);}
+.rank-card .val{
+  font-family:'Orbitron',monospace;font-weight:900;font-size:28px;
+  background:linear-gradient(180deg,#fff,#00D4FF);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.rank-card:nth-child(1) .val{background:linear-gradient(180deg,#fff,#FFD966);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.rank-card .tag{
+  display:inline-block;margin-top:6px;padding:2px 10px;border-radius:10px;font-size:11px;
+  background:rgba(74,222,128,0.1);color:#4ADE80;border:1px solid rgba(74,222,128,0.2);
+}
+.rank-card .tag.ok{background:rgba(255,217,102,0.1);color:#FFD966;border-color:rgba(255,217,102,0.2);}
+
+/* 排行榜底部列表 */
+.rank-table{
+  width:100%;margin-top:28px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
+}
+.rank-table .row{
+  display:flex;align-items:center;gap:10px;padding:10px 14px;
+  border-radius:6px;
+  background:rgba(10,20,50,0.3);border:1px solid rgba(0,180,255,0.08);
+  font-size:13px;
+}
+.rank-table .row .idx{
+  width:26px;text-align:center;font-family:'Orbitron',monospace;
+  font-weight:700;color:#6677aa;
+}
+.rank-table .row .nm{color:#E0E6FF;font-weight:500;min-width:52px;}
+.rank-table .row .sc{font-family:'Orbitron',monospace;font-weight:700;color:#FFD966;margin-left:auto;}
+
+/* ========== 图表容器 ========== */
+.chart-box{
+  width:100%;height:60vh;max-height:700px;
+}
+.chart-box.large{height:68vh;max-height:800px;}
+
+/* ========== 四个一四象限 ========== */
+.four-wrap{
+  width:100%;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+}
+.four-item{
+  padding:28px 24px;border-radius:10px;text-align:center;
+  background:linear-gradient(180deg, rgba(20,40,90,0.4), rgba(10,20,50,0.5));
+  border:1px solid rgba(0,180,255,0.2);
+}
+.four-item.a{border-top-color:#FF6B6B;border-left-color:#FF6B6B;}
+.four-item.b{border-top-color:#FFD966;border-right-color:#FFD966;}
+.four-item.c{border-bottom-color:#00D4FF;border-left-color:#00D4FF;}
+.four-item.d{border-bottom-color:#4ADE80;border-right-color:#4ADE80;}
+
+.four-item .icon{font-size:36px;margin-bottom:12px;}
+.four-item.a .icon{color:#FF6B6B;}
+.four-item.b .icon{color:#FFD966;}
+.four-item.c .icon{color:#00D4FF;}
+.four-item.d .icon{color:#4ADE80;}
+
+.four-item h4{font-family:'Noto Serif SC';font-size:18px;color:#fff;margin-bottom:12px;}
+.four-item .val{
+  font-family:'Orbitron',monospace;font-weight:900;font-size:48px;line-height:1;
+}
+.four-item.a .val{background:linear-gradient(180deg,#fff,#FF6B6B);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.four-item.b .val{background:linear-gradient(180deg,#fff,#FFD966);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.four-item.c .val{background:linear-gradient(180deg,#fff,#00D4FF);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.four-item.d .val{background:linear-gradient(180deg,#fff,#4ADE80);-webkit-background-clip:text;background-clip:text;color:transparent;}
+
+.four-item .sub{font-size:13px;color:#AABBFF;margin-top:10px;line-height:1.6;}
+.four-item .pbar{margin-top:14px;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;}
+.four-item .pbar span{display:block;height:100%;border-radius:3px;}
+.four-item.a .pbar span{background:linear-gradient(90deg,#C62828,#FF6B6B);width:100%;}
+.four-item.b .pbar span{background:linear-gradient(90deg,#E6A817,#FFD966);width:100%;}
+.four-item.c .pbar span{background:linear-gradient(90deg,#0066cc,#00D4FF);width:100%;}
+.four-item.d .pbar span{background:linear-gradient(90deg,#16803c,#4ADE80);width:63%;}
+
+/* ========== 七个有力进度条 ========== */
+.progress-grid{
+  width:100%;max-width:1000px;
+  display:flex;flex-direction:column;gap:18px;
+}
+.progress-item{
+  display:flex;align-items:center;gap:16px;
+}
+.progress-item .label{
+  width:140px;font-size:15px;color:#FFD966;font-weight:700;text-align:right;white-space:nowrap;
+}
+.progress-item .bar-outer{
+  flex:1;height:22px;background:rgba(0,180,255,0.06);border-radius:11px;overflow:hidden;
+}
+.progress-item .bar-inner{
+  height:100%;border-radius:11px;
+  background:linear-gradient(90deg,#00C6FF,#FFD966);
+  display:flex;align-items:center;justify-content:flex-end;padding-right:12px;
+  transition:width 1.5s ease;
+}
+.progress-item .bar-inner.warn{background:linear-gradient(90deg,#FF6B6B,#FFD966);}
+.progress-item .score{
+  width:80px;font-family:'Orbitron',monospace;font-weight:700;font-size:15px;color:#FFD966;
+}
+.progress-item .score.warn{color:#FF6B6B;}
+.progress-note{
+  text-align:center;margin-top:28px;font-size:13px;color:#6677aa;letter-spacing:1px;
+}
+
+/* ========== 工单流 ========== */
+.ticket-panel{
+  width:100%;max-width:1000px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.ticket-row{
+  display:flex;align-items:center;gap:16px;padding:16px 20px;border-radius:8px;
+  background:rgba(10,20,50,0.4);border:1px solid rgba(0,180,255,0.12);
+}
+.ticket-row .tm{
+  font-family:'Orbitron',monospace;font-size:13px;color:#00D4FF;width:56px;white-space:nowrap;
+}
+.ticket-row .ct{flex:1;min-width:0;}
+.ticket-row .ct .t1{color:#E0E6FF;font-size:14px;}
+.ticket-row .ct .t2{color:#6677aa;font-size:12px;margin-top:2px;}
+.ticket-row .st{
+  font-size:11px;padding:4px 10px;border-radius:4px;font-weight:700;
+}
+.ticket-row .st.new{background:rgba(255,80,80,0.12);color:#FF6B6B;border:1px solid rgba(255,80,80,0.25);}
+.ticket-row .st.doing{background:rgba(255,217,102,0.1);color:#FFD966;border:1px solid rgba(255,217,102,0.2);}
+.ticket-row .st.done{background:rgba(74,222,128,0.1);color:#4ADE80;border:1px solid rgba(74,222,128,0.2);}
+
+/* ========== 预警列表 ========== */
+.warn-panel{
+  width:100%;max-width:1000px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.warn-row{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 20px;border-radius:8px;
+  border:1px solid transparent;
+}
+.warn-row.high{
+  background:rgba(255,80,80,0.06);border-color:rgba(255,80,80,0.18);
+}
+.warn-row.mid{
+  background:rgba(255,217,102,0.04);border-color:rgba(255,217,102,0.14);
+}
+.warn-row .ico{font-size:20px;width:36px;text-align:center;}
+.warn-row.high .ico{color:#FF6B6B;}
+.warn-row.mid .ico{color:#FFD966;}
+.warn-row .info{flex:1;min-width:0;}
+.warn-row .info .t{color:#E0E6FF;font-size:14px;}
+.warn-row .info .s{color:#6677aa;font-size:12px;margin-top:2px;}
+.warn-row .tag{
+  font-size:11px;padding:4px 12px;border-radius:4px;font-weight:700;white-space:nowrap;
+}
+.warn-row.high .tag{background:rgba(255,80,80,0.1);color:#FF6B6B;border:1px solid rgba(255,80,80,0.25);}
+.warn-row.mid .tag{background:rgba(255,217,102,0.08);color:#FFD966;border:1px solid rgba(255,217,102,0.2);}
+
+/* ========== 底部 ========== */
+.footer-section{
+  min-height:64px;padding: 20px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:12px;color:#5566aa;
   border-top:1px solid rgba(0,180,255,0.15);
-  display:flex;align-items:center;justify-content:space-between;padding:0 24px;
-  font-size:11px;color:#6677aa;
 }
-.dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:6px;vertical-align:middle;}
-.dot.g{background:#4ADE80;box-shadow:0 0 6px #4ADE80;}
-.dot.r{background:#FF6B6B;box-shadow:0 0 6px #FF6B6B;animation:pulse 1.5s infinite;}
-@keyframes pulse{50%{opacity:.3;}}
+.footer-section .dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:6px;vertical-align:middle;}
+.footer-section .dot.g{background:#4ADE80;box-shadow:0 0 6px #4ADE80;}
 
-/* 响应式 fallback */
-@media(max-width:1280px){
-  main{grid-template-columns:28% 1fr 28%;}
-  .kpi .num{font-size:24px;}
+/* 下滚提示 */
+.scroll-hint{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  color:#6677aa;font-size:11px;letter-spacing:2px;animation:bounce 2s infinite;
+}
+.scroll-hint i{font-size:16px;}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(8px);}}
+
+/* 响应式 */
+@media(max-width:1200px){
+  .section{padding:80px 24px 32px;}
+  .kpi-row{grid-template-columns:repeat(3,1fr);}
+  .rank-grid{grid-template-columns:repeat(3,1fr);}
+  .rank-table{grid-template-columns:repeat(2,1fr);}
+  .four-wrap{grid-template-columns:repeat(2,1fr);}
+  .sec-title{font-size:26px;}
+  .kpi-card .num{font-size:30px;}
+}
+@media(max-width:768px){
+  .kpi-row{grid-template-columns:repeat(2,1fr);}
+  .rank-grid{grid-template-columns:1fr 1fr;}
+  .rank-table{grid-template-columns:1fr;}
+  .four-wrap{grid-template-columns:1fr;}
+  .progress-item .label{width:100px;font-size:13px;}
 }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="h-left">
-    <i class="fas fa-hammer" style="font-size:20px;"></i>
-    <div>
-      <div class="t1">宋丹"双带头人"工作室</div>
-      <div class="t2">商务贸易学院教工党支部</div>
-    </div>
+<!-- ==================== 顶部固定栏 ==================== -->
+<header class="top-bar">
+  <div class="brand">
+    <i class="fas fa-hammer"></i>
+    <span>宋丹"双带头人"工作室</span>
+    <span class="big">POWER</span>
+    <span>智慧党建数据驾驶舱</span>
   </div>
-  <div class="h-title">
-    <div class="big">POWER 智慧党建 数据驾驶舱</div>
-    <div class="sub">Publicity · Organization · Wisdom · Execution · Records · 五大工作领域对标"七个有力"</div>
-  </div>
-  <div class="h-right">
-    <div class="h-chip red"><i class="fas fa-circle" style="color:#FF6B6B;font-size:8px;margin-right:6px;"></i>实时 · 在线25人</div>
-    <div class="h-chip" id="clock">🕒 --:--:--</div>
-    <a href="index.html" style="color:#FFD966;letter-spacing:1px;"><i class="fas fa-home"></i> 返回首页</a>
+  <div class="tags">
+    <span><i class="fas fa-calendar-alt"></i> 2026-07-16</span>
+    <span><i class="fas fa-user-check"></i> 在线 <span id="onlineCount">--</span> 人</span>
+    <span class="live"><i class="fas fa-circle" style="color:#FF6B6B;font-size:6px;"></i> 实时</span>
+    <span>五大工作领域：<b style="color:#FFD966;">P</b>ublicity · <b style="color:#FFD966;">O</b>rganization · <b style="color:#FFD966;">W</b>isdom · <b style="color:#FFD966;">E</b>xecution · <b style="color:#FFD966;">R</b>ecords</span>
+    <a href="index.html"><i class="fas fa-home"></i> 返回首页</a>
   </div>
 </header>
 
-<!-- KPI条 -->
-<div class="kpi-strip">
-  <div class="kpi gold"><i class="fas fa-users ico"></i><div class="num">25<span class="unit">人</span></div><div class="lbl">支部党员总数</div></div>
-  <div class="kpi"><i class="fas fa-book-reader ico"></i><div class="num">95.8<span class="unit">%</span></div><div class="lbl">月度学习完成率</div></div>
-  <div class="kpi"><i class="fas fa-calendar-check ico"></i><div class="num">98.1<span class="unit">%</span></div><div class="lbl">三会一课出勤率</div></div>
-  <div class="kpi"><i class="fas fa-coins ico"></i><div class="num">99.5<span class="unit">%</span></div><div class="lbl">党费足额缴纳率</div></div>
-  <div class="kpi gold"><i class="fas fa-chart-pie ico"></i><div class="num">75.1<span class="unit">分</span></div><div class="lbl">七个有力 · 支部均分</div></div>
-  <div class="kpi"><i class="fas fa-hands-helping ico"></i><div class="num">692<span class="unit">次</span></div><div class="lbl">服务师生总数</div></div>
+<!-- ==================== 侧边导航 ==================== -->
+<nav class="side-nav" id="sideNav">
+  <a href="#sec-kpi"><span class="dot"></span><span class="label">核心指标</span></a>
+  <a href="#sec-rank"><span class="dot"></span><span class="label">党建排行榜</span></a>
+  <a href="#sec-radar"><span class="dot"></span><span class="label">七个有力·雷达图</span></a>
+  <a href="#sec-meeting"><span class="dot"></span><span class="label">三会一课</span></a>
+  <a href="#sec-seven"><span class="dot"></span><span class="label">七个一服务工程</span></a>
+  <a href="#sec-trend"><span class="dot"></span><span class="label">月度趋势</span></a>
+  <a href="#sec-four"><span class="dot"></span><span class="label">四个一成果</span></a>
+  <a href="#sec-progress"><span class="dot"></span><span class="label">达标进度</span></a>
+  <a href="#sec-ticket"><span class="dot"></span><span class="label">工单流</span></a>
+  <a href="#sec-warn"><span class="dot"></span><span class="label">预警清单</span></a>
+</nav>
+
+<!-- ================================================================ -->
+<!-- 板块1：核心KPI指标                                               -->
+<!-- ================================================================ -->
+<section class="section" id="sec-kpi">
+  <div class="section-inner">
+    <div class="sec-header">
+      <div class="sec-eyebrow">POWER · KEY PERFORMANCE INDICATORS</div>
+      <div class="sec-title">核心指标总览</div>
+      <div class="sec-desc">五大工作领域 · 对标七个有力 · 实时数据看板</div>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi-card gold">
+        <div class="icon"><i class="fas fa-users" style="color:#FFD966;"></i></div>
+        <div class="num">25<span class="unit">人</span></div>
+        <div class="lbl">支部党员总数</div>
+      </div>
+      <div class="kpi-card">
+        <div class="icon"><i class="fas fa-book-reader" style="color:#00D4FF;"></i></div>
+        <div class="num">95.8<span class="unit">%</span></div>
+        <div class="lbl">月度学习完成率</div>
+      </div>
+      <div class="kpi-card">
+        <div class="icon"><i class="fas fa-calendar-check" style="color:#4ADE80;"></i></div>
+        <div class="num">98.1<span class="unit">%</span></div>
+        <div class="lbl">三会一课出勤率</div>
+      </div>
+      <div class="kpi-card">
+        <div class="icon"><i class="fas fa-coins" style="color:#A78BFA;"></i></div>
+        <div class="num">99.5<span class="unit">%</span></div>
+        <div class="lbl">党费足额缴纳率</div>
+      </div>
+      <div class="kpi-card gold">
+        <div class="icon"><i class="fas fa-chart-pie" style="color:#FFD966;"></i></div>
+        <div class="num">75.1<span class="unit">分</span></div>
+        <div class="lbl">七个有力 · 支部均分</div>
+      </div>
+      <div class="kpi-card">
+        <div class="icon"><i class="fas fa-hands-helping" style="color:#F472B6;"></i></div>
+        <div class="num">878<span class="unit">次</span></div>
+        <div class="lbl">七个一 · 服务师生总数</div>
+      </div>
+    </div>
+    <div class="scroll-hint"><span>向下滚动浏览详情</span><i class="fas fa-chevron-down"></i></div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 板块2：🏆 党员党建指数排行榜                                      -->
+<!-- ================================================================ -->
+<section class="section" id="sec-rank">
+  <div class="section-inner">
+    <div class="sec-header">
+      <div class="sec-eyebrow">TOP 5 · EXCELLENT MEMBERS</div>
+      <div class="sec-title">🏆 党员党建指数排行榜</div>
+      <div class="sec-desc">综合考评：学习强国 · 三会一课 · 党费 · 四个一 · 服务师生 · 心得提交</div>
+    </div>
+
+    <!-- 前5名突出展示 -->
+    <div class="rank-grid">
+      <div class="rank-card">
+        <div class="rank-avatar">宋</div>
+        <div class="name">宋丹</div>
+        <div class="title">教工支部书记 · 工作室负责人</div>
+        <div class="bar-wrap"><div class="fill" style="width:93.5%;"></div></div>
+        <div class="val">93.5</div>
+        <div class="tag">🏆 优秀</div>
+      </div>
+      <div class="rank-card">
+        <div class="rank-avatar">谭</div>
+        <div class="name">谭亲强</div>
+        <div class="title">组织委员</div>
+        <div class="bar-wrap"><div class="fill" style="width:89.5%;"></div></div>
+        <div class="val">89.5</div>
+        <div class="tag">🌟 优秀</div>
+      </div>
+      <div class="rank-card">
+        <div class="rank-avatar">李</div>
+        <div class="name">李忠华</div>
+        <div class="title">总支副书记</div>
+        <div class="bar-wrap"><div class="fill" style="width:88%;"></div></div>
+        <div class="val">88.0</div>
+        <div class="tag">🌟 优秀</div>
+      </div>
+      <div class="rank-card">
+        <div class="rank-avatar">曾</div>
+        <div class="name">曾昭山</div>
+        <div class="title">总支书记</div>
+        <div class="bar-wrap"><div class="fill" style="width:85.5%;"></div></div>
+        <div class="val">85.5</div>
+        <div class="tag">⭐ 优秀</div>
+      </div>
+      <div class="rank-card">
+        <div class="rank-avatar">殷</div>
+        <div class="name">殷兰波</div>
+        <div class="title">总支宣传委员</div>
+        <div class="bar-wrap"><div class="fill" style="width:83%;"></div></div>
+        <div class="val">83.0</div>
+        <div class="tag">⭐ 优秀</div>
+      </div>
+    </div>
+
+    <!-- 剩余排名 -->
+    <div class="rank-table" id="rankTable"></div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 板块3：🌐 支部党建指数 · 七个有力 · 雷达图                        -->
+<!-- ================================================================ -->
+<section class="section full" id="sec-radar">
+  <div class="section-inner" style="max-width:1400px;">
+    <div class="sec-header">
+      <div class="sec-eyebrow">RADAR ANALYSIS · SEVEN CAPABILITIES</div>
+      <div class="sec-title">🌐 支部党建指数 · 七个有力</div>
+      <div class="sec-desc">优秀标杆（宋丹 93.5） vs 支部平均（75.1） vs 合格预警线（60分）</div>
+    </div>
+    <div class="chart-box large"><div id="chart_radar" style="width:100%;height:100%;"></div></div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 板块4：📖 三会一课 · 月度执行率                                    -->
+<!-- ================================================================ -->
+<section class="section full" id="sec-meeting">
+  <div class="section-inner" style="max-width:1400px;">
+    <div class="sec-header">
+      <div class="sec-eyebrow">MONTHLY EXECUTION RATE</div>
+      <div class="sec-title">📖 三会一课 · 月度执行率</div>
+      <div class="sec-desc">支委会 · 党员大会 · 党小组会 · 党课 ｜ 2024年9月 — 2025年8月 建设周期</div>
+    </div>
+    <div class="chart-box large"><div id="chart_meeting" style="width:100%;height:100%;"></div></div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 板块5：🎯 七个一服务工程 · 七维分布                                -->
+<!-- ================================================================ -->
+<section class="section full" id="sec-seven">
+  <div class="section-inner" style="max-width:1400px;">
+    <div class="sec-header">
+      <div class="sec-eyebrow">SEVEN-DIMENSION SERVICE · PIE ANALYSIS</div>
+      <div class="sec-title">🎯 七个一服务工程 · 七维分布</div>
+      <div class="sec-desc">困难帮扶 · 学业帮扶 · 宿舍对接 · 校友联系 · 竞赛指导 · 就业服务 · 校企服务 ｜ 累计服务 878 次</div>
+    </div>
+    <div class="chart-box large"><div id="chart_seven" style="width:100%;height:100%;"></div></div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 板块6：📈 党建指数 · 月度趋势（12月）                              -->
+<!-- ================================================================ -->
+<section class="section full" id="sec-trend">
+  <div class="section-inner" style="max-width:1400px;">
+    <div class="sec-header">
+      <div class="sec-eyebrow">12-MONTH TREND · START → COMPLETION</div>
+      <div class="sec-title">📈 党建指数 · 月度趋势</div>
+      <div class="sec-desc">2024年9月立项启动 — 2025年8月结项验收 ｜ 支部均分增长 +10.4%</div>
+    </div>
+    <div class="chart-box large"><div id="chart_trend" style="width:100%;height:100%;"></div></div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 板块7：💼 四个一工程 · 年度成果总览                                -->
+<!-- ================================================================ -->
+<section class="section" id="sec-four">
+  <div class="section-inner">
+    <div class="sec-header">
+      <div class="sec-eyebrow">FOUR-ONE PROJECT · ANNUAL ACHIEVEMENTS</div>
+      <div class="sec-title">💼 四个一工程 · 年度成果总览</div>
+      <div class="sec-desc">每位党员：发表一篇论文 · 承担一项课题 · 产出一项知识产权 · 服务一个横向项目</div>
+    </div>
+    <div class="four-wrap">
+      <div class="four-item a">
+        <div class="icon"><i class="fas fa-scroll"></i></div>
+        <h4>📄 论文发表</h4>
+        <div class="val">4<span style="font-size:18px;"> 篇</span></div>
+        <div class="sub">EI / SCI · 1 篇<br>普刊 · 3 篇<br>达标率 100%</div>
+        <div class="pbar"><span></span></div>
+      </div>
+      <div class="four-item b">
+        <div class="icon"><i class="fas fa-flask"></i></div>
+        <h4>🎓 课题项目</h4>
+        <div class="val">4<span style="font-size:18px;"> 项</span></div>
+        <div class="sub">省厅级 · 1 项<br>校级 · 3 项<br>达标率 100%</div>
+        <div class="pbar"><span></span></div>
+      </div>
+      <div class="four-item c">
+        <div class="icon"><i class="fas fa-lightbulb"></i></div>
+        <h4>💡 知识产权</h4>
+        <div class="val">5<span style="font-size:18px;"> 件</span></div>
+        <div class="sub">发明专利 · 1 件<br>软件著作 · 4 件<br>达标率 100%</div>
+        <div class="pbar"><span></span></div>
+      </div>
+      <div class="four-item d">
+        <div class="icon"><i class="fas fa-handshake"></i></div>
+        <h4>🤝 横向项目</h4>
+        <div class="val">12.6<span style="font-size:18px;"> 万</span></div>
+        <div class="sub">服务 5 家企业<br>承接 6 个项目<br>达标率 63%</div>
+        <div class="pbar"><span></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 板块8：🎯 七个有力 · 达标进度对标                                  -->
+<!-- ================================================================ -->
+<section class="section" id="sec-progress">
+  <div class="section-inner">
+    <div class="sec-header">
+      <div class="sec-eyebrow">BENCHMARK PROGRESS · TARGET COMPLIANCE</div>
+      <div class="sec-title">🎯 七个有力 · 达标进度对标</div>
+      <div class="sec-desc">对标《新时代高校党建"双创"工作重点任务指南》· 满分 100 分</div>
+    </div>
+    <div class="progress-grid" id="progressGrid">
+      <div class="progress-item">
+        <div class="label">① 教育党员有力</div>
+        <div class="bar-outer"><div class="bar-inner" style="width:95%;">14.2</div></div>
+        <div class="score">14.2 / 15</div>
+      </div>
+      <div class="progress-item">
+        <div class="label">② 管理党员有力</div>
+        <div class="bar-outer"><div class="bar-inner" style="width:93%;">14.0</div></div>
+        <div class="score">14.0 / 15</div>
+      </div>
+      <div class="progress-item">
+        <div class="label">③ 监督党员有力</div>
+        <div class="bar-outer"><div class="bar-inner" style="width:94%;">13.2</div></div>
+        <div class="score">13.2 / 14</div>
+      </div>
+      <div class="progress-item">
+        <div class="label">④ 组织师生有力</div>
+        <div class="bar-outer"><div class="bar-inner" style="width:96%;">13.5</div></div>
+        <div class="score">13.5 / 14</div>
+      </div>
+      <div class="progress-item">
+        <div class="label">⑤ 宣传师生有力</div>
+        <div class="bar-outer"><div class="bar-inner" style="width:93%;">13.0</div></div>
+        <div class="score">13.0 / 14</div>
+      </div>
+      <div class="progress-item">
+        <div class="label">⑥ 凝聚师生有力</div>
+        <div class="bar-outer"><div class="bar-inner warn" style="width:90%;">12.6</div></div>
+        <div class="score warn">12.6 / 14</div>
+      </div>
+      <div class="progress-item">
+        <div class="label">⑦ 服务师生有力</div>
+        <div class="bar-outer"><div class="bar-inner" style="width:93%;">13.0</div></div>
+        <div class="score">13.0 / 14</div>
+      </div>
+    </div>
+    <div class="progress-note">平均得分率 93.4% ｜ ⑥凝聚师生 略低于平均，需重点关注校企党建共同体建设和师生谈心谈话覆盖率</div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 板块9：📣 三位一体 · 实时工单流                                    -->
+<!-- ================================================================ -->
+<section class="section" id="sec-ticket">
+  <div class="section-inner">
+    <div class="sec-header">
+      <div class="sec-eyebrow">TRINITY · REAL-TIME TICKET FLOW</div>
+      <div class="sec-title">📣 三位一体 · 实时工单流</div>
+      <div class="sec-desc">线上邮箱 + 钉钉群 + 公开电话 ｜ 即时分派 · 限时办结 · 满意度评价</div>
+    </div>
+    <div class="ticket-panel" id="ticketPanel">
+      <div class="ticket-row"><span class="tm">15:20</span><div class="ct"><div class="t1">🎒 唐雅晴 学费减免申请咨询</div><div class="t2">钉钉群 / 分派给：刘娜敏</div></div><span class="st new">NEW</span></div>
+      <div class="ticket-row"><span class="tm">14:08</span><div class="ct"><div class="t1">🏆 互联网+大赛 项目辅导需求</div><div class="t2">工作邮箱 / 分派给：陈思为</div></div><span class="st doing">处理中</span></div>
+      <div class="ticket-row"><span class="tm">12:31</span><div class="ct"><div class="t1">💼 文嘉豪 企业内推请求</div><div class="t2">公开电话 / 分派给：熊津津</div></div><span class="st doing">处理中</span></div>
+      <div class="ticket-row"><span class="tm">11:05</span><div class="ct"><div class="t1">🏭 XX企业 党建共同体共建洽谈</div><div class="t2">钉钉群 / 分派给：宋丹</div></div><span class="st done">✓ 已结 5星</span></div>
+      <div class="ticket-row"><span class="tm">10:17</span><div class="ct"><div class="t1">🏠 3栋502 宿舍矛盾调解</div><div class="t2">公开电话 / 分派给：吴赛芬</div></div><span class="st done">✓ 已结 4.8星</span></div>
+      <div class="ticket-row"><span class="tm">09:32</span><div class="ct"><div class="t1">🎒 李好 助学金申请指导</div><div class="t2">钉钉群 / 分派给：谭亲强</div></div><span class="st done">✓ 已结 5星</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 板块10：🚨 实时预警区 · 书记督办清单                               -->
+<!-- ================================================================ -->
+<section class="section" id="sec-warn">
+  <div class="section-inner">
+    <div class="sec-header">
+      <div class="sec-eyebrow">REAL-TIME ALERT · SECRETARY'S SUPERVISION LIST</div>
+      <div class="sec-title" style="background:linear-gradient(180deg,#fff 30%,#FF6B6B 100%);-webkit-background-clip:text;background-clip:text;color:transparent;">🚨 实时预警区 · 书记督办清单</div>
+      <div class="sec-desc">逾期未完成事项自动升级预警 · 分级分类推送提醒</div>
+    </div>
+    <div class="warn-panel">
+      <div class="warn-row high">
+        <div class="ico"><i class="fas fa-exclamation-triangle"></i></div>
+        <div class="info">
+          <div class="t">张晓航 学习强国连续 2 周未上报</div>
+          <div class="s">第 27 / 28 周 · 缺少积分截图 · 累计欠报</div>
+        </div>
+        <div class="tag">🔴 约谈提醒</div>
+      </div>
+      <div class="warn-row mid">
+        <div class="ico"><i class="fas fa-info-circle"></i></div>
+        <div class="info">
+          <div class="t">宋吉华 党建指数连续 2 月下滑</div>
+          <div class="s">68.5 → 66.0 → 64.5 · 趋势下行</div>
+        </div>
+        <div class="tag">🟡 关注</div>
+      </div>
+      <div class="warn-row mid">
+        <div class="ico"><i class="fas fa-info-circle"></i></div>
+        <div class="info">
+          <div class="t">熊卓城 "四个一"尚未产出横向项目</div>
+          <div class="s">④ 组织师生有力 · 仅完成 1 / 4 项</div>
+        </div>
+        <div class="tag">🟡 关注</div>
+      </div>
+      <div class="warn-row mid">
+        <div class="ico"><i class="fas fa-info-circle"></i></div>
+        <div class="info">
+          <div class="t">马紫仪 庆八一主题党日 未报名</div>
+          <div class="s">报名截止 7 月 15 日 23:59 · 已逾期</div>
+        </div>
+        <div class="tag">🟡 提醒</div>
+      </div>
+      <div class="warn-row mid">
+        <div class="ico"><i class="fas fa-info-circle"></i></div>
+        <div class="info">
+          <div class="t">2 名党员 本月心得未提交</div>
+          <div class="s">文轩、徐雪君 · 待补交</div>
+        </div>
+        <div class="tag">🟡 提醒</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 底部状态栏 ==================== -->
+<div class="footer-section">
+  <span><span class="dot g"></span>钉钉宜搭 · 数据源连接正常 · <span class="dot g"></span>党建指数引擎运行中 · <span class="dot g"></span>邮件工单抓取正常</span>
+  <span>© 2024 – 2026 宋丹"双带头人"工作室 · POWER V1.0 · 最后更新：2026-07-16 15:30:00</span>
+  <span style="color:#4ADE80;">✔ 支持 1920×1080 会议室投屏</span>
 </div>
 
-<main>
-  <!-- 左列 -->
-  <div class="col">
-    <div class="panel" style="flex:0 0 58%;">
-      <span class="corner-tr"></span><span class="corner-bl"></span>
-      <div class="p-title">🏆 党员党建指数排行榜
-        <span class="dots"><span></span><span></span><span></span></span>
-      </div>
-      <div class="p-body">
-        <div class="rank-list" id="rankList"></div>
-      </div>
-    </div>
-    <div class="panel">
-      <span class="corner-tr"></span><span class="corner-bl"></span>
-      <div class="p-title">📖 三会一课 · 月度执行率
-        <span class="dots"><span></span><span></span><span></span></span>
-      </div>
-      <div class="p-body"><div id="chart_meeting" class="chart"></div></div>
-    </div>
-  </div>
-
-  <!-- 中列 -->
-  <div class="col">
-    <div class="center-main">
-      <div class="panel big-radar">
-        <span class="corner-tr"></span><span class="corner-bl"></span>
-        <div class="p-title">🌐 支部党建指数 · 七个有力 · 优秀/一般/预警对比
-          <span class="dots"><span></span><span></span><span></span></span>
-        </div>
-        <div class="p-body"><div id="chart_radar" class="chart"></div></div>
-      </div>
-      <div class="center-top">
-        <div class="panel">
-          <span class="corner-tr"></span><span class="corner-bl"></span>
-          <div class="p-title">📈 党建指数 · 月度趋势（启动→结项 12月）
-            <span class="dots"><span></span><span></span><span></span></span>
-          </div>
-          <div class="p-body"><div id="chart_trend" class="chart"></div></div>
-        </div>
-        <div class="panel">
-          <span class="corner-tr"></span><span class="corner-bl"></span>
-          <div class="p-title">🤝 六个一服务工程 · 六维分布
-            <span class="dots"><span></span><span></span><span></span></span>
-          </div>
-          <div class="p-body"><div id="chart_six" class="chart"></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 右列 -->
-  <div class="col">
-    <div class="panel" style="flex:0 0 38%;">
-      <span class="corner-tr"></span><span class="corner-bl"></span>
-      <div class="p-title">💼 四个一工程 · 年度成果总览
-        <span class="dots"><span></span><span></span><span></span></span>
-      </div>
-      <div class="p-body">
-        <div class="four-grid">
-          <div class="fq a">
-            <div class="h"><i class="fas fa-scroll"></i><h5>📄 论文发表</h5></div>
-            <div><div class="v">4<span style="font-size:14px;">篇</span></div>
-            <div class="s">EI/SCI·1 ｜ 普刊·3 ｜ 达标率 100%</div>
-            <div class="p-bar"><span></span></div></div>
-          </div>
-          <div class="fq b">
-            <div class="h"><i class="fas fa-flask"></i><h5>🎓 课题项目</h5></div>
-            <div><div class="v">4<span style="font-size:14px;">项</span></div>
-            <div class="s">省厅级·1 ｜ 校级·3 ｜ 达标率 100%</div>
-            <div class="p-bar"><span></span></div></div>
-          </div>
-          <div class="fq c">
-            <div class="h"><i class="fas fa-lightbulb"></i><h5>💡 知识产权</h5></div>
-            <div><div class="v">5<span style="font-size:14px;">件</span></div>
-            <div class="s">发明·1 ｜ 软著·4 ｜ 达标率 100%</div>
-            <div class="p-bar"><span></span></div></div>
-          </div>
-          <div class="fq d">
-            <div class="h"><i class="fas fa-handshake"></i><h5>🤝 横向项目</h5></div>
-            <div><div class="v">12.6<span style="font-size:14px;">万</span></div>
-            <div class="s">5家企业·6项目 ｜ 达标率 63%</div>
-            <div class="p-bar"><span></span></div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="panel" style="flex:0 0 34%;">
-      <span class="corner-tr"></span><span class="corner-bl"></span>
-      <div class="p-title">🎯 七个有力 · 达标进度对标
-        <span class="dots"><span></span><span></span><span></span></span>
-      </div>
-      <div class="p-body">
-        <div id="sevenPower" style="display:flex;flex-direction:column;gap:8px;padding:4px 0;">
-          <div style="display:flex;align-items:center;gap:8px;">
-            <span style="width:100px;font-size:11px;color:#FFD966;white-space:nowrap;">①教育党员</span>
-            <div style="flex:1;height:16px;background:rgba(0,180,255,0.08);border-radius:8px;overflow:hidden;"><div style="height:100%;width:95%;border-radius:8px;background:linear-gradient(90deg,#00C6FF,#FFD966);"></div></div>
-            <span style="font-size:11px;color:#FFD966;font-family:Orbitron;">14.2/15</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <span style="width:100px;font-size:11px;color:#FFD966;white-space:nowrap;">②管理党员</span>
-            <div style="flex:1;height:16px;background:rgba(0,180,255,0.08);border-radius:8px;overflow:hidden;"><div style="height:100%;width:93%;border-radius:8px;background:linear-gradient(90deg,#00C6FF,#FFD966);"></div></div>
-            <span style="font-size:11px;color:#FFD966;font-family:Orbitron;">14.0/15</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <span style="width:100px;font-size:11px;color:#FFD966;white-space:nowrap;">③监督党员</span>
-            <div style="flex:1;height:16px;background:rgba(0,180,255,0.08);border-radius:8px;overflow:hidden;"><div style="height:100%;width:94%;border-radius:8px;background:linear-gradient(90deg,#00C6FF,#FFD966);"></div></div>
-            <span style="font-size:11px;color:#FFD966;font-family:Orbitron;">13.2/14</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <span style="width:100px;font-size:11px;color:#FFD966;white-space:nowrap;">④组织师生</span>
-            <div style="flex:1;height:16px;background:rgba(0,180,255,0.08);border-radius:8px;overflow:hidden;"><div style="height:100%;width:96%;border-radius:8px;background:linear-gradient(90deg,#00C6FF,#FFD966);"></div></div>
-            <span style="font-size:11px;color:#FFD966;font-family:Orbitron;">13.5/14</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <span style="width:100px;font-size:11px;color:#FFD966;white-space:nowrap;">⑤宣传师生</span>
-            <div style="flex:1;height:16px;background:rgba(0,180,255,0.08);border-radius:8px;overflow:hidden;"><div style="height:100%;width:93%;border-radius:8px;background:linear-gradient(90deg,#00C6FF,#FFD966);"></div></div>
-            <span style="font-size:11px;color:#FFD966;font-family:Orbitron;">13.0/14</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <span style="width:100px;font-size:11px;color:#FF6B6B;white-space:nowrap;">⑥凝聚师生</span>
-            <div style="flex:1;height:16px;background:rgba(0,180,255,0.08);border-radius:8px;overflow:hidden;"><div style="height:100%;width:90%;border-radius:8px;background:linear-gradient(90deg,#FF6B6B,#FFD966);"></div></div>
-            <span style="font-size:11px;color:#FF6B6B;font-family:Orbitron;">12.6/14</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <span style="width:100px;font-size:11px;color:#FFD966;white-space:nowrap;">⑦服务师生</span>
-            <div style="flex:1;height:16px;background:rgba(0,180,255,0.08);border-radius:8px;overflow:hidden;"><div style="height:100%;width:93%;border-radius:8px;background:linear-gradient(90deg,#00C6FF,#FFD966);"></div></div>
-            <span style="font-size:11px;color:#FFD966;font-family:Orbitron;">13.0/14</span>
-          </div>
-          <div style="text-align:center;margin-top:4px;padding-top:8px;border-top:1px solid rgba(0,180,255,0.15);">
-            <span style="font-size:12px;color:#AABBFF;">对标《新时代高校党建"双创"工作重点任务指南》</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="panel" style="flex:0 0 28%;">
-      <span class="corner-tr"></span><span class="corner-bl"></span>
-      <div class="p-title">📣 三位一体 · 实时工单流
-        <span class="dots"><span></span><span></span><span></span></span>
-      </div>
-      <div class="p-body">
-        <div class="ticket-list" id="ticketList">
-          <div class="ticket"><span class="time">15:20</span><div class="cont"><div class="t1">🎒 唐雅晴 学费减免申请咨询</div><div class="t2">钉钉群 / 分派给：刘娜敏</div></div><span class="st-badge st-new">NEW</span></div>
-          <div class="ticket"><span class="time">14:08</span><div class="cont"><div class="t1">🏆 互联网+大赛 项目辅导需求</div><div class="t2">工作邮箱 / 分派给：陈思为</div></div><span class="st-badge st-doing">处理中</span></div>
-          <div class="ticket"><span class="time">12:31</span><div class="cont"><div class="t1">💼 文嘉豪 企业内推请求</div><div class="t2">公开电话 / 分派给：熊津津</div></div><span class="st-badge st-doing">处理中</span></div>
-          <div class="ticket"><span class="time">11:05</span><div class="cont"><div class="t1">🏭 XX企业 党建共同体共建洽谈</div><div class="t2">钉钉群 / 分派给：宋丹</div></div><span class="st-badge st-done">✓ 已结 5星</span></div>
-          <div class="ticket"><span class="time">10:17</span><div class="cont"><div class="t1">🏠 3栋502 宿舍矛盾调解</div><div class="t2">公开电话 / 分派给：吴赛芬</div></div><span class="st-badge st-done">✓ 已结 4.8星</span></div>
-          <div class="ticket"><span class="time">09:32</span><div class="cont"><div class="t1">🎒 李好 助学金申请指导</div><div class="t2">钉钉群 / 分派给：谭亲强</div></div><span class="st-badge st-done">✓ 已结 5星</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="panel" style="flex:0 0 22%;">
-      <span class="corner-tr"></span><span class="corner-bl"></span>
-      <div class="p-title">🏆 荣誉与投票 · 实时统计
-        <span class="dots"><span></span><span></span><span></span></span>
-      </div>
-      <div class="p-body">
-        <div style="display:flex;flex-direction:column;gap:12px;">
-          <div style="background:rgba(249,115,22,0.1);border-radius:8px;padding:12px;">
-            <div style="display:flex;align-items:center;justify-content:space-between;">
-              <div><div style="font-size:11px;color:#89B4FF;">荣誉获得</div><div style="font-family:'Orbitron';font-size:24px;color:#F97316;font-weight:900;">86</div></div>
-              <i class="fas fa-trophy" style="font-size:24px;color:#F97316;"></i>
-            </div>
-          </div>
-          <div style="background:rgba(59,130,246,0.1);border-radius:8px;padding:12px;">
-            <div style="display:flex;align-items:center;justify-content:space-between;">
-              <div><div style="font-size:11px;color:#89B4FF;">进行中投票</div><div style="font-family:'Orbitron';font-size:24px;color:#3B82F6;font-weight:900;">6</div></div>
-              <i class="fas fa-vote-yea" style="font-size:24px;color:#3B82F6;"></i>
-            </div>
-          </div>
-          <div style="background:rgba(255,193,7,0.1);border-radius:8px;padding:12px;">
-            <div style="display:flex;align-items:center;justify-content:space-between;">
-              <div><div style="font-size:11px;color:#89B4FF;">问卷参与</div><div style="font-family:'Orbitron';font-size:24px;color:#F59E0B;font-weight:900;">47</div></div>
-              <i class="fas fa-file-poll" style="font-size:24px;color:#F59E0B;"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="panel">
-      <span class="corner-tr"></span><span class="corner-bl"></span>
-      <div class="p-title">🚨 实时预警区 · 书记督办清单
-        <span class="dots"><span></span><span></span><span></span></span>
-      </div>
-      <div class="p-body">
-        <div class="warn-list">
-          <div class="warn-item high"><i class="fas fa-exclamation-triangle ico"></i><div><div class="t">刘佳杰 7月党费超13天未缴</div><div class="s">党费模块 · 2026-07-01 应缴</div></div><span class="st">🔴 立即催缴</span></div>
-          <div class="warn-item high"><i class="fas fa-exclamation-circle ico"></i><div><div class="t">张晓航 学习强国连续2周未上报</div><div class="s">第27/28周 · 缺少积分截图</div></div><span class="st">🔴 约谈提醒</span></div>
-          <div class="warn-item mid"><i class="fas fa-info-circle ico"></i><div><div class="t">宋吉华 党建指数连续2月下滑</div><div class="s">68.5 → 66.0 → 64.5</div></div><span class="st">🟡 关注</span></div>
-          <div class="warn-item mid"><i class="fas fa-info-circle ico"></i><div><div class="t">熊卓城 "四个一"尚未产出横向项目</div><div class="s">④组织师生有力 仅完成1/4</div></div><span class="st">🟡 关注</span></div>
-          <div class="warn-item mid"><i class="fas fa-info-circle ico"></i><div><div class="t">马紫仪 庆八一主题党日 未报名</div><div class="s">截止7-15 23:59</div></div><span class="st">🟡 提醒</span></div>
-          <div class="warn-item mid"><i class="fas fa-info-circle ico"></i><div><div class="t">2名党员 本月心得未提交</div><div class="s">文轩、徐雪君 待补交</div></div><span class="st">🟡 提醒</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
-
-<footer-bar>
-  <span><span class="dot g"></span>钉钉宜搭 · 宜搭数据源连接正常 · <span class="dot g"></span>党建指数引擎运行中 · <span class="dot g"></span>邮件工单抓取正常</span>
-  <span>© 2024-2026 宋丹"双带头人"工作室 · POWER V1.0 · 最后更新：2026-07-14 15:30:00</span>
-  <span style="color:#4ADE80;">✔ 本大屏支持 1920×1080 会议室投屏</span>
-</footer-bar>
-
 <script>
-/* ===== 时钟 ===== */
-function tick(){
-  const d=new Date();
-  const t=['0'+d.getHours(),'0'+d.getMinutes(),'0'+d.getSeconds()].map(x=>x.slice(-2)).join(':');
-  const dt=`🕒 ${d.getFullYear()}-${['0'+(d.getMonth()+1)].map(x=>x.slice(-2))[0]}-${['0'+d.getDate()].map(x=>x.slice(-2))[0]} ${t}`;
-  const el=document.getElementById('clock');if(el)el.textContent=dt;
-}
-tick();setInterval(tick,1000);
-
-/* ===== 排行榜 ===== */
-const RANK=[
+/* ===== 排行榜底部列表 ===== */
+const RANK_FULL=[
   ['宋丹',93.5],['谭亲强',89.5],['李忠华',88.0],['曾昭山',85.5],['殷兰波',83.0],
   ['熊津津',81.5],['刘娜敏',79.0],['陈思为',78.0],['邓新平',77.5],['朱爱娇',76.5],
   ['言戈力',75.0],['黄琳博',74.0],['吴赛芬',72.5],['易蕾',71.5],['汤婷',70.0],
   ['沈杰',69.5],['岳伟',68.5],['徐雪君',67.0],['胡晨怡',66.0],['文轩',65.5],
   ['马紫仪',64.5],['熊卓城',64.0],['宋吉华',62.5],['张晓航',61.5],['刘佳杰',60.0]
 ];
-document.getElementById('rankList').innerHTML=RANK.map((r,i)=>`
-  <div class="rank-item">
-    <div class="rank-no">${i+1}</div>
-    <div>
-      <div class="r-name">${r[0]}</div>
-      <div class="r-bar"><span style="width:${r[1]}%"></span></div>
-    </div>
-    <div style="font-size:10px;color:${r[1]>=80?'#4ADE80':r[1]>=70?'#FFD966':'#FF9E9E'};text-align:center;">${r[1]>=80?'优秀':r[1]>=70?'良好':'合格'}</div>
-    <div class="r-score">${r[1]}</div>
-  </div>
+document.getElementById('rankTable').innerHTML=RANK_FULL.slice(5).map((r,i)=>`
+  <div class="row"><span class="idx">${i+6}</span><span class="nm">${r[0]}</span><span class="sc">${r[1]}</span></div>
 `).join('');
 
-/* ============ ECharts 通用主题色 ============ */
-const GOLD='#FFD966',RED='#FF6B6B',CYAN='#00D4FF',BLUE='#2E5BFF',GREEN='#4ADE80';
-echarts.registerTheme('ioto',{});
+/* ===== 实时在线人数 · 基于实际时段统计 ===== */
+const PARTY_TOTAL=25;  // 党员总数
+const onlineEl=document.getElementById('onlineCount');
+function getRealtimeOnline(){
+  const now=new Date();
+  const h=now.getHours();
+  const m=now.getMinutes();
+  const d=now.getDay();  // 0=周日,6=周六
+  const isWeekend=(d===0||d===6);
 
-/* ============ 三会一课 ============ */
+  // 根据时段确定合理在线比例（不可能100%在线）
+  let minR,maxR;
+  if(isWeekend){
+    if(h>=9 && h<12){minR=0.20;maxR=0.36;}      // 周末上午
+    else if(h>=12 && h<14){minR=0.16;maxR=0.28;}// 周末午间
+    else if(h>=14 && h<18){minR=0.22;maxR=0.40;}// 周末下午
+    else if(h>=18 && h<22){minR=0.28;maxR=0.44;}// 周末晚上
+    else if(h>=22 || h<6){minR=0.04;maxR=0.12;} // 周末深夜
+    else {minR=0.08;maxR=0.16;}
+  }else{
+    if(h>=8 && h<9){minR=0.44;maxR=0.60;}       // 上班前
+    else if(h>=9 && h<12){minR=0.72;maxR=0.88;}// 工作日上午（核心时段）
+    else if(h>=12 && h<14){minR=0.36;maxR=0.56;}// 午休
+    else if(h>=14 && h<18){minR=0.76;maxR=0.92;}// 工作日下午
+    else if(h>=18 && h<20){minR=0.32;maxR=0.52;}// 下班路上
+    else if(h>=20 && h<22){minR=0.20;maxR=0.40;}// 晚间在家
+    else if(h>=22 || h<6){minR=0.04;maxR=0.16;} // 深夜
+    else {minR=0.16;maxR=0.32;}
+  }
+  // 引入分钟级微扰 + 随机浮动
+  const micro=(Math.sin(m*0.3)+Math.random()*0.3-0.15)*0.08;
+  const ratio=Math.max(0.02,Math.min(0.95,minR+(maxR-minR)*Math.random()+micro));
+  return Math.max(1,Math.min(PARTY_TOTAL,Math.round(PARTY_TOTAL*ratio)));
+}
+function refreshOnline(){
+  const v=getRealtimeOnline();
+  onlineEl.textContent=v;
+  // 数字变化动画
+  onlineEl.style.transition='color .3s';
+  onlineEl.style.color='#FFD966';
+  setTimeout(()=>{onlineEl.style.color='';},600);
+}
+refreshOnline();
+// 每 25 秒微调一次（模拟实时波动）
+setInterval(refreshOnline,25000);
+
+/* 颜色常量 */
+const GOLD='#FFD966',RED='#FF6B6B',CYAN='#00D4FF',BLUE='#2E5BFF',GREEN='#4ADE80';
+const ORANGE='#F59E0B',PURPLE='#A78BFA',PINK='#F472B6';
+
+/* ===== 所有 ECharts 实例 ===== */
+const chartInstances=[];
+
+/* ===== 侧边导航高亮 ===== */
+function updateNav(){
+  const navs=document.querySelectorAll('.side-nav a');
+  let current='';
+  document.querySelectorAll('.section').forEach(sec=>{
+    const rect=sec.getBoundingClientRect();
+    if(rect.top<=window.innerHeight*0.5&&rect.bottom>=window.innerHeight*0.3) current=sec.id;
+  });
+  navs.forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+current);
+  });
+}
+window.addEventListener('scroll',updateNav,{passive:true});
+updateNav();
+
+/* ===== 三会一课柱状图 ===== */
 (function(){
-  const chart=echarts.init(document.getElementById('chart_meeting'));
-  const months=['9月','10月','11月','12月','1月','2月','3月','4月','5月','6月','7月','8月'];
+  const dom=document.getElementById('chart_meeting');
+  const chart=echarts.init(dom);
+  chartInstances.push({chart,dom});
+  const m=['9月','10月','11月','12月','1月','2月','3月','4月','5月','6月','7月','8月'];
   chart.setOption({
-    tooltip:{trigger:'axis',backgroundColor:'rgba(10,20,50,0.9)',borderColor:CYAN,textStyle:{color:'#fff'}},
-    legend:{textStyle:{color:'#AABBFF',fontSize:10},top:0,itemWidth:10,itemHeight:8},
-    grid:{top:28,left:30,right:6,bottom:18},
-    xAxis:{type:'category',data:months,axisLine:{lineStyle:{color:'rgba(0,180,255,0.3)'}},axisLabel:{color:'#89B4FF',fontSize:10}},
-    yAxis:{type:'value',min:0,max:100,axisLine:{show:false},splitLine:{lineStyle:{color:'rgba(0,180,255,0.08)'}},axisLabel:{color:'#89B4FF',fontSize:10,formatter:'{value}%'}},
+    tooltip:{trigger:'axis',backgroundColor:'rgba(10,20,50,0.92)',borderColor:CYAN,textStyle:{color:'#fff',fontSize:13}},
+    legend:{textStyle:{color:'#AABBFF',fontSize:13},top:8,itemWidth:14,itemHeight:10,itemGap:16},
+    grid:{top:50,left:58,right:20,bottom:30},
+    xAxis:{type:'category',data:m,axisLine:{lineStyle:{color:'rgba(0,180,255,0.25)'}},axisLabel:{color:'#89B4FF',fontSize:12},boundaryGap:true},
+    yAxis:{type:'value',min:0,max:100,
+      axisLine:{show:false},
+      splitLine:{lineStyle:{color:'rgba(0,180,255,0.06)'}},
+      axisLabel:{color:'#89B4FF',fontSize:12,formatter:'{value}%',margin:10}},
     series:[
-      {name:'支委会',type:'bar',barWidth:'18%',data:[100,100,100,100,100,100,100,100,100,100,100,100],itemStyle:{color:RED,borderRadius:[2,2,0,0]}},
-      {name:'党员大会',type:'bar',barWidth:'18%',data:[100,100,100,100,96,100,100,100,100,100,96,100],itemStyle:{color:GOLD,borderRadius:[2,2,0,0]}},
-      {name:'党小组会',type:'bar',barWidth:'18%',data:[100,100,96,100,100,92,100,100,96,100,100,100],itemStyle:{color:CYAN,borderRadius:[2,2,0,0]}},
-      {name:'党课',type:'line',smooth:true,data:[100,100,100,100,100,100,100,100,97,100,100,100],symbol:'circle',symbolSize:5,itemStyle:{color:GREEN},lineStyle:{width:2},z:10}
+      {name:'支委会',type:'bar',barWidth:'18%',data:[100,100,100,100,100,100,100,100,100,100,100,100],itemStyle:{color:RED,borderRadius:[3,3,0,0]}},
+      {name:'党员大会',type:'bar',barWidth:'18%',data:[100,100,100,100,96,100,100,100,100,100,96,100],itemStyle:{color:GOLD,borderRadius:[3,3,0,0]}},
+      {name:'党小组会',type:'bar',barWidth:'18%',data:[100,100,96,100,100,92,100,100,96,100,100,100],itemStyle:{color:CYAN,borderRadius:[3,3,0,0]}},
+      {name:'党课',type:'line',smooth:true,data:[100,100,100,100,100,100,100,100,97,100,100,100],symbol:'circle',symbolSize:7,itemStyle:{color:GREEN},lineStyle:{width:2.5},z:10}
     ]
   });
-  window.addEventListener('resize',()=>chart.resize());
 })();
 
-/* ============ 大雷达图 - 七个有力 ============ */
+/* ===== 雷达图 ===== */
 (function(){
-  const chart=echarts.init(document.getElementById('chart_radar'));
+  const dom=document.getElementById('chart_radar');
+  const chart=echarts.init(dom);
+  chartInstances.push({chart,dom});
   const dim=[
-    {name:'①教育党员(15)',max:15},
-    {name:'②管理党员(15)',max:15},
-    {name:'③监督党员(14)',max:14},
-    {name:'④组织师生(14)',max:14},
-    {name:'⑤宣传师生(14)',max:14},
-    {name:'⑥凝聚师生(14)',max:14},
-    {name:'⑦服务师生(14)',max:14}
+    {name:'①教育党员\n(15分)',max:15},
+    {name:'②管理党员\n(15分)',max:15},
+    {name:'③监督党员\n(14分)',max:14},
+    {name:'④组织师生\n(14分)',max:14},
+    {name:'⑤宣传师生\n(14分)',max:14},
+    {name:'⑥凝聚师生\n(14分)',max:14},
+    {name:'⑦服务师生\n(14分)',max:14}
   ];
   chart.setOption({
-    tooltip:{backgroundColor:'rgba(10,20,50,0.9)',borderColor:CYAN,textStyle:{color:'#fff'}},
-    legend:{data:['🌟 优秀党员 宋丹(93.5)','📊 支部 平均(75.1)','⚠️ 预警线 合格(60分)'],textStyle:{color:'#AABBFF',fontSize:11,fontFamily:'Noto Sans SC'},top:4,itemWidth:12,itemHeight:8},
+    tooltip:{backgroundColor:'rgba(10,20,50,0.92)',borderColor:CYAN,textStyle:{color:'#fff',fontSize:13}},
+    legend:{data:['🌟 优秀标杆 宋丹(93.5)','📊 支部平均(75.1)','⚠️ 合格预警线(60)'],textStyle:{color:'#AABBFF',fontSize:13,fontFamily:'Noto Sans SC'},top:10,itemWidth:14,itemHeight:10,itemGap:18},
     radar:{
-      shape:'circle',
-      center:['50%','55%'],radius:'66%',
+      shape:'circle',center:['50%','56%'],radius:'68%',
       indicator:dim,
-      axisName:{color:'#FFD966',fontFamily:'Noto Sans SC',fontSize:11,fontWeight:700},
-      splitLine:{lineStyle:{color:['rgba(0,212,255,0.05)','rgba(0,212,255,0.10)','rgba(0,212,255,0.15)','rgba(0,212,255,0.20)','rgba(0,212,255,0.25)']}},
-      splitArea:{show:true,areaStyle:{color:['rgba(0,180,255,0.02)','rgba(0,180,255,0.05)']}},
-      axisLine:{lineStyle:{color:'rgba(0,212,255,0.25)'}}
+      axisName:{color:'#FFD966',fontFamily:'Noto Sans SC',fontSize:13,fontWeight:700},
+      splitLine:{lineStyle:{color:['rgba(0,212,255,0.04)','rgba(0,212,255,0.08)','rgba(0,212,255,0.14)','rgba(0,212,255,0.20)','rgba(0,212,255,0.28)']}},
+      splitArea:{show:true,areaStyle:{color:['rgba(0,180,255,0.015)','rgba(0,180,255,0.04)']}},
+      axisLine:{lineStyle:{color:'rgba(0,212,255,0.22)'}}
     },
     series:[{
-      type:'radar',symbolSize:5,
+      type:'radar',symbolSize:6,
       data:[
-        {name:'🌟 优秀党员 宋丹(93.5)',value:[14.2,14.0,13.2,13.5,13.0,12.6,13.0],
-          itemStyle:{color:GOLD},areaStyle:{color:new echarts.graphic.RadialGradient(0.5,0.5,1,[{offset:0,color:'rgba(255,217,102,0.5)'},{offset:1,color:'rgba(255,217,102,0.06)'}])},lineStyle:{width:2}},
-        {name:'📊 支部 平均(75.1)',value:[12.1,11.5,10.8,10.2,9.8,9.5,10.2],
-          itemStyle:{color:CYAN},areaStyle:{color:'rgba(0,212,255,0.18)'},lineStyle:{width:2,type:'solid'}},
-        {name:'⚠️ 预警线 合格(60分)',value:[9,9,8.4,8.4,8.4,8.4,8.4],
-          itemStyle:{color:RED,opacity:.7},areaStyle:{color:'rgba(255,107,107,0.06)'},lineStyle:{width:1,type:'dashed'}}
+        {name:'🌟 优秀标杆 宋丹(93.5)',value:[14.2,14.0,13.2,13.5,13.0,12.6,13.0],
+          itemStyle:{color:GOLD},areaStyle:{color:new echarts.graphic.RadialGradient(0.5,0.5,1,[{offset:0,color:'rgba(255,217,102,0.45)'},{offset:1,color:'rgba(255,217,102,0.04)'}])},lineStyle:{width:2.5}},
+        {name:'📊 支部平均(75.1)',value:[12.1,11.5,10.8,10.2,9.8,9.5,10.2],
+          itemStyle:{color:CYAN},areaStyle:{color:'rgba(0,212,255,0.15)'},lineStyle:{width:2.5}},
+        {name:'⚠️ 合格预警线(60)',value:[9,9,8.4,8.4,8.4,8.4,8.4],
+          itemStyle:{color:RED,opacity:.6},areaStyle:{color:'rgba(255,107,107,0.04)'},lineStyle:{width:1.5,type:'dashed'}}
       ]
     }]
   });
-  window.addEventListener('resize',()=>chart.resize());
 })();
 
-/* ============ 12月趋势 ============ */
+/* ===== 七维饼图 ===== */
 (function(){
-  const chart=echarts.init(document.getElementById('chart_trend'));
-  const months=['9月','10月','11月','12月','1月','2月','3月','4月','5月','6月','7月','8月'];
+  const dom=document.getElementById('chart_seven');
+  const chart=echarts.init(dom);
+  chartInstances.push({chart,dom});
   chart.setOption({
-    tooltip:{trigger:'axis',backgroundColor:'rgba(10,20,50,0.9)',borderColor:CYAN,textStyle:{color:'#fff'}},
-    legend:{textStyle:{color:'#AABBFF',fontSize:10},top:0,itemWidth:10,itemHeight:8},
-    grid:{top:28,left:30,right:10,bottom:18},
-    xAxis:{type:'category',data:months,axisLine:{lineStyle:{color:'rgba(0,180,255,0.3)'}},axisLabel:{color:'#89B4FF',fontSize:10},boundaryGap:false},
-    yAxis:{type:'value',min:60,max:85,axisLine:{show:false},splitLine:{lineStyle:{color:'rgba(0,180,255,0.08)'}},axisLabel:{color:'#89B4FF',fontSize:10}},
-    series:[
-      {name:'支部均分',type:'line',smooth:true,symbol:'circle',symbolSize:6,data:[68.0,69.5,71.0,72.5,70.5,73.5,74.0,75.5,76.5,75.0,77.5,75.1],
-        lineStyle:{width:3,color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:RED},{offset:1,color:GOLD}])},
-        itemStyle:{color:GOLD,borderColor:'#fff',borderWidth:1},
-        areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(198,40,40,0.45)'},{offset:1,color:'rgba(198,40,40,0.00)'}])}},
-      {name:'优秀线(80)',type:'line',data:Array(12).fill(80),lineStyle:{type:'dashed',color:GOLD,width:1,opacity:.6},symbol:'none'},
-      {name:'合格线(60)',type:'line',data:Array(12).fill(60),lineStyle:{type:'dashed',color:RED,width:1,opacity:.6},symbol:'none'}
-    ]
-  });
-  window.addEventListener('resize',()=>chart.resize());
-})();
-
-/* ============ 六个一 · 玫瑰饼 ============ */
-(function(){
-  const chart=echarts.init(document.getElementById('chart_six'));
-  chart.setOption({
-    tooltip:{trigger:'item',backgroundColor:'rgba(10,20,50,0.9)',borderColor:CYAN,textStyle:{color:'#fff'},formatter:'{b}<br/>服务 {c} 次 · 占比 {d}%'},
-    legend:{orient:'vertical',right:4,top:'center',textStyle:{color:'#AABBFF',fontSize:11},itemWidth:10,itemHeight:8},
+    tooltip:{trigger:'item',backgroundColor:'rgba(10,20,50,0.92)',borderColor:CYAN,textStyle:{color:'#fff',fontSize:13},formatter:'{b}<br/>服务 <b>{c}</b> 次 · 占比 <b>{d}%</b>'},
+    legend:{orient:'vertical',right:'4%',top:'center',textStyle:{color:'#AABBFF',fontSize:14},itemWidth:14,itemHeight:12,itemGap:8},
     series:[{
-      type:'pie',radius:['30%','75%'],center:['38%','52%'],roseType:'radius',
-      itemStyle:{borderColor:'#060A2E',borderWidth:2,borderRadius:4},
-      label:{color:'#fff',fontSize:11,formatter:'{c}次'},
-      labelLine:{lineStyle:{color:CYAN}},
+      type:'pie',radius:['32%','72%'],center:['40%','50%'],roseType:'radius',
+      itemStyle:{borderColor:'#060A2E',borderWidth:3,borderRadius:5},
+      label:{color:'#fff',fontSize:12,formatter:'{c}次'},
+      labelLine:{lineStyle:{color:CYAN},length:10,length2:14},
+      emphasis:{scaleSize:14,label:{fontSize:18,fontWeight:'bold'}},
       data:[
         {value:132,name:'🎒 困难帮扶',itemStyle:{color:RED}},
+        {value:86, name:'📚 学业帮扶',itemStyle:{color:ORANGE}},
         {value:108,name:'🏠 宿舍对接',itemStyle:{color:'#B45309'}},
-        {value:96,name:'👥 校友联系',itemStyle:{color:GOLD}},
+        {value:96, name:'👥 校友联系',itemStyle:{color:GOLD}},
         {value:120,name:'🏆 竞赛指导',itemStyle:{color:GREEN}},
         {value:180,name:'💼 就业服务',itemStyle:{color:CYAN}},
         {value:156,name:'🏭 校企服务',itemStyle:{color:BLUE}}
       ]
     }]
   });
-  window.addEventListener('resize',()=>chart.resize());
 })();
+
+/* ===== 12月趋势 ===== */
+(function(){
+  const dom=document.getElementById('chart_trend');
+  const chart=echarts.init(dom);
+  chartInstances.push({chart,dom});
+  const months=['9月','10月','11月','12月','1月','2月','3月','4月','5月','6月','7月','8月'];
+  chart.setOption({
+    tooltip:{trigger:'axis',backgroundColor:'rgba(10,20,50,0.92)',borderColor:CYAN,textStyle:{color:'#fff',fontSize:13}},
+    legend:{textStyle:{color:'#AABBFF',fontSize:13},top:8,itemWidth:14,itemHeight:10,itemGap:14},
+    grid:{top:46,left:48,right:20,bottom:30},
+    xAxis:{type:'category',data:months,axisLine:{lineStyle:{color:'rgba(0,180,255,0.25)'}},axisLabel:{color:'#89B4FF',fontSize:12},boundaryGap:false},
+    yAxis:{type:'value',min:58,max:85,axisLine:{show:false},splitLine:{lineStyle:{color:'rgba(0,180,255,0.06)'}},axisLabel:{color:'#89B4FF',fontSize:12}},
+    series:[
+      {name:'支部均分',type:'line',smooth:true,symbol:'circle',symbolSize:8,data:[68.0,69.5,71.0,72.5,70.5,73.5,74.0,75.5,76.5,75.0,77.5,75.1],
+        lineStyle:{width:3.5,color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:RED},{offset:1,color:GOLD}])},
+        itemStyle:{color:GOLD,borderColor:'#fff',borderWidth:1.5},
+        areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(198,40,40,0.40)'},{offset:1,color:'rgba(198,40,40,0.00)'}])}},
+      {name:'优秀线(80)',type:'line',data:Array(12).fill(80),lineStyle:{type:'dashed',color:GOLD,width:1.5,opacity:.5},symbol:'none'},
+      {name:'合格线(60)',type:'line',data:Array(12).fill(60),lineStyle:{type:'dashed',color:RED,width:1.5,opacity:.5},symbol:'none'}
+    ]
+  });
+})();
+
+/* ===== 窗口 resize ===== */
+let resizeTimer;
+window.addEventListener('resize',()=>{
+  clearTimeout(resizeTimer);
+  resizeTimer=setTimeout(()=>{
+    chartInstances.forEach(({chart})=>{try{chart.resize();}catch(e){}});
+  },150);
+});
+
+/* ===== 图表可见时才 resize（性能优化） ===== */
+const secObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      const charts=entry.target.querySelectorAll('[id^="chart_"]');
+      charts.forEach(c=>{
+        const found=chartInstances.find(ci=>ci.dom===c);
+        if(found) try{found.chart.resize();}catch(e){}
+      });
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.section').forEach(s=>secObserver.observe(s));
 </script>
 </body>
 </html>
