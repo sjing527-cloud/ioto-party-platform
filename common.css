@@ -32,7 +32,8 @@ nav{
   white-space:nowrap;
   height:auto;
   padding:10px 0;
-  overflow:hidden;
+  /* 允许下拉菜单溢出显示（必须 visible，否则「更多」菜单被裁剪） */
+  overflow:visible;
 }
 .hero{padding-top:calc(44px + 62px)!important;}
 .nav-wrap{

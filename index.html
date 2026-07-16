@@ -46,11 +46,13 @@ nav{
 .menu a:hover{opacity:1;color:var(--gold-light);}
 .menu a::after{content:'';position:absolute;left:50%;bottom:-2px;width:0;height:2px;background:var(--gold);transition:all .3s;}
 .menu a:hover::after{width:100%;left:0;}
-/* 「更多」下拉菜单 - 使用 fixed 定位脱离 nav 的层叠上下文 */
-.menu .has-drop{position:relative;}
+/* 「更多」下拉菜单 - absolute 定位相对 .has-drop，确保鼠标移到菜单过程中不触发 mouseleave */
+.menu .has-drop{position:relative;z-index:9999;padding-bottom:6px;margin-bottom:-6px;}
 .menu .has-drop::after{display:none;}
 .menu .drop{
-  position:fixed;
+  position:absolute;
+  top:100%;left:auto;right:0;
+  margin-top:6px;
   background:#fff;border-radius:8px;
   box-shadow:0 16px 48px rgba(0,0,0,0.25),0 0 0 1px rgba(0,0,0,0.05);
   min-width:180px;padding:8px 0;
@@ -58,9 +60,6 @@ nav{
   transform:translateY(-6px);
   transition:opacity .2s,transform .2s;
   z-index:9999;
-  /* 强制提升到顶层 */
-  isolation:isolate;
-  will-change:transform,opacity;
 }
 .menu .has-drop:hover .drop,.menu .has-drop.open .drop{
   opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0);
@@ -1028,48 +1027,33 @@ footer .line{border-top:1px solid rgba(255,255,255,0.1);max-width:1200px;margin:
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
-/* 「更多」下拉菜单 - 移动端兼容 + fixed 定位 */
-function positionDrop(){
-  document.querySelectorAll('.has-drop').forEach(h=>{
-    const drop=h.querySelector('.drop');
-    if(!drop)return;
-    const rect=h.getBoundingClientRect();
-    drop.style.top=(rect.bottom+8)+'px';
-    drop.style.left=(rect.right-180)+'px';
-  });
-}
+/* 「更多」下拉菜单 - 简化版（absolute 定位，无需 JS 计算位置） */
+let closeTimer=null;
+function scheduleClose(h){clearTimeout(closeTimer);closeTimer=setTimeout(()=>h.classList.remove('open'),300);}
+function cancelClose(){clearTimeout(closeTimer);}
 document.querySelectorAll('.has-drop > a').forEach(a=>{
   a.addEventListener('click',e=>{
     e.preventDefault();
     const parent=a.parentElement;
     const wasOpen=parent.classList.contains('open');
     document.querySelectorAll('.has-drop').forEach(h=>h.classList.remove('open'));
-    if(!wasOpen){
-      parent.classList.add('open');
-      positionDrop();
-    }
+    if(!wasOpen) parent.classList.add('open');
   });
   a.addEventListener('mouseenter',()=>{
     const parent=a.parentElement;
-    if(!parent.classList.contains('open')){
-      document.querySelectorAll('.has-drop').forEach(h=>h.classList.remove('open'));
-      parent.classList.add('open');
-      positionDrop();
-    }
+    cancelClose();
+    document.querySelectorAll('.has-drop').forEach(h=>h.classList.remove('open'));
+    parent.classList.add('open');
   });
 });
 document.querySelectorAll('.has-drop').forEach(h=>{
-  h.addEventListener('mouseleave',()=>{
-    h.classList.remove('open');
-  });
+  h.addEventListener('mouseleave',()=>scheduleClose(h));
 });
 document.addEventListener('click',e=>{
   if(!e.target.closest('.has-drop')){
     document.querySelectorAll('.has-drop').forEach(h=>h.classList.remove('open'));
   }
 });
-window.addEventListener('resize',positionDrop);
-window.addEventListener('scroll',positionDrop);
 </script>
 <script>
 /* Hero雷达图 - 七个有力 */
