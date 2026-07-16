@@ -109,7 +109,7 @@ nav{
 @keyframes rotate{to{transform:rotate(360deg);}}
 .hero-wrap{
   max-width:1280px;margin:0 auto;padding:60px 32px;
-  display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;
+  display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:stretch;
   position:relative;z-index:2;
 }
 .badge{
@@ -164,12 +164,13 @@ nav{
 .ioto-card .cn{font-size:13px;margin-top:10px;color:#444;}
 
 /* Hero右 - 党建指数雷达卡 */
-.hero-visual{position:relative;}
+.hero-visual{position:relative;display:flex;}
 .hero-card{
   background:#fff;border-radius:16px;padding:24px;
   box-shadow:var(--shadow),0 0 0 1px rgba(212,175,55,0.3);
   border:1px solid rgba(198,40,40,0.08);
   position:relative;overflow:hidden;
+  width:100%;display:flex;flex-direction:column;
 }
 .hero-card::before{
   content:'';position:absolute;top:0;left:0;right:0;height:5px;
@@ -184,7 +185,7 @@ nav{
 }
 .kpi .v{font-family:'Noto Serif SC';font-size:26px;font-weight:900;color:var(--red-main);line-height:1;}
 .kpi .u{font-size:11px;color:#666;margin-top:4px;}
-.radar-wrap{position:relative;height:240px;}
+.radar-wrap{position:relative;flex:1;min-height:260px;}
 .radar-wrap canvas{width:100%!important;height:100%!important;}
 
 /* ============ Section通用 ============ */
