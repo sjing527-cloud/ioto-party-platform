@@ -29,30 +29,54 @@ nav{
   box-shadow:0 2px 30px rgba(139,0,0,0.3);
 }
 .nav-wrap{
-  max-width:1280px;margin:0 auto;padding:14px 32px;
-  display:flex;align-items:center;justify-content:space-between;
+  max-width:1400px;margin:0 auto;padding:12px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
 }
 .logo{
-  display:flex;align-items:center;gap:12px;
-  color:#fff;
+  display:flex;align-items:center;gap:10px;
+  color:#fff;flex-shrink:0;
 }
-.logo i{font-size:28px;color:var(--gold);}
-.logo-text .t1{font-family:'Noto Serif SC';font-size:18px;font-weight:900;letter-spacing:2px;}
-.logo-text .t2{font-size:11px;opacity:0.85;letter-spacing:3px;}
-.menu{display:flex;gap:28px;align-items:center;}
-.menu a{color:#fff;font-size:14px;font-weight:500;opacity:.9;transition:all .3s;position:relative;padding:6px 2px;}
+.logo i{font-size:24px;color:var(--gold);}
+.logo-text .t1{font-family:'Noto Serif SC';font-size:16px;font-weight:900;letter-spacing:2px;white-space:nowrap;}
+.logo-text .t2{font-size:10px;opacity:0.85;letter-spacing:2px;white-space:nowrap;}
+.menu{display:flex;gap:18px;align-items:center;flex:1;justify-content:center;flex-wrap:nowrap;}
+.menu a{color:#fff;font-size:13.5px;font-weight:500;opacity:.9;transition:all .3s;position:relative;padding:6px 2px;white-space:nowrap;}
 .menu a:hover{opacity:1;color:var(--gold-light);}
 .menu a::after{content:'';position:absolute;left:50%;bottom:-2px;width:0;height:2px;background:var(--gold);transition:all .3s;}
 .menu a:hover::after{width:100%;left:0;}
+/* 「更多」下拉菜单 */
+.menu .has-drop{position:relative;}
+.menu .has-drop::after{display:none;}
+.menu .drop{
+  position:absolute;top:100%;right:0;margin-top:8px;
+  background:#fff;border-radius:8px;box-shadow:0 12px 40px rgba(0,0,0,0.18);
+  min-width:160px;padding:8px 0;opacity:0;visibility:hidden;transform:translateY(-6px);
+  transition:all .25s;z-index:200;
+}
+.menu .has-drop:hover .drop,.menu .has-drop.open .drop{opacity:1;visibility:visible;transform:translateY(0);}
+.menu .drop a{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 18px;color:#333;font-size:13.5px;
+  border-bottom:1px solid #f3f3f3;
+}
+.menu .drop a:last-child{border:none;}
+.menu .drop a:hover{background:rgba(198,40,40,0.06);color:var(--red-main);}
+.menu .drop a::after{display:none;}
+.menu .drop a i{color:var(--red-main);font-size:12px;width:14px;text-align:center;}
+.menu .more-caret{font-size:10px;margin-left:2px;transition:transform .25s;}
+.menu .has-drop:hover .more-caret{transform:rotate(180deg);}
+
 .btn-gold{
   background:linear-gradient(135deg,var(--gold) 0%,var(--gold-light) 100%);
   color:var(--red-deep)!important;
-  padding:8px 20px!important;
-  border-radius:4px;font-weight:700!important;
+  padding:8px 14px!important;
+  border-radius:4px;font-weight:700!important;font-size:13px;
   box-shadow:0 4px 16px rgba(212,175,55,0.4);
-  transition:transform .3s!important;
+  transition:transform .3s!important;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
 }
 .btn-gold:hover{transform:translateY(-2px);}
+.btn-gold .lbl{display:inline;}
+.btn-gold .short{display:none;}
 
 /* ============ HERO ============ */
 .hero{
@@ -362,6 +386,19 @@ footer{background:#0a0a0a;color:rgba(255,255,255,.6);padding:40px 32px;text-alig
 footer .line{border-top:1px solid rgba(255,255,255,0.1);max-width:1200px;margin:0 auto 20px;}
 
 /* ============ 响应式 ============ */
+@media(max-width:1280px){
+  .nav-wrap{padding:12px 16px;gap:8px;}
+  .menu{gap:14px;}
+  .menu a{font-size:12.5px;padding:6px 1px;}
+  .btn-gold{padding:7px 10px!important;font-size:12px;}
+  .logo-text .t1{font-size:15px;letter-spacing:1px;}
+  .logo-text .t2{font-size:9px;letter-spacing:1px;}
+}
+@media(max-width:1100px){
+  .menu a{font-size:12px;}
+  .btn-gold .lbl{display:none;}
+  .btn-gold .short{display:inline;}
+}
 @media(max-width:1024px){
   .hero-wrap{grid-template-columns:1fr;padding:60px 20px;}
   .hero h1{font-size:36px;}
@@ -407,10 +444,15 @@ footer .line{border-top:1px solid rgba(255,255,255,0.1);max-width:1200px;margin:
       <a href="news.html">学院新闻</a>
       <a href="analysis.html">分析模块</a>
       <a href="management.html">管理模块</a>
-      <a href="vote.html">投票问卷</a>
-      <a href="honor.html">荣誉管理</a>
-      <a href="conclusion.html" class="btn-gold"><i class="fas fa-file-alt"></i> 结项窗口</a>
-      <a href="dashboard.html" target="_blank" class="btn-gold"><i class="fas fa-chart-line"></i> 数据大屏</a>
+      <span class="has-drop">
+        <a href="javascript:void(0)">更多 <i class="fas fa-caret-down more-caret"></i></a>
+        <div class="drop">
+          <a href="vote.html"><i class="fas fa-vote-yea"></i> 投票问卷</a>
+          <a href="honor.html"><i class="fas fa-trophy"></i> 荣誉管理</a>
+        </div>
+      </span>
+      <a href="conclusion.html" class="btn-gold"><i class="fas fa-file-alt"></i> <span class="lbl">结项窗口</span></a>
+      <a href="dashboard.html" target="_blank" class="btn-gold"><i class="fas fa-chart-line"></i> <span class="lbl">数据大屏</span><span class="short">大屏</span></a>
     </div>
   </div>
 </nav>
@@ -974,6 +1016,23 @@ footer .line{border-top:1px solid rgba(255,255,255,0.1);max-width:1200px;margin:
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+/* 「更多」下拉菜单 - 移动端兼容 */
+document.querySelectorAll('.has-drop > a').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const parent=a.parentElement;
+    const wasOpen=parent.classList.contains('open');
+    document.querySelectorAll('.has-drop').forEach(h=>h.classList.remove('open'));
+    if(!wasOpen)parent.classList.add('open');
+  });
+});
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.has-drop')){
+    document.querySelectorAll('.has-drop').forEach(h=>h.classList.remove('open'));
+  }
+});
+</script>
 <script>
 /* Hero雷达图 - 七个有力 */
 const ctx=document.getElementById('heroRadar').getContext('2d');
