@@ -1,91 +1,91 @@
 {
   "summary": {
     "total": 9,
-    "national": 2,
-    "provincial": 7,
+    "national": 3,
+    "provincial": 6,
     "university": 0
   },
   "competitions": [
     {
       "id": 1,
-      "name": "\"学创杯\"全国大学生创业综合模拟大赛",
+      "name": "全国职业院校技能竞赛"互联网+国际经济与贸易"",
       "level": "国家级",
-      "award": "一等奖",
-      "teachers": ["宋丹"],
-      "year": 2022,
-      "description": "国赛一等奖（团队），宋丹获全国优秀指导老师"
+      "award": "一等奖（六连冠）",
+      "teachers": ["宋吉华", "李忠华"],
+      "year": 2025,
+      "description": "全国职业院校技能大赛一等奖，实现六连冠"
     },
     {
       "id": 2,
-      "name": "\"学创杯\"湖南省赛",
-      "level": "省级",
-      "award": "一等奖",
-      "teachers": ["宋丹"],
-      "year": 2022,
-      "description": "省赛一等奖，最佳指导老师"
+      "name": "第十届"博导前程杯"全国电子商务运营技能竞赛",
+      "level": "国家级",
+      "award": "特等奖",
+      "teachers": ["殷兰波", "陈善祥"],
+      "year": 2025,
+      "description": "全国电子商务运营技能竞赛特等奖"
     },
     {
       "id": 3,
-      "name": "\"楚怡杯\"湖南省职业院校技能竞赛",
-      "level": "省级",
+      "name": ""学创杯"全国大学生综合模拟大赛",
+      "level": "国家级",
       "award": "一等奖",
-      "teachers": ["宋丹", "李忠华"],
+      "teachers": ["宋丹"],
       "year": 2025,
-      "description": "楚怡杯一等奖"
+      "description": "学创杯全国总决赛一等奖"
     },
     {
       "id": 4,
-      "name": "\"楚怡杯\"湖南省职业院校技能竞赛",
+      "name": "湖南省职业院校技能竞赛"市场营销"",
       "level": "省级",
       "award": "一等奖",
-      "teachers": ["曾昭山", "胡晨怡"],
+      "teachers": ["李忠华"],
       "year": 2025,
-      "description": "楚怡杯一等奖"
+      "description": "湖南省职业院校技能竞赛一等奖"
     },
     {
       "id": 5,
-      "name": "\"楚怡杯\"湖南省职业院校技能竞赛",
+      "name": "湖南省电子商务师职业技能大赛",
       "level": "省级",
-      "award": "二等奖",
-      "teachers": ["殷兰波", "陈思为"],
+      "award": "一等奖",
+      "teachers": ["殷兰波", "陈善祥"],
       "year": 2025,
-      "description": "楚怡杯二等奖"
+      "description": "湖南省电子商务师职业技能大赛一等奖"
     },
     {
       "id": 6,
-      "name": "\"楚怡杯\"湖南省职业院校技能竞赛",
+      "name": ""学创杯"省级选拔赛",
       "level": "省级",
-      "award": "三等奖",
-      "teachers": ["宋吉华", "易蕾"],
+      "award": "一等奖",
+      "teachers": ["胡晨怡", "岳伟"],
       "year": 2025,
-      "description": "楚怡杯三等奖"
+      "description": "学创杯省级选拔赛一等奖"
     },
     {
       "id": 7,
-      "name": "\"楚怡杯\"湖南省职业院校技能竞赛",
+      "name": "湖南省"互联网+"大学生创新创业大赛",
       "level": "省级",
-      "award": "三等奖",
-      "teachers": ["胡晨怡", "岳伟"],
+      "award": "二等奖",
+      "teachers": ["宋吉华", "易蕾"],
       "year": 2025,
-      "description": "楚怡杯三等奖"
+      "description": "互联网+大学生创新创业大赛省级二等奖"
     },
     {
       "id": 8,
-      "name": "\"楚怡杯\"湖南省职业院校技能竞赛",
+      "name": "湖南省职业院校技能大赛"电子商务"",
       "level": "省级",
       "award": "三等奖",
-      "teachers": ["陈思为", "汤婷"],
+      "teachers": ["曾昭山"],
       "year": 2025,
-      "description": "楚怡杯三等奖"
+      "description": "湖南省职业院校技能大赛电子商务赛项三等奖"
     },
     {
       "id": 9,
-      "name": "2025-2026学年广东省职业院校学生专业技能大赛GZ047电子商务赛项",
+      "name": "湖南省职业院校技能大赛"银行业务"",
       "level": "省级",
-      "award": "裁判员",
-      "teachers": ["宋丹"],
-      "year": 2026,
-      "description": "裁判员（广州城建职业学院聘书）"
+      "award": "三等奖",
+      "teachers": ["胡晨怡"],
+      "year": 2025,
+      "description": "湖南省职业院校技能大赛银行业务赛项三等奖"
     }
   ]
 }
