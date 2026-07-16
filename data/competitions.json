@@ -1,13 +1,31 @@
 {
   "summary": {
-    "total": 6,
-    "national": 0,
-    "provincial": 6,
+    "total": 9,
+    "national": 2,
+    "provincial": 7,
     "university": 0
   },
   "competitions": [
     {
       "id": 1,
+      "name": "\"学创杯\"全国大学生创业综合模拟大赛",
+      "level": "国家级",
+      "award": "一等奖",
+      "teachers": ["宋丹"],
+      "year": 2022,
+      "description": "国赛一等奖（团队），宋丹获全国优秀指导老师"
+    },
+    {
+      "id": 2,
+      "name": "\"学创杯\"湖南省赛",
+      "level": "省级",
+      "award": "一等奖",
+      "teachers": ["宋丹"],
+      "year": 2022,
+      "description": "省赛一等奖，最佳指导老师"
+    },
+    {
+      "id": 3,
       "name": "\"楚怡杯\"湖南省职业院校技能竞赛",
       "level": "省级",
       "award": "一等奖",
@@ -16,7 +34,7 @@
       "description": "楚怡杯一等奖"
     },
     {
-      "id": 2,
+      "id": 4,
       "name": "\"楚怡杯\"湖南省职业院校技能竞赛",
       "level": "省级",
       "award": "一等奖",
@@ -25,7 +43,7 @@
       "description": "楚怡杯一等奖"
     },
     {
-      "id": 3,
+      "id": 5,
       "name": "\"楚怡杯\"湖南省职业院校技能竞赛",
       "level": "省级",
       "award": "二等奖",
@@ -34,7 +52,7 @@
       "description": "楚怡杯二等奖"
     },
     {
-      "id": 4,
+      "id": 6,
       "name": "\"楚怡杯\"湖南省职业院校技能竞赛",
       "level": "省级",
       "award": "三等奖",
@@ -43,7 +61,7 @@
       "description": "楚怡杯三等奖"
     },
     {
-      "id": 5,
+      "id": 7,
       "name": "\"楚怡杯\"湖南省职业院校技能竞赛",
       "level": "省级",
       "award": "三等奖",
@@ -52,13 +70,22 @@
       "description": "楚怡杯三等奖"
     },
     {
-      "id": 6,
+      "id": 8,
       "name": "\"楚怡杯\"湖南省职业院校技能竞赛",
       "level": "省级",
       "award": "三等奖",
       "teachers": ["陈思为", "汤婷"],
       "year": 2025,
       "description": "楚怡杯三等奖"
+    },
+    {
+      "id": 9,
+      "name": "2025-2026学年广东省职业院校学生专业技能大赛GZ047电子商务赛项",
+      "level": "省级",
+      "award": "裁判员",
+      "teachers": ["宋丹"],
+      "year": 2026,
+      "description": "裁判员（广州城建职业学院聘书）"
     }
   ]
 }
